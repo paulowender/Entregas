@@ -1,0 +1,32 @@
+*** VENDA CAB ***
+
+ ME_Status_Entrega` int(11) DEFAULT '0',                                                                                                                                                                                                                                            
+ ME_Exp_Final` int(11) DEFAULT '-1',                                                                                                                                                                                                                                                
+ ME_Pronto_Entrega` varchar(60) DEFAULT 'AGUARDANDO CONFIRMAÇÃO..',                                                                                                                                                                                                               
+ ME_Cod_User_Separador` int(11) DEFAULT '0',                                                                                                                                                                                                                                        
+ ME_Nome_User_Separador` varchar(60) DEFAULT NULL,                                                                                                                                                                                                                                  
+ ME_Hora_Saiu_Entrega` datetime DEFAULT NULL,                                                                                                                                                                                                                                       
+ ME_Hora_Chegou_Entrega` datetime DEFAULT NULL,                                                                                                                                                                                                                                     
+ ME_Hora_Separacao` datetime DEFAULT NULL,                                                                                                                                                                                                                                          
+ ME_Hora_ChegadaExp` datetime DEFAULT NULL,                                                                                                                                                                                                                                         
+ ME_Status_Conferido` int(11) DEFAULT '0', 
+
+ Index_ME_EntregaCab` (`Record_No`,`CodEmp`,`No_Docto`,`ME_Status_Entrega`,
+`ME_Exp_Final`,`ME_Pronto_Entrega`,`ME_Cod_User_Separador`,`ME_Nome_User_Separador`,
+`ME_Hora_Saiu_Entrega`,`ME_Hora_Chegou_Entrega`,`ME_Hora_Separacao`,`ME_Hora_ChegadaExp`,
+`ME_Status_Conferido`)  
+
+*** VENDA PRO ***
+
+ ME_Qtd_Separada` decimal(18,5) DEFAULT '0.00000',                                                                                                                                                                                              
+ ME_Cod_User_Separador` int(11) DEFAULT '0',                                                                                                                                                                                                    
+ ME_Nome_User_Separador` varchar(60) DEFAULT NULL,                                                                                                                                                                                              
+ ME_DataHoraSeparacao` datetime DEFAULT NULL,                                                                                                                                                                                                   
+ ME_Qtd_Conferida` decimal(18,5) DEFAULT '0.00000',                                                                                                                                                                                             
+ ME_Cod_User_Conferente` int(11) DEFAULT '0',                                                                                                                                                                                                   
+ ME_Nome_User_Conferente` varchar(60) DEFAULT NULL,                                                                                                                                                                                             
+ ME_DataHora_Conferencia` datetime DEFAULT NULL, 
+
+Index_ME_Det` (`Record_No`,`CodEmp`,`No_Docto`,`ME_Qtd_Separada`,`ME_Cod_User_Separador`,
+`ME_Nome_User_Separador`,`ME_DataHoraSeparacao`,`ME_Qtd_Conferida`,`ME_Cod_User_Conferente`,
+`ME_Nome_User_Conferente`,`ME_DataHora_Conferencia`) 

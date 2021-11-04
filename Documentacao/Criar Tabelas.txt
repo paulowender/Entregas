@@ -1,0 +1,28 @@
+venda cab
+
+Alter Table venda_cab Add ME_Status_Entrega int(11) DEFAULT 0  After ECF_FormaPagto;
+Alter Table venda_cab Add ME_Exp_Final int(11) DEFAULT -1  After ME_Status_Entrega;
+Alter Table venda_cab Add ME_Pronto_Entrega varchar(60) DEFAULT 'AGUARDANDO CONFERENCIA..' After ME_Exp_Final;
+Alter Table venda_cab Add ME_Cod_User_Separador int(11) DEFAULT '0'  After ME_Pronto_Entrega;
+Alter Table venda_cab Add ME_Nome_User_Separador varchar(60) DEFAULT NULL  After ME_Cod_User_Separador;
+Alter Table venda_cab Add ME_Hora_Saiu_Entrega datetime DEFAULT NULL After ME_Nome_User_Separador;
+Alter Table venda_cab Add ME_Hora_EntregaFinalizada datetime DEFAULT NULL After ME_Hora_Saiu_Entrega;
+Alter Table venda_cab Add ME_Hora_Chegou_Entrega datetime DEFAULT NULL After ME_Hora_EntregaFinalizada; 
+Alter Table venda_cab Add ME_Hora_Separacao  datetime DEFAULT NULL After ME_Hora_Chegou_Entrega;
+Alter Table venda_cab Add ME_Hora_ChegadaExp datetime DEFAULT NULL After ME_Hora_Separacao ;
+Alter Table venda_cab Add ME_Status_Conferido int(11) DEFAULT '0'  After ME_Hora_ChegadaExp;
+Alter Table venda_cab Add ME_Nome_RespEntRecebimento varchar(60) DEFAULT NULL  After ME_Status_Conferido; 
+Alter Table venda_cab Add ME_Foto_AssCli longtext DEFAULT NULL  After ME_Nome_RespEntRecebimento; 
+Alter Table venda_cab Add ME_Foto_AssFuncionario longtext DEFAULT NULL After ME_Foto_AssCli; 
+Alter Table venda_cab Add ME_Foto_Entrega longtext DEFAULT NULL After ME_Foto_AssFuncionario;
+ 
+venda_pro
+
+Alter Table venda_pro Add ME_Qtd_Separada decimal(18,5) DEFAULT '0.00000' after Inf_Adicional;
+Alter Table venda_pro Add ME_Cod_User_Separador int(11) DEFAULT '0' after ME_Qtd_Separada;
+Alter Table venda_pro Add ME_Nome_User_Separador varchar(60) DEFAULT NULL after ME_Cod_User_Separador;
+Alter Table venda_pro Add ME_DataHoraSeparacao datetime DEFAULT NULL after ME_Nome_User_Separador;
+Alter Table venda_pro Add ME_Qtd_Conferida decimal(18,5) DEFAULT '0.00000' after ME_DataHoraSeparacao;
+Alter Table venda_pro Add ME_Cod_User_Conferente int(11) DEFAULT '0' after ME_Qtd_Conferida;
+Alter Table venda_pro Add ME_Nome_User_Conferente varchar(60) DEFAULT NULL after ME_Cod_User_Conferente;
+Alter Table venda_pro Add ME_DataHora_Conferencia datetime DEFAULT NULL after ME_Nome_User_Conferente;

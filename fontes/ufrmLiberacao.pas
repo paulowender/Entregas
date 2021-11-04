@@ -1,0 +1,241 @@
+unit ufrmLiberacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmLiberacao = class(TForm)
+    Img_SairLiberacao: TImage;
+    edt_senha: TLabeledEdit;
+    Label_DocumentoSeparadacao: TLabel;
+    Label_Cliente: TLabel;
+    procedure Img_SairLiberacaoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edt_senhaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLiberacao: TfrmLiberacao;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmMonitoramentoEntrega, udmPrincipal;
+
+procedure TfrmLiberacao.edt_senhaKeyPress(Sender: TObject; var Key: Char);
+var
+  qry_AtualizaStatus : TFDQuery;
+  sql_Login : TFDQuery;
+  md5 : string;
+begin
+
+  if key = #27 then
+  begin
+    Img_SairLiberacaoClick(Self);
+  end;
+
+  if key = #13 then
+  begin
+
+    try
+
+       sql_Login := TFDQuery.Create(self);
+       sql_Login.Connection := dmPrincipal.conexao;
+       qry_AtualizaStatus := TFDQuery.Create(self);
+       qry_AtualizaStatus.Connection := dmPrincipal.conexao;
+       try
+
+          sql_Login.Active := false;
+          sql_Login.SQL.Clear;
+          sql_Login.SQL.Add('select md5(:senha) as MD5_;');
+          sql_Login.ParamByName('senha').AsString := edt_senha.Text;
+          sql_Login.Active := true;
+
+          if sql_Login.RecordCount = 0 then
+          begin
+          ShowMessage('Falha na conexão com o servidor, solicite suporte..');
+          exit;
+          end
+          else
+          begin
+          md5 := sql_Login.FieldByName('MD5_').AsString;
+          end;
+
+          sql_Login.Active := false;
+          sql_Login.SQL.Clear;
+          sql_Login.SQL.Add('select usuario.Codigo as CodigoUsuario, usuario.Acessa_ECoBI, usuario.CodEmp as CodEmp, ');
+          sql_Login.SQL.Add('empresa.descricao as DescEmp, ');
+          sql_Login.SQL.Add('empresa.Cidade as CidadeEmpAcessada, empresa.Uf as UfEmpAcessada,');
+          sql_Login.SQL.Add('empresa.Fone as Telefone_Emp, empresa.Ie, ');
+          sql_Login.SQL.Add('empresa.Cnpj as CnpjEmpAcessada, usuario.Nome as NomeUsuario from usuario ');
+          sql_Login.SQL.Add('left join empresa on empresa.codigo = usuario.CodEmp ');
+          sql_Login.SQL.Add('where PassWord = :Password and usuario.Sit_Desativado = 0 limit 1 ');
+          sql_Login.ParamByName('Password').AsString := md5;
+          sql_Login.Active := true;
+
+          if sql_Login.RecordCount = 0 then
+          begin
+          ShowMessage('Senha invalida, solicite suporte..');
+          edt_senha.Text := '';
+          edt_senha.SetFocus;
+          exit;
+          end
+          else
+          begin
+
+            frmMonitoramentoEntrega.vCodigoUsuarioLogado := sql_Login.FieldByName('CodigoUsuario').AsInteger;
+            frmMonitoramentoEntrega.vNomeUsuarioLogado := sql_Login.FieldByName('NomeUsuario').AsString;
+
+
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.Active := false;
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.ParamByName('NoDocto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('CodEmp').AsInteger;
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.ParamByName('Data').AsDate := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Dt_Movto').AsDateTime;
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.ParamByName('Cod_IDRegistro').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Cod_IDRegistro').AsLargeInt;
+            frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.Active := true;
+
+            if frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.RecordCount > 0 then
+            begin
+
+              frmMonitoramentoEntrega.edt_PropostaEmConfernecia.Text := IntToStr(frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Cod_Proposta').AsInteger);
+              frmMonitoramentoEntrega.edt_CodCliEmConferencia.Text :=  IntToStr(frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Cod_Cliente').AsInteger);
+              frmMonitoramentoEntrega.edt_RazaoClienteEmConferencia.Text := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Razao_Cliente').AsString;
+              frmMonitoramentoEntrega.edt_DocEmConferencia.Text := IntToStr(frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger);
+              frmMonitoramentoEntrega.edt_QtdSeparada.Text := '';
+
+              frmMonitoramentoEntrega.tab_SeparacaoDeMercadoria.TabVisible := true;
+              frmMonitoramentoEntrega.PageControl_ControleEntrega.ActivePage := frmMonitoramentoEntrega.tab_SeparacaoDeMercadoria;
+              frmMonitoramentoEntrega.ComboBox_Status.ItemIndex := 1;
+              frmMonitoramentoEntrega.ComboBox_Expedicao.ItemIndex := -1;
+
+              if frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Exp_Final').AsInteger = 1 then
+              begin
+              frmMonitoramentoEntrega.LabeledEdit_Saida.Text := 'EXPEDIÇÃO FUNDOS';
+              frmMonitoramentoEntrega.BitBtn_EnviarSeparacaoDeposito.Caption := 'CONTINUAR SEPARAÇÃO NO DEPOSITO';
+              end
+              else if frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Exp_Final').AsInteger = 2 then
+              begin
+              frmMonitoramentoEntrega.LabeledEdit_Saida.Text := 'EXPEDIÇÃO FRENTE';
+              frmMonitoramentoEntrega.BitBtn_EnviarSeparacaoDeposito.Caption := 'CONTINUAR SEPARAÇÃO NO DEPOSITO';
+              end
+              else if frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Exp_Final').AsInteger = 3 then
+              begin
+              frmMonitoramentoEntrega.LabeledEdit_Saida.Text := 'EXPEDIÇÃO FUNDOS';
+              frmMonitoramentoEntrega.BitBtn_EnviarSeparacaoDeposito.Caption := 'CONTINUAR SEPARAÇÃO NA EXPEDIÇÃO FUNDOS';
+              end
+              else
+              begin
+              frmMonitoramentoEntrega.LabeledEdit_Saida.Text := 'INFORME UMA EXPEDIÇÃO';
+              frmMonitoramentoEntrega.BitBtn_EnviarSeparacaoDeposito.Caption := 'CONTINUAR SEPARAÇÃO NO DEPOSITO';
+              end;
+
+
+              qry_AtualizaStatus.Active := false;
+              qry_AtualizaStatus.SQL.Clear;
+              qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Hora_Separacao = :ME_Hora_Separacao, ');
+              qry_AtualizaStatus.SQL.Add('ME_Cod_User_Separador = :ME_Cod_User_Separador, ');
+              qry_AtualizaStatus.SQL.Add('ME_Nome_User_Separador = :ME_Nome_User_Separador, ME_Pronto_Entrega = :ME_Pronto_Entrega');
+              qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
+              qry_AtualizaStatus.ParamByName('Status').AsInteger := 1;
+              qry_AtualizaStatus.ParamByName('ME_Hora_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+              qry_AtualizaStatus.ParamByName('ME_Cod_User_Separador').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+              qry_AtualizaStatus.ParamByName('ME_Nome_User_Separador').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
+              qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('CodEmp').AsInteger;
+              qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
+              qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'SEPARAÇÃO EM ANDAMENTO..';
+              qry_AtualizaStatus.ExecSQL;
+
+              if qry_AtualizaStatus.RowsAffected > 0 then
+              begin
+              frmLiberacao.Close;
+              frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.First;
+              frmMonitoramentoEntrega.edt_QtdSeparada.SetFocus;
+              end
+              else
+              begin
+              ShowMessage('Falha na atualização do status da entrada..');
+              end;
+
+
+            end
+            else
+            begin
+
+              ShowMessage('Atenção, essa entrega será encerrada, pois so possui serviços..');
+
+             qry_AtualizaStatus.Active := false;
+             qry_AtualizaStatus.SQL.Clear;
+             qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Hora_Separacao = :ME_Hora_Separacao, ');
+             qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_Nome_User_Separador = :ME_Nome_User_Separador');
+             qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
+             qry_AtualizaStatus.ParamByName('Status').AsInteger := 6;
+             qry_AtualizaStatus.ParamByName('ME_Hora_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+             qry_AtualizaStatus.ParamByName('ME_Cod_User_Separador').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+             qry_AtualizaStatus.ParamByName('ME_Nome_User_Separador').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
+             qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;;
+             qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
+             qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'ENCERRADA, APENAS SERVIÇOS LANÇADOS..';
+             qry_AtualizaStatus.ExecSQL;
+
+             frmLiberacao.Close;
+             frmMonitoramentoEntrega.Img_ConsultaClick(sender);
+
+            end;
+
+          end;
+
+
+       except
+       ShowMessage('Falha na conexão com o servidor, solicite suporte..');
+       exit;
+       end;
+
+
+
+    finally
+      qry_AtualizaStatus.DisposeOf;
+      sql_Login.DisposeOf;
+    end;
+
+
+  end;
+
+
+
+
+
+
+end;
+
+procedure TfrmLiberacao.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  {Limpar o formulario da memoria ao fecha-lo..}
+  Action := TCloseAction.caFree;
+  frmLiberacao := nil;
+  {Fim}
+end;
+
+procedure TfrmLiberacao.FormShow(Sender: TObject);
+begin
+  edt_senha.SetFocus;
+end;
+
+procedure TfrmLiberacao.Img_SairLiberacaoClick(Sender: TObject);
+begin
+  frmLiberacao.Close;
+end;
+
+end.

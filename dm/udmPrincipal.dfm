@@ -1,0 +1,20 @@
+object dmPrincipal: TdmPrincipal
+  OldCreateOrder = False
+  Height = 265
+  Width = 197
+  object FDPhysMySQLDriverLink: TFDPhysMySQLDriverLink
+    Left = 67
+    Top = 39
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 64
+    Top = 104
+  end
+  object conexao: TFDConnection
+    LoginPrompt = False
+    BeforeConnect = conexaoBeforeConnect
+    Left = 64
+    Top = 176
+  end
+end

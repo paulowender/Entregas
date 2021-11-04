@@ -1,0 +1,29 @@
+program Entregas;
+
+uses
+  Vcl.Forms,
+  ufrmMonitoramentoEntrega in 'fontes\ufrmMonitoramentoEntrega.pas' {frmMonitoramentoEntrega},
+  ufrmLogin in 'fontes\ufrmLogin.pas' {frmLogin},
+  udmPrincipal in 'dm\udmPrincipal.pas' {dmPrincipal: TDataModule},
+  ufrmLiberacao in 'fontes\ufrmLiberacao.pas' {frmLiberacao},
+  ufrmLiberarEntrega in 'fontes\ufrmLiberarEntrega.pas' {frmLiberarEntrega},
+  ufrmVincularEntregador in 'fontes\ufrmVincularEntregador.pas' {frmVincularEntregador},
+  ufrmDetalheEntrega in 'fontes\ufrmDetalheEntrega.pas' {frmDetalheEntrega},
+  ufrmLiberaConferencia in 'fontes\ufrmLiberaConferencia.pas' {frmLiberaConferencia},
+  ufrmBuscaClientes in 'fontes\ufrmBuscaClientes.pas' {frmBuscaClientes},
+  ufrmBuscaTransportador in 'fontes\ufrmBuscaTransportador.pas' {frm_TransportadorBuscar},
+  ufrmAlterarExpedicao in 'fontes\ufrmAlterarExpedicao.pas' {frmAlterarExpedicao},
+  ufrmObsFinalizaEntrega in 'fontes\ufrmObsFinalizaEntrega.pas' {frmObsFinalizaEntrega},
+  ufrmCancelarEntrega in 'fontes\ufrmCancelarEntrega.pas' {frmCancelaEntrega},
+  ufrmCancelaEntrega2 in 'fontes\ufrmCancelaEntrega2.pas' {frmCancelaEntrega2},
+  uFuncaoCriptografia in 'fontes\uFuncaoCriptografia.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmPrincipal, dmPrincipal);
+  Application.CreateForm(TfrmMonitoramentoEntrega, frmMonitoramentoEntrega);
+  Application.Run;
+end.
