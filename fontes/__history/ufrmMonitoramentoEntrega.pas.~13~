@@ -287,6 +287,7 @@ type
     vSecaoParcerias : string;
     vSecaoLocacao: string;
     vSincFiscal : string;
+    vCaminhoLogo: String;
     procedure pAtivarEsconderTab(status : Boolean; Modulo : Integer);
     procedure pValidaIndexBD;
   public
@@ -469,25 +470,14 @@ begin
     0 :
     begin
       pAtivarEsconderTab(true,0);
-      ComboBox_MonitorarExpedicao.ItemIndex := 3;
+      ComboBox_MonitorarExpedicao.ItemIndex := StrToInt(vExpedicaoInicial);
       ComboBox_Secao.ItemIndex := StrToInt(vSecao);
     end;
     1 :
     begin
-
       pAtivarEsconderTab(true,1);
-
-      if StrToInt(vExpedicaoInicial) = 2 then
-      begin
-      ComboBox_MonitorarExpedicao.ItemIndex := 2;
-      end
-      else
-      begin
-      ComboBox_MonitorarExpedicao.ItemIndex := 3;
-      end;
-
+      ComboBox_MonitorarExpedicao.ItemIndex := StrToInt(vExpedicaoInicial);
       ComboBox_Secao.ItemIndex := StrToInt(vSecao);
-
     end;
     2 :
     begin
@@ -944,6 +934,15 @@ begin
    Label_Itens6.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens7.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens8.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
+
+
+   if (FDQuery_VendasParaSeparar.RecordCount > 0) and (FDQuery_DetalhesItens.RecordCount = 0) then
+   begin
+     ShowMessage('So serviço..');
+   end;
+
+
+
 end;
 
 procedure TfrmMonitoramentoEntrega.FormClose(Sender: TObject;
@@ -964,6 +963,8 @@ begin
 
     vNomeArquivoConfig := StringReplace(ExtractFileName(ParamStr(0)), '.exe', '', [RfReplaceAll]);
     vNomeArquivoConfig := ExtractFilePath(ParamSTR(0)) + 'Config_' + vNomeArquivoConfig + '.ini';
+    vCaminhoLogo := StringReplace(ExtractFileName(ParamStr(0)), '.exe', '', [RfReplaceAll]);
+    vCaminhoLogo := ExtractFilePath(ParamSTR(0))+'Logo180x108.jpg';
 
     txt := TIniFile.Create(vNomeArquivoConfig);
     try
@@ -1008,6 +1009,11 @@ begin
      Edit_SecaoOficina.Text := vSecaoOficina;
      Edit_SecaoLocacao.Text := vSecaoLocacao;
      Edit_SecaoParcerias.Text := vSecaoParcerias;
+
+     FDQuery_ItensParaSeparacao.Connection := dmPrincipal.conexao;
+     FDQuery_VendasParaSeparar.Connection := dmPrincipal.conexao;
+     FDQuery_DetalhesItens.Connection := dmPrincipal.conexao;
+     FDQuery_EndEntrega.Connection := dmPrincipal.conexao;
 
 
     finally
@@ -1390,7 +1396,7 @@ begin
         qry_VendaSeparada.SQL.Add('LEFT JOIN funcionario Fun ON Fun.Codigo=venda_pro.Cod_Vendedor and Fun.Codemp in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30) ');
         qry_VendaSeparada.SQL.Add('where venda_cab.CodEmp = :CodEmp and ( venda_cab.ME_MercSeparada = 1 or venda_cab.Cod_Cfop in ('+Edt_CodCfopDiretoConf.Text+') or venda_cab.Cod_Secao in ('+Edit_CodSecaoDiretoConf.Text+') )');
         qry_VendaSeparada.SQL.Add('and venda_cab.ME_Status_Entrega = 0');
-        qry_VendaSeparada.SQL.Add('and venda_cab.Dt_movto between :DataInicial and :DataFinal ');
+        qry_VendaSeparada.SQL.Add('and venda_cab.Dt_movto between :DataInicial and :DataFinal limit 50 ');
         qry_VendaSeparada.ParamByName('DataInicial').AsDate := DateEdit_InicioVenda.Date;
         qry_VendaSeparada.ParamByName('DataFinal').AsDate   := DateEdit_FimVendas.Date;
         qry_VendaSeparada.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
@@ -1653,7 +1659,7 @@ begin
       FDQuery_VendasParaSeparar.SQL.Add('group by venda_cab.Record_No,venda_cab.No_Docto, ');
       FDQuery_VendasParaSeparar.SQL.Add('venda_cab.CodEmp ');
       FDQuery_VendasParaSeparar.SQL.Add('having Valor > 0');
-      FDQuery_VendasParaSeparar.SQL.Add('order by venda_cab.Dt_Movto,venda_cab.Hr_Movto');
+      FDQuery_VendasParaSeparar.SQL.Add('order by venda_cab.Dt_Movto,venda_cab.Hr_Movto limit 50');
       FDQuery_VendasParaSeparar.ParamByName('DataInicial').AsDate := DateEdit_InicioVenda.Date;
       FDQuery_VendasParaSeparar.ParamByName('DataFinal').AsDate   := DateEdit_FimVendas.Date;
       FDQuery_VendasParaSeparar.ParamByName('CodEmp').AsInteger := vCodEmpLogado;
@@ -1725,7 +1731,7 @@ begin
     vcaminhoArq := StringReplace(ExtractFileName(ParamStr(0)), '.exe', '', [RfReplaceAll]);
     vcaminhoArq := ExtractFilePath(ParamSTR(0)) + 'DANF_Entregas.fr3';
     frxReport_Entregas.LoadFromFile(vcaminhoArq);
-    TfrxPictureView(frxReport_Entregas.FindObject('Picture_Logo')).Picture.LoadFromFile('C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\imagens\AtlasCopco.jpg');
+    TfrxPictureView(frxReport_Entregas.FindObject('Picture_Logo')).Picture.LoadFromFile(vCaminhoLogo);
     frxReport_Entregas.PrintOptions.ShowDialog := true;
     frxReport_Entregas.PrepareReport;
     frxReport_Entregas.ShowPreparedReport;

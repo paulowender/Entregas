@@ -3488,7 +3488,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 56'
+        Text = 'Vers'#227'o 60'
         Width = 50
       end>
   end
@@ -3496,7 +3496,7 @@
     Interval = 6000
     OnTimer = Timer_ConsultaVendasTimer
     Left = 597
-    Top = 512
+    Top = 496
   end
   object FDQuery_VendasParaSeparar: TFDQuery
     Connection = dmPrincipal.conexao
@@ -6989,7 +6989,6 @@
     Top = 344
   end
   object FDQuery_EndEntrega: TFDQuery
-    Connection = dmPrincipal.conexao
     SQL.Strings = (
       'select clientes.razao, clientes.Cpf_Cnpj, clientes.Rg_Ie,'
       
@@ -7261,67 +7260,5 @@
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-  end
-  object FDQuery_ItensParaSeparacao1: TFDQuery
-    Connection = dmPrincipal.conexao
-    SQL.Strings = (
-      
-        'select venda_pro.Record_No,venda_pro.No_Docto,venda_pro.Cod_Prod' +
-        'uto, '
-      'venda_pro.Descricao as Nome_Produto,'
-      'prodserv_dados.Cod_Fabricante,'
-      'prodserv_dados.Fabricante,'
-      'prodserv_dados.Num_Fabricante,'
-      'venda_pro.Quantidade as Qtd_vendida,'
-      
-        'concat(round(venda_pro.Quantidade,2),'#39' '#39', prodserv_dados.Unidade' +
-        ') as Qtd_vendidaImpressao,'
-      'prodserv_dados.Unidade, '
-      'venda_pro.ME_Qtd_Separada as Qtd_separada,'
-      
-        'concat(round(venda_pro.ME_Qtd_Separada,2),'#39' '#39', prodserv_dados.Un' +
-        'idade) as Qtd_SeparadaImpressao,'
-      'venda_pro.ME_Cod_User_Separador as Cod_separador,'
-      'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_DataHoraSeparacao as Data_Separacao,'
-      'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
-      
-        'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
-        'nidade) as Qtd_ConferidaImpressao,'
-      'venda_pro.ME_Cod_User_Conferente as Cod_Conferente,'
-      'venda_pro.ME_Nome_User_Conferente as Nome_Conferente,'
-      'venda_pro.ME_DataHora_Conferencia as Data_Confernecia'
-      'from venda_pro'
-      
-        'inner join prodserv_dados on prodserv_dados.CodEmp = venda_pro.C' +
-        'odEmp'
-      'and prodserv_dados.Codigo = venda_pro.Cod_Produto'
-      'where'
-      'venda_pro.no_docto = :NoDocto '
-      'and venda_pro.CodEmp = :CodEmp'
-      'and venda_pro.Dt_Movto = :Data'
-      'and venda_pro.Icms_ST_Aliquota <> '#39'ISS'#39' '
-      'and venda_pro.Cod_IDRegistro = :Cod_IDRegistro'
-      'order by Fabricante')
-    Left = 604
-    Top = 336
-    ParamData = <
-      item
-        Name = 'NODOCTO'
-        ParamType = ptInput
-        Value = Null
-      end
-      item
-        Name = 'CODEMP'
-        ParamType = ptInput
-      end
-      item
-        Name = 'DATA'
-        ParamType = ptInput
-      end
-      item
-        Name = 'COD_IDREGISTRO'
-        ParamType = ptInput
-      end>
   end
 end

@@ -925,7 +925,10 @@ end;
 
 procedure TfrmMonitoramentoEntrega.FDQuery_DetalhesItensAfterOpen(
   DataSet: TDataSet);
+  var
+  qry_AtualizaStatus : TFDQuery;
 begin
+
    Label_Itens1.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens2.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens3.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
@@ -934,6 +937,42 @@ begin
    Label_Itens6.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens7.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
    Label_Itens8.Caption := 'Produtos: '+FDQuery_DetalhesItens.RecordCount.ToString;
+
+
+   if (FDQuery_VendasParaSeparar.RecordCount > 0) and (FDQuery_DetalhesItens.RecordCount = 0) and (FDQuery_VendasParaSeparar.FieldByName('ME_Status_Entrega').AsInteger <> 6)  then
+   begin
+
+      qry_AtualizaStatus := TFDQuery.Create(self);
+      qry_AtualizaStatus.Connection := dmPrincipal.conexao;
+      try
+
+        ToggleSwitch_Consulta.Enabled := false;
+
+        qry_AtualizaStatus.Active := false;
+        qry_AtualizaStatus.SQL.Clear;
+        qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Hora_Separacao = :ME_Hora_Separacao, ');
+        qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_Nome_User_Separador = :ME_Nome_User_Separador');
+        qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
+        qry_AtualizaStatus.ParamByName('Status').AsInteger := 6;
+        qry_AtualizaStatus.ParamByName('ME_Hora_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+        qry_AtualizaStatus.ParamByName('ME_Cod_User_Separador').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+        qry_AtualizaStatus.ParamByName('ME_Nome_User_Separador').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
+        qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
+        qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
+        qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'ENCERRADA, APENAS SERVIÇOS LANÇADOS..';
+        qry_AtualizaStatus.ExecSQL;
+
+        FDQuery_VendasParaSeparar.Refresh;
+
+        ShowMessage('Atenção, essa entrega será encerrada, pois so possui serviços..');
+
+      finally
+      qry_AtualizaStatus.DisposeOf;
+      ToggleSwitch_Consulta.Enabled := true;
+      end;
+
+   end;
+
 end;
 
 procedure TfrmMonitoramentoEntrega.FormClose(Sender: TObject;
