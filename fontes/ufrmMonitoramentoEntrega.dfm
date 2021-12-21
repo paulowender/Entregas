@@ -12,6 +12,7 @@
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
@@ -724,7 +725,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -737,7 +738,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid1: TDBGrid
           Left = 0
@@ -968,7 +968,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -981,7 +981,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
@@ -1238,7 +1237,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1251,7 +1250,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
@@ -1508,7 +1506,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1521,7 +1519,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
@@ -1778,7 +1775,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1791,7 +1788,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid3: TDBGrid
           Left = 0
@@ -2048,7 +2044,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2061,7 +2057,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
@@ -2514,7 +2509,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 54
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2527,7 +2522,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
@@ -2784,7 +2778,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2797,7 +2791,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
@@ -7259,6 +7252,17 @@
       Origin = 'Cod_IDRegistro'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
+    end
+  end
+  object MainMenu: TMainMenu
+    Left = 628
+    Top = 328
+    object Emissodeetiquetaspembarque1: TMenuItem
+      Caption = 'Utilit'#225'rios'
+      object Etiquetasparaembarque1: TMenuItem
+        Caption = 'Etiquetas para embarque'
+        OnClick = Etiquetasparaembarque1Click
+      end
     end
   end
 end

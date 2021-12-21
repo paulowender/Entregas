@@ -212,6 +212,9 @@ type
     Edit_SecaoOficina: TEdit;
     Edit_SecaoParcerias: TEdit;
     Edit_SecaoLocacao: TEdit;
+    MainMenu: TMainMenu;
+    Emissodeetiquetaspembarque1: TMenuItem;
+    Etiquetasparaembarque1: TMenuItem;
     procedure spb_fecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBGrid_AguardandoSeparaçãoDblClick(Sender: TObject);
@@ -268,6 +271,7 @@ type
     procedure DBGrid_EntregaFuturaTitleClick(Column: TColumn);
     procedure DBGrid_EntregaFinalizadaDblClick(Sender: TObject);
     procedure DBGrid_TodasDblClick(Sender: TObject);
+    procedure Etiquetasparaembarque1Click(Sender: TObject);
   private
     { Private declarations }
     vNomeArquivoConfig : String;
@@ -324,7 +328,8 @@ implementation
 uses udmPrincipal,ufrmLiberacao, ufrmLogin, ufrmLiberarEntrega,
   ufrmDetalheEntrega, ufrmLiberaConferencia, ufrmVincularEntregador,
   ufrmBuscaClientes, ufrmBuscaTransportador, ufrmAlterarExpedicao,
-  ufrmCancelarEntrega, ufrmCancelaEntrega2, uFuncaoCriptografia;
+  ufrmCancelarEntrega, ufrmCancelaEntrega2, uFuncaoCriptografia,
+  ufrmEtiquetasEmbarque;
 
 procedure TfrmMonitoramentoEntrega.BitBtn_EnviarSeparacaoDepositoClick(
   Sender: TObject);
@@ -920,6 +925,18 @@ begin
 
   end;
 
+
+end;
+
+procedure TfrmMonitoramentoEntrega.Etiquetasparaembarque1Click(Sender: TObject);
+begin
+
+  if not Assigned(frmEtiquetasEmbarque) then
+  begin
+    Application.CreateForm(TfrmEtiquetasEmbarque,frmEtiquetasEmbarque);
+  end;
+
+  frmEtiquetasEmbarque.ShowModal;
 
 end;
 
@@ -1940,6 +1957,11 @@ begin
   end;
 
   if Assigned(frmLiberacao) then
+  begin
+    exit;
+  end;
+
+  if Assigned(frmEtiquetasEmbarque) then
   begin
     exit;
   end;

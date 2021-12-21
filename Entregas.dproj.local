@@ -2,5 +2,8 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2021/09/28 19:45:52.000.894,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Supertec.dproj=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Entregas.dproj</Transaction>
+    <Transaction>2021/12/17 15:06:31.000.782,=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.pas</Transaction>
+    <Transaction>2021/12/17 15:06:52.000.371,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.dfm=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\fontes\ufrmEtiquetasEmbarque.dfm</Transaction>
+    <Transaction>2021/12/17 15:06:52.000.371,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.pas=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\fontes\ufrmEtiquetasEmbarque.pas</Transaction>
   </Transactions>
 </BorlandProject>

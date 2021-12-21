@@ -16,7 +16,8 @@ uses
   ufrmObsFinalizaEntrega in 'fontes\ufrmObsFinalizaEntrega.pas' {frmObsFinalizaEntrega},
   ufrmCancelarEntrega in 'fontes\ufrmCancelarEntrega.pas' {frmCancelaEntrega},
   ufrmCancelaEntrega2 in 'fontes\ufrmCancelaEntrega2.pas' {frmCancelaEntrega2},
-  uFuncaoCriptografia in 'fontes\uFuncaoCriptografia.pas';
+  uFuncaoCriptografia in 'fontes\uFuncaoCriptografia.pas',
+  ufrmEtiquetasEmbarque in 'fontes\ufrmEtiquetasEmbarque.pas' {frmEtiquetasEmbarque};
 
 {$R *.res}
 
