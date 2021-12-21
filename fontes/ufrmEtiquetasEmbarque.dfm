@@ -3,7 +3,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Emiss'#227'o de etiquetas para embarque'
-  ClientHeight = 306
+  ClientHeight = 392
   ClientWidth = 704
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -28,13 +28,34 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     TabOrder = 0
     object edt_NumeroNfe: TLabeledEdit
       Left = 10
-      Top = 21
+      Top = 19
       Width = 119
       Height = 21
       EditLabel.Width = 93
       EditLabel.Height = 13
       EditLabel.Caption = 'Numero nota fiscal:'
       TabOrder = 0
+      OnKeyPress = edt_NumeroNfeKeyPress
+    end
+    object CheckBox_EndNfe: TCheckBox
+      Left = 146
+      Top = 22
+      Width = 97
+      Height = 17
+      Caption = 'Endere'#231'o NFE'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+      OnClick = CheckBox_EndNfeClick
+    end
+    object CheckBox_EndCob: TCheckBox
+      Left = 253
+      Top = 22
+      Width = 164
+      Height = 17
+      Caption = 'Endere'#231'o entrega principal'
+      TabOrder = 2
+      OnClick = CheckBox_EndCobClick
     end
   end
   object Panel2: TPanel
@@ -42,119 +63,164 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Left = 3
     Top = 55
     Width = 698
-    Height = 201
+    Height = 287
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    object GroupBox1: TGroupBox
+    ExplicitHeight = 201
+    object GroupBox_DadosNfe: TGroupBox
       Left = 0
       Top = 0
       Width = 698
-      Height = 201
+      Height = 287
       Align = alClient
       Caption = 'Dados para impress'#227'o:'
+      Enabled = False
       TabOrder = 0
-      object LabeledEdit1: TLabeledEdit
+      ExplicitHeight = 201
+      object Label1: TLabel
+        Left = 10
+        Top = 165
+        Width = 67
+        Height = 13
+        Caption = 'Observa'#231#245'es:'
+      end
+      object LabeledEdit_Transportador: TLabeledEdit
         Left = 10
         Top = 40
         Width = 311
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 73
         EditLabel.Height = 13
         EditLabel.Caption = 'Transportador:'
         TabOrder = 0
       end
-      object LabeledEdit2: TLabeledEdit
+      object LabeledEdit_Volumes: TLabeledEdit
         Left = 10
         Top = 133
         Width = 159
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 43
         EditLabel.Height = 13
         EditLabel.Caption = 'Volumes:'
         TabOrder = 1
+        OnKeyPress = LabeledEdit_VolumesKeyPress
       end
-      object LabeledEdit3: TLabeledEdit
+      object LabeledEdit_Embalagem: TLabeledEdit
         Left = 197
         Top = 133
         Width = 124
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 58
         EditLabel.Height = 13
         EditLabel.Caption = 'Embalagem:'
         TabOrder = 2
       end
-      object LabeledEdit4: TLabeledEdit
+      object LabeledEdit_End: TLabeledEdit
         Left = 337
         Top = 40
         Width = 268
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 49
         EditLabel.Height = 13
         EditLabel.Caption = 'Endere'#231'o:'
         TabOrder = 3
       end
-      object LabeledEdit5: TLabeledEdit
+      object LabeledEdit_Numero: TLabeledEdit
         Left = 611
         Top = 40
         Width = 79
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 41
         EditLabel.Height = 13
         EditLabel.Caption = 'Numero:'
         TabOrder = 4
       end
-      object LabeledEdit6: TLabeledEdit
+      object LabeledEdit_Cidade: TLabeledEdit
         Left = 337
         Top = 87
         Width = 268
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade:'
         TabOrder = 5
       end
-      object LabeledEdit7: TLabeledEdit
+      object LabeledEdit_UF: TLabeledEdit
         Left = 611
         Top = 87
         Width = 79
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 17
         EditLabel.Height = 13
         EditLabel.Caption = 'UF:'
         TabOrder = 6
       end
-      object LabeledEdit8: TLabeledEdit
+      object LabeledEdit_Cep: TLabeledEdit
         Left = 337
         Top = 133
-        Width = 268
+        Width = 160
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 23
         EditLabel.Height = 13
         EditLabel.Caption = 'CEP:'
         TabOrder = 7
       end
-      object LabeledEdit9: TLabeledEdit
+      object LabeledEdit_Cliente: TLabeledEdit
         Left = 10
         Top = 87
         Width = 311
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'Cliente:'
         TabOrder = 8
+      end
+      object LabeledEdit_Bairro: TLabeledEdit
+        Left = 503
+        Top = 133
+        Width = 187
+        Height = 21
+        CharCase = ecUpperCase
+        EditLabel.Width = 32
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Bairro:'
+        TabOrder = 9
+      end
+      object Memo_Obs: TMemo
+        AlignWithMargins = True
+        Left = 5
+        Top = 181
+        Width = 688
+        Height = 101
+        Align = alBottom
+        ReadOnly = True
+        TabOrder = 10
+        ExplicitLeft = 3
+        ExplicitTop = 183
       end
     end
   end
   object Panel3: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 262
+    Top = 348
     Width = 698
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitLeft = -2
+    ExplicitTop = 262
     object btnGravar: TBitBtn
       Tag = 99
       Left = 317
@@ -190,6 +256,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         00FAE7E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D0CCD5371FD74029D74029D7
         4029D74029D74029D74029D5361EF4D0CCFFFFFFFFFFFFFFFFFF}
       TabOrder = 0
+      OnClick = btnGravarClick
     end
     object btnCancelar: TBitBtn
       Tag = 99

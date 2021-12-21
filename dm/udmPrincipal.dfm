@@ -12,6 +12,11 @@ object dmPrincipal: TdmPrincipal
     Top = 104
   end
   object conexao: TFDConnection
+    Params.Strings = (
+      'Database=supertec'
+      'User_Name=root'
+      'Password=18110002'
+      'DriverID=mySQL')
     LoginPrompt = False
     BeforeConnect = conexaoBeforeConnect
     Left = 64

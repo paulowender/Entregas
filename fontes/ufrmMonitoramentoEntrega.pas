@@ -1221,7 +1221,7 @@ begin
 
     end;
 
-    //INDEX VENDA_NFECAB
+    //INDEX VENDA_NFECAB NFE CANCEL
     qry_Index.Active := false;
     qry_Index.SQL.clear;
     qry_Index.SQL.Add('show index from venda_nfecab where Key_name = :Key ');
@@ -1248,8 +1248,32 @@ begin
 
     end;
 
+    //INDEX VENDA_NFECAB ETIQUETA
+    qry_Index.Active := false;
+    qry_Index.SQL.clear;
+    qry_Index.SQL.Add('show index from venda_nfecab where Key_name = :Key ');
+    qry_Index.ParamByName('Key').AsString := 'ME_Etiquetas';
+    qry_Index.Active := true;
+
+    if qry_Index.RecordCount <> 2 then
+    begin
+
+      try
+      qry_exc.Active := false;
+      qry_exc.SQL.clear;
+      qry_exc.SQL.Add('DROP INDEX ME_Etiquetas ON venda_nfecab');
+      qry_exc.ExecSQL;
+      except
+
+      end;
+
+      qry_exc.Active := false;
+      qry_exc.SQL.clear;
+      qry_exc.SQL.Add('alter table venda_nfecab add index ME_Etiquetas (CodEmp,No_Docto)');
+      qry_exc.ExecSQL;
 
 
+    end;
 
   finally
   qry_Index.DisposeOf;
