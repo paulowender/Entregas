@@ -31,6 +31,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       Top = 19
       Width = 119
       Height = 21
+      TabStop = False
       EditLabel.Width = 93
       EditLabel.Height = 13
       EditLabel.Caption = 'Numero nota fiscal:'
@@ -42,6 +43,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       Top = 22
       Width = 97
       Height = 17
+      TabStop = False
       Caption = 'Endere'#231'o NFE'
       Checked = True
       State = cbChecked
@@ -53,6 +55,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       Top = 22
       Width = 164
       Height = 17
+      TabStop = False
       Caption = 'Endere'#231'o entrega principal'
       TabOrder = 2
       OnClick = CheckBox_EndCobClick
@@ -67,7 +70,6 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 201
     object GroupBox_DadosNfe: TGroupBox
       Left = 0
       Top = 0
@@ -77,7 +79,6 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       Caption = 'Dados para impress'#227'o:'
       Enabled = False
       TabOrder = 0
-      ExplicitHeight = 201
       object Label1: TLabel
         Left = 10
         Top = 165
@@ -105,7 +106,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 43
         EditLabel.Height = 13
         EditLabel.Caption = 'Volumes:'
-        TabOrder = 1
+        TabOrder = 6
         OnKeyPress = LabeledEdit_VolumesKeyPress
       end
       object LabeledEdit_Embalagem: TLabeledEdit
@@ -117,7 +118,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 58
         EditLabel.Height = 13
         EditLabel.Caption = 'Embalagem:'
-        TabOrder = 2
+        TabOrder = 7
       end
       object LabeledEdit_End: TLabeledEdit
         Left = 337
@@ -128,7 +129,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 49
         EditLabel.Height = 13
         EditLabel.Caption = 'Endere'#231'o:'
-        TabOrder = 3
+        TabOrder = 1
       end
       object LabeledEdit_Numero: TLabeledEdit
         Left = 611
@@ -139,7 +140,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 41
         EditLabel.Height = 13
         EditLabel.Caption = 'Numero:'
-        TabOrder = 4
+        TabOrder = 2
       end
       object LabeledEdit_Cidade: TLabeledEdit
         Left = 337
@@ -150,7 +151,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade:'
-        TabOrder = 5
+        TabOrder = 4
       end
       object LabeledEdit_UF: TLabeledEdit
         Left = 611
@@ -161,7 +162,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 17
         EditLabel.Height = 13
         EditLabel.Caption = 'UF:'
-        TabOrder = 6
+        TabOrder = 5
       end
       object LabeledEdit_Cep: TLabeledEdit
         Left = 337
@@ -172,7 +173,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 23
         EditLabel.Height = 13
         EditLabel.Caption = 'CEP:'
-        TabOrder = 7
+        TabOrder = 8
       end
       object LabeledEdit_Cliente: TLabeledEdit
         Left = 10
@@ -183,7 +184,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'Cliente:'
-        TabOrder = 8
+        TabOrder = 3
       end
       object LabeledEdit_Bairro: TLabeledEdit
         Left = 503
@@ -205,8 +206,6 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         Align = alBottom
         ReadOnly = True
         TabOrder = 10
-        ExplicitLeft = 3
-        ExplicitTop = 183
       end
     end
   end
@@ -219,8 +218,6 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = -2
-    ExplicitTop = 262
     object btnGravar: TBitBtn
       Tag = 99
       Left = 317
@@ -294,6 +291,194 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 1
       OnClick = btnCancelarClick
+    end
+  end
+  object frxReport_Etiqueta: TfrxReport
+    Version = '6.9.6'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44565.375347615700000000
+    ReportOptions.LastChange = 44565.559623159720000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 459
+    Top = 31
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page_Etiquet: TfrxReportPage
+      PaperWidth = 110.000000000000000000
+      PaperHeight = 50.000000000000000000
+      PaperSize = 256
+      Frame.Typ = []
+      MirrorMode = []
+      object Memo_Empresa: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.125984251968500000
+        Top = 16.803149610000000000
+        Width = 151.181200000000000000
+        Height = 34.015748030000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          'SUPERTEC COM'#201'RCIO E IMPORTA'#199#195'O LTDA')
+        ParentFont = False
+      end
+      object Memo_Site: TfrxMemoView
+        AllowVectorExport = True
+        Left = 186.519790000000000000
+        Top = 16.889761340000000000
+        Width = 205.984244650000000000
+        Height = 34.015770000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          'Site: https://www.supertecmt.com.br/'
+          'E-mail: financeiro@supertecmt.com.br'
+          'Fone: (66) 3511-8700')
+        ParentFont = False
+        WordWrap = False
+      end
+      object Memo_Transportador: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.236218030000000000
+        Top = 58.795300000000000000
+        Width = 359.055113230000000000
+        Height = 18.897650000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = [fsBold, fsUnderline]
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'TRANSETE TRANSPORTE SEGURO LTDA')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_Cliente: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.236218030000000000
+        Top = 83.031540000000000000
+        Width = 359.055110790000000000
+        Height = 18.897650000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'VALE DO VERDE EMPREENDIMENTOS AGRICOLAS LTDA')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_Endereco: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.236218030000000000
+        Top = 105.708720000000000000
+        Width = 359.055113230000000000
+        Height = 18.897637800000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'R COLONIZADOR ENIO PIPINO II, 8858')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_BairroCepCidadeUf: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.236218030000000000
+        Top = 132.165430000000000000
+        Width = 359.055113230000000000
+        Height = 18.897637800000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'EUNICE - 78558970 - SINOP - MT')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_NFE: TfrxMemoView
+        AllowVectorExport = True
+        Left = 32.236218030000000000
+        Top = 158.622140000000000000
+        Width = 98.267718980000000000
+        Height = 18.897650000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'NF: 367151')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_Data: TfrxMemoView
+        AllowVectorExport = True
+        Left = 144.385900000000000000
+        Top = 158.622140000000000000
+        Width = 75.590600000000000000
+        Height = 18.897650000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        Memo.UTF8W = (
+          '22/11/2021')
+        ParentFont = False
+        VAlign = vaCenter
+      end
+      object Memo_VolumeQtd: TfrxMemoView
+        AllowVectorExport = True
+        Left = 260.771800000000000000
+        Top = 158.622140000000000000
+        Width = 130.771641340000000000
+        Height = 18.897650000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        Memo.UTF8W = (
+          'VOL 1/5')
+        ParentFont = False
+        VAlign = vaCenter
+      end
     end
   end
 end

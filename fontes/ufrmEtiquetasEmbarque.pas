@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, ACBrBase, ACBrEnterTab;
+  FireDAC.Comp.Client, ACBrBase, ACBrEnterTab, frxClass;
 
 type
   TfrmEtiquetasEmbarque = class(TForm)
@@ -33,6 +33,7 @@ type
     CheckBox_EndCob: TCheckBox;
     Memo_Obs: TMemo;
     Label1: TLabel;
+    frxReport_Etiqueta: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -66,18 +67,35 @@ end;
 procedure TfrmEtiquetasEmbarque.btnGravarClick(Sender: TObject);
 var
   I : integer;
+  CaminhoArq : String;
 begin
 
   if (LabeledEdit_Volumes.text = EmptyStr) or (LabeledEdit_Embalagem.text = EmptyStr)
-  or (LabeledEdit_Transportador.text = EmptyStr) then
+  or (LabeledEdit_Transportador.text = EmptyStr) or (LabeledEdit_Cidade.Text = EmptyStr)
+  or (LabeledEdit_UF.text = EmptyStr) or (edt_NumeroNfe.Text = EmptyStr) then
   begin
-  ShowMessage('Atenção preencha os campos do volume, embalagem, transportador..');
+  ShowMessage('Atenção preencha os campos do volume, embalagem, transportador, cidade, uf..');
   exit;
   end;
 
   for I := 1 to StrToInt(LabeledEdit_Volumes.Text) do
   begin
-    ShowMessage('Imprimindo volume: '+ IntToStr(I)+ ' de '+ LabeledEdit_Volumes.Text);
+
+       CaminhoArq := StringReplace(ExtractFileName(ParamStr(0)), '.exe', '', [RfReplaceAll]);
+       CaminhoArq := ExtractFilePath(ParamSTR(0)) + 'Etiqueta_Embarque.fr3';
+       frxReport_Etiqueta.LoadFromFile(CaminhoArq);
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Transportador')).Memo.Text := LabeledEdit_Transportador.text;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Cliente')).Memo.Text := LabeledEdit_Cliente.text;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Endereco')).Memo.Text := LabeledEdit_End.text+', '+LabeledEdit_Numero.text;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_BairroCepCidadeUf')).Memo.Text := LabeledEdit_Bairro.Text+' '+LabeledEdit_Cep.Text+' '+LabeledEdit_Cidade.Text+' '+LabeledEdit_UF.Text;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_NFE')).Memo.Text := 'NFE: '+edt_NumeroNfe.Text;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Data')).Memo.Text := DateToStr(Now);
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_VolumeQtd')).Memo.Text := LabeledEdit_Embalagem.Text+' '+IntToStr(I)+'/'+LabeledEdit_Volumes.Text;
+       frxReport_Etiqueta.PrintOptions.Printer := 'Embarque';
+       frxReport_Etiqueta.PrintOptions.ShowDialog:= False;
+       frxReport_Etiqueta.PrepareReport;
+       frxReport_Etiqueta.Print;
+
   end;
 
   pLimparCampos;
