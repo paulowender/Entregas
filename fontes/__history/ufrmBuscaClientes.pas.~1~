@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.ExtCtrls, Vcl.Buttons;
+  Vcl.ExtCtrls;
 
 type
   TfrmBuscaClientes = class(TForm)
@@ -24,7 +24,6 @@ type
     FDQuery_ClientesFone: TStringField;
     FDQuery_Clientescodigo: TIntegerField;
     FDQuery_Clientesrazao: TStringField;
-    SpeedButton1: TSpeedButton;
     procedure Edit_NomeClientesKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button_FecharClick(Sender: TObject);
@@ -48,7 +47,6 @@ uses udmPrincipal, ufrmMonitoramentoEntrega;
 procedure TfrmBuscaClientes.Button_FecharClick(Sender: TObject);
 begin
   frmBuscaClientes.close;
-  /// thiago teste
 end;
 
 procedure TfrmBuscaClientes.DBGridClientesDblClick(Sender: TObject);
