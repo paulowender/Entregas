@@ -48,7 +48,6 @@ uses udmPrincipal, ufrmMonitoramentoEntrega;
 procedure TfrmBuscaClientes.Button_FecharClick(Sender: TObject);
 begin
   frmBuscaClientes.close;
-  /// thiago teste
 end;
 
 procedure TfrmBuscaClientes.DBGridClientesDblClick(Sender: TObject);
