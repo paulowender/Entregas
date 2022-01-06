@@ -3481,7 +3481,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 65'
+        Text = 'Vers'#227'o 71'
         Width = 50
       end>
   end
@@ -6982,8 +6982,12 @@
     Top = 344
   end
   object FDQuery_EndEntrega: TFDQuery
+    Connection = dmPrincipal.conexao
     SQL.Strings = (
-      'select clientes.razao, clientes.Cpf_Cnpj, clientes.Rg_Ie,'
+      
+        'select clientes.razao, clientes.Cpf_Cnpj, clientes.Rg_Ie,cli_end' +
+        'cobent.EndEntrega as EnderecoBD, cli_endcobent.EndEntrega_No as ' +
+        'NumeroEnd,'
       
         'concat(cli_endcobent.EndEntrega,'#39' '#39',EndEntrega_No ) as EndEntreg' +
         'a, cli_endcobent.BairroEntrega, cli_endcobent.CepEntrega,'
@@ -7020,6 +7024,8 @@
       'razao=razao'
       'Cpf_Cnpj=Cpf_Cnpj'
       'Rg_Ie=Rg_Ie'
+      'EnderecoBD=EnderecoBD'
+      'NumeroEnd=NumeroEnd'
       'EndEntrega=EndEntrega'
       'BairroEntrega=BairroEntrega'
       'CepEntrega=CepEntrega'

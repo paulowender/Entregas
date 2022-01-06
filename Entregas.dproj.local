@@ -5,5 +5,39 @@
     <Transaction>2021/12/17 15:06:31.000.782,=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.pas</Transaction>
     <Transaction>2021/12/17 15:06:52.000.371,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\fontes\ufrmEtiquetasEmbarque.dfm=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.dfm</Transaction>
     <Transaction>2021/12/17 15:06:52.000.371,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\fontes\ufrmEtiquetasEmbarque.pas=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\Entregas\Unit1.pas</Transaction>
-  </Transactions>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="dm"/>
+    <File Path="dm\udmPrincipal.pas"/>
+    <File Path="dm\udmPrincipal.dfm"/>
+    <File Path="fontes"/>
+    <File Path="fontes\ufrmAlterarExpedicao.pas"/>
+    <File Path="fontes\ufrmAlterarExpedicao.dfm"/>
+    <File Path="fontes\ufrmBuscaClientes.pas"/>
+    <File Path="fontes\ufrmBuscaClientes.dfm"/>
+    <File Path="fontes\ufrmBuscaTransportador.pas"/>
+    <File Path="fontes\ufrmBuscaTransportador.dfm"/>
+    <File Path="fontes\ufrmCancelaEntrega2.pas"/>
+    <File Path="fontes\ufrmCancelaEntrega2.dfm"/>
+    <File Path="fontes\ufrmCancelarEntrega.pas"/>
+    <File Path="fontes\ufrmCancelarEntrega.dfm"/>
+    <File Path="fontes\ufrmDetalheEntrega.pas"/>
+    <File Path="fontes\ufrmDetalheEntrega.dfm"/>
+    <File Path="fontes\ufrmEtiquetasEmbarque.pas"/>
+    <File Path="fontes\ufrmEtiquetasEmbarque.dfm"/>
+    <File Path="fontes\ufrmLiberacao.pas"/>
+    <File Path="fontes\ufrmLiberacao.dfm"/>
+    <File Path="fontes\ufrmLiberaConferencia.pas"/>
+    <File Path="fontes\ufrmLiberaConferencia.dfm"/>
+    <File Path="fontes\ufrmLiberarEntrega.pas"/>
+    <File Path="fontes\ufrmLiberarEntrega.dfm"/>
+    <File Path="fontes\ufrmLogin.pas"/>
+    <File Path="fontes\ufrmLogin.dfm"/>
+    <File Path="fontes\ufrmMonitoramentoEntrega.pas"/>
+    <File Path="fontes\ufrmMonitoramentoEntrega.dfm"/>
+    <File Path="fontes\ufrmObsFinalizaEntrega.pas"/>
+    <File Path="fontes\ufrmObsFinalizaEntrega.dfm"/>
+    <File Path="fontes\ufrmVincularEntregador.pas"/>
+    <File Path="fontes\ufrmVincularEntregador.dfm"/>
+    <File Path="fontes\uFuncaoCriptografia.pas"/>
+  </ProjectSortOrder>
 </BorlandProject>

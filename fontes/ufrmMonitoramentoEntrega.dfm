@@ -3489,9 +3489,10 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 71'
+        Text = 'Vers'#227'o 75'
         Width = 50
       end>
+    ExplicitTop = 768
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000

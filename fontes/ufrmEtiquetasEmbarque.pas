@@ -34,16 +34,23 @@ type
     Memo_Obs: TMemo;
     Label1: TLabel;
     frxReport_Etiqueta: TfrxReport;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    LabeledEdit_Orçamento: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure edt_NumeroNfeKeyPress(Sender: TObject; var Key: Char);
-    procedure pTrazerDados;
+    procedure pTrazerDadosNfe;
+    procedure pTrazerDadosDoc;
     procedure pLimparCampos;
     procedure btnGravarClick(Sender: TObject);
     procedure LabeledEdit_VolumesKeyPress(Sender: TObject; var Key: Char);
     procedure CheckBox_EndNfeClick(Sender: TObject);
     procedure CheckBox_EndCobClick(Sender: TObject);
+    procedure LabeledEdit_OrçamentoKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_NumeroNfeEnter(Sender: TObject);
+    procedure LabeledEdit_OrçamentoEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,7 +79,7 @@ begin
 
   if (LabeledEdit_Volumes.text = EmptyStr) or (LabeledEdit_Embalagem.text = EmptyStr)
   or (LabeledEdit_Transportador.text = EmptyStr) or (LabeledEdit_Cidade.Text = EmptyStr)
-  or (LabeledEdit_UF.text = EmptyStr) or (edt_NumeroNfe.Text = EmptyStr) then
+  or (LabeledEdit_UF.text = EmptyStr) and ((edt_NumeroNfe.Text = EmptyStr) or (LabeledEdit_Orçamento.Text = EmptyStr)) then
   begin
   ShowMessage('Atenção preencha os campos do volume, embalagem, transportador, cidade, uf..');
   exit;
@@ -88,7 +95,16 @@ begin
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Cliente')).Memo.Text := LabeledEdit_Cliente.text;
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Endereco')).Memo.Text := LabeledEdit_End.text+', '+LabeledEdit_Numero.text;
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_BairroCepCidadeUf')).Memo.Text := LabeledEdit_Bairro.Text+' '+LabeledEdit_Cep.Text+' '+LabeledEdit_Cidade.Text+' '+LabeledEdit_UF.Text;
+
+       if not (edt_NumeroNfe.Text = EmptyStr) then
+       begin
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_NFE')).Memo.Text := 'NFE: '+edt_NumeroNfe.Text;
+       end
+       else if not (LabeledEdit_Orçamento.Text = EmptyStr) then
+       begin
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_NFE')).Memo.Text := 'DOC: '+LabeledEdit_Orçamento.Text;
+       end;
+
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Data')).Memo.Text := DateToStr(Now);
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_VolumeQtd')).Memo.Text := LabeledEdit_Embalagem.Text+' '+IntToStr(I)+'/'+LabeledEdit_Volumes.Text;
        frxReport_Etiqueta.PrintOptions.Printer := 'Embarque';
@@ -126,6 +142,12 @@ begin
 
 end;
 
+procedure TfrmEtiquetasEmbarque.edt_NumeroNfeEnter(Sender: TObject);
+begin
+  LabeledEdit_Orçamento.Text := '';
+  pLimparCampos;
+end;
+
 procedure TfrmEtiquetasEmbarque.edt_NumeroNfeKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -145,7 +167,7 @@ begin
 
     try
     pLimparCampos;
-    pTrazerDados;
+    pTrazerDadosNfe;
     except on E: Exception do
     ShowMessage('Falha ao consultar nfe '+e.Message);
     end;
@@ -168,6 +190,40 @@ procedure TfrmEtiquetasEmbarque.FormShow(Sender: TObject);
 begin
   edt_NumeroNfe.SetFocus;
   GroupBox_DadosNfe.Enabled := false;
+end;
+
+procedure TfrmEtiquetasEmbarque.LabeledEdit_OrçamentoEnter(Sender: TObject);
+begin
+  edt_NumeroNfe.Text := '';
+  pLimparCampos;
+end;
+
+procedure TfrmEtiquetasEmbarque.LabeledEdit_OrçamentoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+
+  if key in ['0','1','2','3','4','5','6','7','8','9',#8,#13] = false then
+  begin
+  key:=#0;
+  end;
+
+  if Key = #13 then
+  begin
+
+    if LabeledEdit_Orçamento.Text = EmptyStr then
+    begin
+      exit;
+    end;
+
+    try
+    pLimparCampos;
+    pTrazerDadosDoc;
+    except on E: Exception do
+    ShowMessage('Falha ao consultar nfe '+e.Message);
+    end;
+
+  end;
+
 end;
 
 procedure TfrmEtiquetasEmbarque.LabeledEdit_VolumesKeyPress(Sender: TObject;
@@ -197,7 +253,63 @@ begin
   GroupBox_DadosNfe.Enabled := false;
 end;
 
-procedure TfrmEtiquetasEmbarque.pTrazerDados;
+procedure TfrmEtiquetasEmbarque.pTrazerDadosDoc;
+var
+    qry_Nfe : TFDQuery;
+begin
+
+     qry_Nfe := TFDQuery.Create(self);
+     qry_Nfe.Connection := dmPrincipal.conexao;
+     try
+
+        qry_Nfe.Active := false;
+        qry_Nfe.SQL.clear;
+        qry_Nfe.SQL.Add('select transportador.Razao as Transportador, venda_cab.Razao_Cliente, clientes.Endereco, ');
+        qry_Nfe.SQL.Add('clientes.End_Numero, clientes.Cidade, clientes.UF, ');
+        qry_Nfe.SQL.Add('clientes.Cep, clientes.Bairro from venda_cab ');
+        qry_Nfe.SQL.Add('LEFT JOIN clientes on clientes.CodEmp = venda_cab.CodEmp ');
+        qry_Nfe.SQL.Add('and clientes.codigo = venda_cab.Cod_Cliente ');
+        qry_Nfe.SQL.Add('LEFT JOIN transportador on transportador.CodEmp = venda_cab.CodEmp and ');
+        qry_Nfe.SQL.Add('transportador.codigo = venda_cab.Cod_Transp ');
+        qry_Nfe.SQL.Add('where venda_cab.No_Docto = :No_Docto and venda_cab.CodEmp = :CodEmp ');
+        qry_Nfe.SQL.Add('and venda_cab.Cod_CCusto = 2 ');
+        qry_Nfe.ParamByName('No_Docto').AsInteger := StrToInt(LabeledEdit_Orçamento.Text);
+        qry_Nfe.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
+        qry_Nfe.Active := true;
+
+        if qry_Nfe.RecordCount > 0 then
+        begin
+
+            LabeledEdit_Transportador.Text := qry_Nfe.FieldByName('Transportador').AsString;
+            LabeledEdit_Cliente.Text := qry_Nfe.FieldByName('Razao_Cliente').AsString;
+            LabeledEdit_Volumes.Text := '';
+            LabeledEdit_Embalagem.Text := 'VOL';
+            LabeledEdit_End.Text := qry_Nfe.FieldByName('Endereco').AsString;
+            LabeledEdit_Cidade.Text := qry_Nfe.FieldByName('Cidade').AsString;
+            LabeledEdit_Cep.text := StringReplace(qry_Nfe.FieldByName('Cep').AsString,'-','',[rfReplaceAll]);
+            LabeledEdit_Cep.text := StringReplace(LabeledEdit_Cep.text,'/','',[rfReplaceAll]);
+             LabeledEdit_Cep.text := StringReplace(LabeledEdit_Cep.text,'.','',[rfReplaceAll]);
+            LabeledEdit_Numero.Text := qry_Nfe.FieldByName('End_Numero').AsString;
+            LabeledEdit_UF.Text := qry_Nfe.FieldByName('UF').AsString;
+            LabeledEdit_Bairro.Text := qry_Nfe.FieldByName('Bairro').AsString;
+            GroupBox_DadosNfe.Enabled := true;
+
+
+        end
+        else
+        begin
+          ShowMessage('Nenhuma documento com esse numero encontrado..');
+          GroupBox_DadosNfe.Enabled := false;
+        end;
+
+
+     finally
+     qry_Nfe.DisposeOf;
+     end;
+
+end;
+
+procedure TfrmEtiquetasEmbarque.pTrazerDadosNfe;
 var
     qry_Nfe : TFDQuery;
 begin

@@ -3489,7 +3489,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 65'
+        Text = 'Vers'#227'o 71'
         Width = 50
       end>
   end

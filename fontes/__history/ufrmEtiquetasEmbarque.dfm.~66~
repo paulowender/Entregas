@@ -1,4 +1,4 @@
-object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
+﻿object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
@@ -22,51 +22,83 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Left = 3
     Top = 3
     Width = 698
-    Height = 46
+    Height = 62
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    object edt_NumeroNfe: TLabeledEdit
-      Left = 10
-      Top = 19
-      Width = 119
-      Height = 21
-      TabStop = False
-      EditLabel.Width = 93
-      EditLabel.Height = 13
-      EditLabel.Caption = 'Numero nota fiscal:'
+    object GroupBox1: TGroupBox
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 374
+      Height = 56
+      Align = alLeft
+      Caption = 'Numero Nota Fiscal:'
       TabOrder = 0
-      OnKeyPress = edt_NumeroNfeKeyPress
+      object edt_NumeroNfe: TLabeledEdit
+        Left = 7
+        Top = 22
+        Width = 119
+        Height = 21
+        TabStop = False
+        EditLabel.Width = 3
+        EditLabel.Height = 13
+        TabOrder = 0
+        OnEnter = edt_NumeroNfeEnter
+        OnKeyPress = edt_NumeroNfeKeyPress
+      end
+      object CheckBox_EndNfe: TCheckBox
+        Left = 147
+        Top = 10
+        Width = 97
+        Height = 17
+        TabStop = False
+        Caption = 'Endere'#231'o NFE'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+        OnClick = CheckBox_EndNfeClick
+      end
+      object CheckBox_EndCob: TCheckBox
+        Left = 147
+        Top = 33
+        Width = 164
+        Height = 17
+        TabStop = False
+        Caption = 'Endere'#231'o entrega principal'
+        TabOrder = 2
+        OnClick = CheckBox_EndCobClick
+      end
     end
-    object CheckBox_EndNfe: TCheckBox
-      Left = 146
-      Top = 22
-      Width = 97
-      Height = 17
-      TabStop = False
-      Caption = 'Endere'#231'o NFE'
-      Checked = True
-      State = cbChecked
+    object GroupBox2: TGroupBox
+      AlignWithMargins = True
+      Left = 413
+      Top = 3
+      Width = 282
+      Height = 56
+      Align = alRight
+      Caption = 'Numero Or'#231'amento:'
       TabOrder = 1
-      OnClick = CheckBox_EndNfeClick
-    end
-    object CheckBox_EndCob: TCheckBox
-      Left = 253
-      Top = 22
-      Width = 164
-      Height = 17
-      TabStop = False
-      Caption = 'Endere'#231'o entrega principal'
-      TabOrder = 2
-      OnClick = CheckBox_EndCobClick
+      object LabeledEdit_Orçamento: TLabeledEdit
+        Left = 9
+        Top = 22
+        Width = 119
+        Height = 21
+        TabStop = False
+        EditLabel.Width = 3
+        EditLabel.Height = 13
+        TabOrder = 0
+        OnEnter = LabeledEdit_OrçamentoEnter
+        OnKeyPress = LabeledEdit_OrçamentoKeyPress
+      end
     end
   end
   object Panel2: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 55
+    Top = 71
     Width = 698
-    Height = 287
+    Height = 271
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -74,7 +106,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       Left = 0
       Top = 0
       Width = 698
-      Height = 287
+      Height = 271
       Align = alClient
       Caption = 'Dados para impress'#227'o:'
       Enabled = False
@@ -200,7 +232,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       object Memo_Obs: TMemo
         AlignWithMargins = True
         Left = 5
-        Top = 181
+        Top = 165
         Width = 688
         Height = 101
         Align = alBottom
@@ -302,14 +334,14 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44565.375347615700000000
-    ReportOptions.LastChange = 44565.559347430560000000
+    ReportOptions.LastChange = 44565.673267604160000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 459
-    Top = 31
+    Left = 595
+    Top = 271
     Datasets = <>
     Variables = <>
     Style = <>
@@ -355,7 +387,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         HAlign = haCenter
         Memo.UTF8W = (
           'Site: https://www.supertecmt.com.br/'
-          'E-mail: financeiro@supertecmt.com.br'
+          'E-mail: expedicao@supertecmt.com.br'
           'Fone: (66) 3511-8700')
         ParentFont = False
         WordWrap = False

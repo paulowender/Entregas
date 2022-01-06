@@ -22,64 +22,91 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Left = 3
     Top = 3
     Width = 698
-    Height = 46
+    Height = 62
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -2
-    object edt_NumeroNfe: TLabeledEdit
-      Left = 10
-      Top = 19
-      Width = 119
-      Height = 21
-      TabStop = False
-      EditLabel.Width = 93
-      EditLabel.Height = 13
-      EditLabel.Caption = 'Numero nota fiscal:'
+    object GroupBox1: TGroupBox
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 369
+      Height = 56
+      Align = alLeft
+      Caption = 'Nota Fiscal:'
       TabOrder = 0
-      OnKeyPress = edt_NumeroNfeKeyPress
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitHeight = 54
+      object edt_NumeroNfe: TLabeledEdit
+        Left = 7
+        Top = 22
+        Width = 119
+        Height = 21
+        TabStop = False
+        EditLabel.Width = 3
+        EditLabel.Height = 13
+        TabOrder = 0
+        OnKeyPress = edt_NumeroNfeKeyPress
+      end
+      object CheckBox_EndNfe: TCheckBox
+        Left = 147
+        Top = 10
+        Width = 97
+        Height = 17
+        TabStop = False
+        Caption = 'Endere'#231'o NFE'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+        OnClick = CheckBox_EndNfeClick
+      end
+      object CheckBox_EndCob: TCheckBox
+        Left = 147
+        Top = 32
+        Width = 164
+        Height = 17
+        TabStop = False
+        Caption = 'Endere'#231'o entrega principal'
+        TabOrder = 2
+        OnClick = CheckBox_EndCobClick
+      end
     end
-    object CheckBox_EndNfe: TCheckBox
-      Left = 146
-      Top = 22
-      Width = 97
-      Height = 17
-      TabStop = False
-      Caption = 'Endere'#231'o NFE'
-      Checked = True
-      State = cbChecked
+    object GroupBox2: TGroupBox
+      AlignWithMargins = True
+      Left = 413
+      Top = 3
+      Width = 282
+      Height = 56
+      Align = alRight
+      Caption = 'Or'#231'amento:'
       TabOrder = 1
-      OnClick = CheckBox_EndNfeClick
-    end
-    object CheckBox_EndCob: TCheckBox
-      Left = 253
-      Top = 22
-      Width = 164
-      Height = 17
-      TabStop = False
-      Caption = 'Endere'#231'o entrega principal'
-      TabOrder = 2
-      OnClick = CheckBox_EndCobClick
+      ExplicitLeft = 416
+      ExplicitTop = 0
+      ExplicitHeight = 54
     end
   end
   object Panel2: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 55
+    Top = 71
     Width = 698
-    Height = 287
+    Height = 271
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 55
+    ExplicitHeight = 287
     object GroupBox_DadosNfe: TGroupBox
       Left = 0
       Top = 0
       Width = 698
-      Height = 287
+      Height = 271
       Align = alClient
       Caption = 'Dados para impress'#227'o:'
       Enabled = False
       TabOrder = 0
+      ExplicitHeight = 287
       object Label1: TLabel
         Left = 10
         Top = 165
@@ -201,12 +228,13 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       object Memo_Obs: TMemo
         AlignWithMargins = True
         Left = 5
-        Top = 181
+        Top = 165
         Width = 688
         Height = 101
         Align = alBottom
         ReadOnly = True
         TabOrder = 10
+        ExplicitTop = 181
       end
     end
   end
@@ -219,6 +247,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitLeft = -2
     object btnGravar: TBitBtn
       Tag = 99
       Left = 317
@@ -303,14 +332,14 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44565.375347615700000000
-    ReportOptions.LastChange = 44565.550192835650000000
+    ReportOptions.LastChange = 44565.673267604160000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 459
-    Top = 31
+    Left = 595
+    Top = 271
     Datasets = <>
     Variables = <>
     Style = <>
@@ -326,7 +355,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       MirrorMode = []
       object Memo_Empresa: TfrxMemoView
         AllowVectorExport = True
-        Left = 37.992125984251970000
+        Left = 32.125984251968500000
         Top = 16.803149610000000000
         Width = 151.181200000000000000
         Height = 34.015748030000000000
@@ -343,9 +372,9 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_Site: TfrxMemoView
         AllowVectorExport = True
-        Left = 188.519790000000000000
+        Left = 186.519790000000000000
         Top = 16.889761340000000000
-        Width = 213.543304650000000000
+        Width = 205.984244650000000000
         Height = 34.015770000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -356,32 +385,23 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
         HAlign = haCenter
         Memo.UTF8W = (
           'Site: https://www.supertecmt.com.br/'
-          'E-mail: financeiro@supertecmt.com.br'
+          'E-mail: expedicao@supertecmt.com.br'
           'Fone: (66) 3511-8700')
         ParentFont = False
         WordWrap = False
       end
-      object Shape_Transporte: TfrxShapeView
-        AllowVectorExport = True
-        Left = 34.236218030000000000
-        Top = 58.574803150000000000
-        Width = 370.393703230000000000
-        Height = 18.897650000000000000
-        Frame.Typ = []
-      end
       object Memo_Transportador: TfrxMemoView
         AllowVectorExport = True
-        Left = 34.236218030000000000
+        Left = 32.236218030000000000
         Top = 58.795300000000000000
-        Width = 370.393703230000000000
+        Width = 359.055113230000000000
         Height = 18.897650000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -12
         Font.Name = 'Arial'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsUnderline]
         Frame.Typ = []
-        HAlign = haCenter
         Memo.UTF8W = (
           'TRANSETE TRANSPORTE SEGURO LTDA')
         ParentFont = False
@@ -389,9 +409,9 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_Cliente: TfrxMemoView
         AllowVectorExport = True
-        Left = 34.236218030000000000
+        Left = 32.236218030000000000
         Top = 83.031540000000000000
-        Width = 370.393700790000000000
+        Width = 359.055110790000000000
         Height = 18.897650000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -406,9 +426,9 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_Endereco: TfrxMemoView
         AllowVectorExport = True
-        Left = 34.236218030000000000
+        Left = 32.236218030000000000
         Top = 105.708720000000000000
-        Width = 370.393703230000000000
+        Width = 359.055113230000000000
         Height = 18.897637800000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -423,9 +443,9 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_BairroCepCidadeUf: TfrxMemoView
         AllowVectorExport = True
-        Left = 34.236218030000000000
+        Left = 32.236218030000000000
         Top = 132.165430000000000000
-        Width = 370.393703230000000000
+        Width = 359.055113230000000000
         Height = 18.897637800000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -440,7 +460,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_NFE: TfrxMemoView
         AllowVectorExport = True
-        Left = 34.236218030000000000
+        Left = 32.236218030000000000
         Top = 158.622140000000000000
         Width = 98.267718980000000000
         Height = 18.897650000000000000
@@ -457,7 +477,7 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_Data: TfrxMemoView
         AllowVectorExport = True
-        Left = 146.385900000000000000
+        Left = 144.385900000000000000
         Top = 158.622140000000000000
         Width = 75.590600000000000000
         Height = 18.897650000000000000
@@ -474,9 +494,9 @@ object frmEtiquetasEmbarque: TfrmEtiquetasEmbarque
       end
       object Memo_VolumeQtd: TfrxMemoView
         AllowVectorExport = True
-        Left = 262.771800000000000000
+        Left = 260.771800000000000000
         Top = 158.622140000000000000
-        Width = 142.110231340000000000
+        Width = 130.771641340000000000
         Height = 18.897650000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
