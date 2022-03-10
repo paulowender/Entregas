@@ -147,7 +147,7 @@ begin
               qry_AtualizaStatus.SQL.Clear;
               qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Hora_Separacao = :ME_Hora_Separacao, ');
               qry_AtualizaStatus.SQL.Add('ME_Cod_User_Separador = :ME_Cod_User_Separador, ');
-              qry_AtualizaStatus.SQL.Add('ME_Nome_User_Separador = :ME_Nome_User_Separador, ME_Pronto_Entrega = :ME_Pronto_Entrega');
+              qry_AtualizaStatus.SQL.Add('ME_Nome_User_Separador = :ME_Nome_User_Separador, ME_Obs = :ME_Obs');
               qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
               qry_AtualizaStatus.ParamByName('Status').AsInteger := 1;
               qry_AtualizaStatus.ParamByName('ME_Hora_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
@@ -155,7 +155,7 @@ begin
               qry_AtualizaStatus.ParamByName('ME_Nome_User_Separador').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
               qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('CodEmp').AsInteger;
               qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
-              qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'SEPARAÇÃO EM ANDAMENTO..';
+              qry_AtualizaStatus.ParamByName('ME_Obs').AsString := 'SEPARAÇÃO EM ANDAMENTO..';
               qry_AtualizaStatus.ExecSQL;
 
               if qry_AtualizaStatus.RowsAffected > 0 then
@@ -179,7 +179,7 @@ begin
              qry_AtualizaStatus.Active := false;
              qry_AtualizaStatus.SQL.Clear;
              qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Hora_Separacao = :ME_Hora_Separacao, ');
-             qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_Nome_User_Separador = :ME_Nome_User_Separador');
+             qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs, ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_Nome_User_Separador = :ME_Nome_User_Separador');
              qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
              qry_AtualizaStatus.ParamByName('Status').AsInteger := 6;
              qry_AtualizaStatus.ParamByName('ME_Hora_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
@@ -187,7 +187,7 @@ begin
              qry_AtualizaStatus.ParamByName('ME_Nome_User_Separador').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
              qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;;
              qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
-             qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'ENCERRADA, APENAS SERVIÇOS LANÇADOS..';
+             qry_AtualizaStatus.ParamByName('ME_Obs').AsString := 'ENCERRADA, APENAS SERVIÇOS LANÇADOS..';
              qry_AtualizaStatus.ExecSQL;
 
              frmLiberacao.Close;

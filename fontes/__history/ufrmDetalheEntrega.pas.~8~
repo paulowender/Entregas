@@ -1,0 +1,801 @@
+unit ufrmDetalheEntrega;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+
+type
+  TfrmDetalheEntrega = class(TForm)
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    qry_DetalhevendaCabecalho: TFDQuery;
+    qry_DetalhevendaDetalhe: TFDQuery;
+    DataSource_DetalhevendaCabecalho: TDataSource;
+    DataSource_DetalhevendaDetalhe: TDataSource;
+    DBGrid3: TDBGrid;
+    DBGrid_ItensParaSeparar: TDBGrid;
+    pnl_topo: TPanel;
+    Label_DetalheEntrega: TLabel;
+    pnl_barra_topo: TPanel;
+    img_logo: TImage;
+    qry_DetalhevendaCabecalhoRecord_No: TIntegerField;
+    qry_DetalhevendaCabecalhoCod_IDRegistro: TIntegerField;
+    qry_DetalhevendaCabecalhoME_Hora_Separacao: TDateTimeField;
+    qry_DetalhevendaCabecalhoME_Hora_ChegadaExp: TDateTimeField;
+    qry_DetalhevendaCabecalhoCodEmp: TIntegerField;
+    qry_DetalhevendaCabecalhoDt_Movto: TDateField;
+    qry_DetalhevendaCabecalhoHr_Movto: TTimeField;
+    qry_DetalhevendaCabecalhoNo_Docto: TLargeintField;
+    qry_DetalhevendaCabecalhoCod_Proposta: TIntegerField;
+    qry_DetalhevendaCabecalhoCod_Cliente: TIntegerField;
+    qry_DetalhevendaCabecalhoRazao_Cliente: TStringField;
+    qry_DetalhevendaCabecalhoValor: TFMTBCDField;
+    qry_DetalhevendaCabecalhoCod_Transp: TIntegerField;
+    qry_DetalhevendaCabecalhoTransportador: TStringField;
+    qry_DetalhevendaCabecalhoME_Cod_User_Separador: TIntegerField;
+    qry_DetalhevendaCabecalhoME_Nome_User_Separador: TStringField;
+    qry_DetalhevendaCabecalhoME_Hora_Saiu_Entrega: TDateTimeField;
+    qry_DetalhevendaCabecalhoME_Hora_Chegou_Entrega: TDateTimeField;
+    Panel1: TPanel;
+    edt_QtdConferida: TLabeledEdit;
+    btnGravarEnviarEntrega: TBitBtn;
+    btnFechar: TBitBtn;
+    qry_DetalhevendaCabecalhoME_Status_Conferido: TIntegerField;
+    qry_DetalhevendaCabecalhoME_Status_Entrega: TIntegerField;
+    BitBtn_RetornarSeparacao: TBitBtn;
+    btnGravarFinalizarEntrega: TBitBtn;
+    qry_DetalhevendaCabecalhoME_Exp_Final: TIntegerField;
+    qry_DetalhevendaDetalheRecord_No: TIntegerField;
+    qry_DetalhevendaDetalheNo_Docto: TLargeintField;
+    qry_DetalhevendaDetalheCod_Produto: TIntegerField;
+    qry_DetalhevendaDetalheCod_Fabricante: TIntegerField;
+    qry_DetalhevendaDetalheFabricante: TStringField;
+    qry_DetalhevendaDetalheNum_Fabricante: TStringField;
+    qry_DetalhevendaDetalheQtd_vendida: TFMTBCDField;
+    qry_DetalhevendaDetalheUnidade: TStringField;
+    qry_DetalhevendaDetalheQtd_separada: TFMTBCDField;
+    qry_DetalhevendaDetalheCod_separador: TIntegerField;
+    qry_DetalhevendaDetalheSeparador: TStringField;
+    qry_DetalhevendaDetalheData_Separacao: TDateTimeField;
+    qry_DetalhevendaDetalheQtd_Conferida: TFMTBCDField;
+    qry_DetalhevendaDetalheCod_Conferente: TIntegerField;
+    qry_DetalhevendaDetalheNome_Conferente: TStringField;
+    qry_DetalhevendaDetalheData_Confernecia: TDateTimeField;
+    qry_DetalhevendaDetalheNome_Produto: TStringField;
+    BitBtn_AlterarExp: TBitBtn;
+    Edt_CodEan: TLabeledEdit;
+    qry_DetalhevendaCabecalhoME_Obs: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure edt_QtdConferidaKeyPress(Sender: TObject; var Key: Char);
+    procedure btnGravarEnviarEntregaClick(Sender: TObject);
+    procedure DBGrid_ItensParaSepararDblClick(Sender: TObject);
+    procedure BitBtn_RetornarSeparacaoClick(Sender: TObject);
+    procedure DBGrid_ItensParaSepararDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure btnGravarFinalizarEntregaClick(Sender: TObject);
+    procedure BitBtn_AlterarExpClick(Sender: TObject);
+    procedure Edt_CodEanKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+    procedure RetornarEntregaSeparacao;
+    procedure pEnviarParaEntrega;
+    procedure pAlterarExpConferencia;
+  public
+    { Public declarations }
+    vPermitido : Integer;
+    procedure pFinalizarEntrega;
+  end;
+
+var
+  frmDetalheEntrega: TfrmDetalheEntrega;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmLiberaConferencia, udmPrincipal, ufrmMonitoramentoEntrega,
+  ufrmObsFinalizaEntrega;
+
+procedure TfrmDetalheEntrega.BitBtn_AlterarExpClick(Sender: TObject);
+begin
+
+     if (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 5) then
+   begin
+     ShowMessage('Operação invalida, entrega finalizada..');
+     exit;
+   end;
+
+   if (Application.MessageBox('Deseja alterar a expedição de confenrencia ?','ATENÇÃO..',mb_YesNo+mb_IconInformation+mb_DefButton2) = ID_YES) then
+   begin
+    pAlterarExpConferencia;
+   end
+   else
+   begin
+   exit;
+   end;
+
+end;
+
+procedure TfrmDetalheEntrega.BitBtn_RetornarSeparacaoClick(Sender: TObject);
+begin
+
+   if (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 5) then
+   begin
+     ShowMessage('Operação invalida, entrega finalizada..');
+     exit;
+   end;
+
+
+   if (Application.MessageBox('Deseja enviar essa entrega para a separação ?','ATENÇÃO..',mb_YesNo+mb_IconInformation+mb_DefButton2) = ID_YES) then
+   begin
+    RetornarEntregaSeparacao;
+   end
+   else
+   begin
+   exit;
+   end;
+
+end;
+
+procedure TfrmDetalheEntrega.btnFecharClick(Sender: TObject);
+begin
+  frmDetalheEntrega.Close;
+end;
+
+procedure TfrmDetalheEntrega.btnGravarEnviarEntregaClick(Sender: TObject);
+begin
+
+  pEnviarParaEntrega;
+
+end;
+
+procedure TfrmDetalheEntrega.btnGravarFinalizarEntregaClick(Sender: TObject);
+begin
+
+      if not Assigned(frmObsFinalizaEntrega) then
+      begin
+        Application.CreateForm(TfrmObsFinalizaEntrega,frmObsFinalizaEntrega);
+      end;
+
+      frmObsFinalizaEntrega.ShowModal;
+
+end;
+
+procedure TfrmDetalheEntrega.DBGrid_ItensParaSepararDblClick(Sender: TObject);
+begin
+
+  if (edt_QtdConferida.Enabled and Edt_CodEan.Enabled  = false) then
+  begin
+  edt_QtdConferida.SetFocus;
+  exit;
+  end
+  else if (Edt_CodEan.Enabled and edt_QtdConferida.Enabled = false)  then
+  begin
+    Edt_CodEan.SetFocus;
+    exit;
+  end
+   else if (Edt_CodEan.Enabled and edt_QtdConferida.Enabled)  then
+  begin
+
+    if frmMonitoramentoEntrega.vPreferenciaConferencia.ToInteger = 0 then
+    begin
+    edt_QtdConferida.SetFocus;
+    end
+    else if frmMonitoramentoEntrega.vPreferenciaConferencia.ToInteger = 1 then
+    begin
+    Edt_CodEan.SetFocus;
+    end;
+
+
+  end;
+
+
+end;
+
+procedure TfrmDetalheEntrega.DBGrid_ItensParaSepararDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+
+  {if (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency = 0) and (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsString = '')  then
+  begin
+  TDBGrid(Sender).Canvas.Font.Color:= clWhite;
+  TDBGrid(Sender).Canvas.Brush.Color:=clGray;
+  end
+  else if (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency = 0) and (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsString <> '')  then
+  begin
+  TDBGrid(Sender).Canvas.Font.Color:= clWhite;
+  TDBGrid(Sender).Canvas.Brush.Color:=clRed;
+  end;}
+
+  if (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency <> qry_DetalhevendaDetalhe.FieldByName('Qtd_vendida').AsCurrency) then
+  begin
+  TDBGrid(Sender).Canvas.Font.Color:= clWhite;
+  TDBGrid(Sender).Canvas.Brush.Color:=clRed;
+  end;
+
+
+  TDBGrid(Sender).DefaultDrawDataCell(Rect, TDBGrid(Sender).columns[datacol].field, State);
+
+end;
+
+procedure TfrmDetalheEntrega.Edt_CodEanKeyPress(Sender: TObject; var Key: Char);
+var
+  qry_barras : TFDQuery;
+  qry_atualiza : TFDQuery;
+begin
+
+  if Key = #13 then
+  begin
+
+    if Edt_CodEan.Text = '' then
+    begin
+      exit;
+    end;
+
+    qry_barras := TFDQuery.Create(self);
+    qry_barras.Connection := dmPrincipal.conexao;
+    qry_atualiza := TFDQuery.Create(self);
+    qry_atualiza.Connection := dmPrincipal.conexao;
+    qry_DetalhevendaDetalhe.First;
+    try
+
+      while not qry_DetalhevendaDetalhe.eof do
+      begin
+
+        qry_barras.Active := false;
+        qry_barras.SQL.clear;
+        qry_barras.SQL.Add('select CodEmp,Cod_produto, Cod_Barras from prodserv_codbar ');
+        qry_barras.SQL.Add(' where cod_produto = :CodigoProduto and CodEmp = :CodEmp and Cod_Barras*1 = :Barras');
+        qry_barras.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
+        qry_barras.ParamByName('CodigoProduto').AsInteger := qry_DetalhevendaDetalhe.FieldByName('Cod_Produto').AsInteger;
+        qry_barras.ParamByName('Barras').AsString := Edt_CodEan.Text;
+        qry_barras.Active := true;
+
+        if qry_barras.RecordCount > 0 then
+        begin
+
+
+          if qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency+1 > qry_DetalhevendaDetalhe.FieldByName('Qtd_vendida').AsCurrency  then
+          begin
+            ShowMessage('Atenção a quantidade conferida passou a quantidade vendida..');
+            Edt_CodEan.Text := '';
+            Edt_CodEan.SetFocus;
+            exit;
+          end;
+
+
+          qry_atualiza.Active := false;
+          qry_atualiza.SQL.Clear;
+          qry_atualiza.SQL.Add('update venda_pro set ME_Qtd_Conferida = :ME_Qtd_Conferida, ');
+          qry_atualiza.SQL.Add('ME_Cod_User_Conferente = :ME_Cod_User_Conferente, ME_DataHora_Conferencia = :ME_DataHora_Conferencia, ');
+          qry_atualiza.SQL.Add('ME_Nome_User_Conferente = :ME_Nome_User_Conferente where CodEmp = :CodEmp and Record_No = :Record_No ');
+          qry_atualiza.SQL.Add('and Cod_IDRegistro = :Cod_IDRegistro and Dt_Movto = :Dt_Movto and No_Docto = :No_Docto ');
+          qry_atualiza.ParamByName('ME_Qtd_Conferida').AsCurrency := qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency+1;
+          qry_atualiza.ParamByName('ME_Cod_User_Conferente').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+          qry_atualiza.ParamByName('ME_Nome_User_Conferente').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
+          qry_atualiza.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaDetalhe.FieldByName('Record_No').AsLargeInt;
+          qry_atualiza.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+          qry_atualiza.ParamByName('Cod_IDRegistro').AsInteger := qry_DetalhevendaCabecalho.FieldByName('Cod_IDRegistro').AsInteger;
+          qry_atualiza.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+          qry_atualiza.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+          qry_atualiza.ParamByName('ME_DataHora_Conferencia').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+          qry_atualiza.ExecSQL;
+
+
+          qry_DetalhevendaDetalhe.Refresh;
+          Edt_CodEan.Text := '';
+          Edt_CodEan.SetFocus;
+          exit;
+
+
+        end;
+
+
+        qry_DetalhevendaDetalhe.Next;
+
+      end;
+
+
+      ShowMessage('Atenção, não consta nenhum produto com esse código de barras..') ;
+      Edt_CodEan.Text := '';
+      Edt_CodEan.SetFocus;
+
+
+    finally
+    qry_barras.DisposeOf;
+    qry_atualiza.DisposeOf;
+    end;
+
+
+  end;
+
+
+end;
+
+procedure TfrmDetalheEntrega.edt_QtdConferidaKeyPress(Sender: TObject;
+  var Key: Char);
+  var
+  qry_Update : TFDQuery;
+begin
+
+  if Key = #13 then
+  begin
+
+     if (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 5) then
+     begin
+       ShowMessage('Operação invalida, entrega finalizada..');
+       exit;
+     end;
+
+
+    if qry_DetalhevendaCabecalho.FieldByName('ME_Status_Conferido').AsInteger = 1 then
+    begin
+      ShowMessage('Entrega ja conferida..');
+      exit;
+    end;
+
+    if not (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 2) then
+    begin
+      ShowMessage('Só e possivel conferir entregas que estiverem com status aguardando conferencia..');
+      exit;
+    end;
+
+
+     if StrToCurr(edt_QtdConferida.Text) < 0 then
+     begin
+       ShowMessage('Quantidade contada menor que zero..');
+       edt_QtdConferida.Text := '0';
+       edt_QtdConferida.SetFocus;
+       exit;
+     end;
+
+     if StrToCurr(edt_QtdConferida.Text) > qry_DetalhevendaDetalhe.FieldByName('Qtd_vendida').AsCurrency then
+     begin
+       ShowMessage('A quantidade conferida não pode ser maior que a vendida..');
+       edt_QtdConferida.Text := '';
+       edt_QtdConferida.SetFocus;
+       exit;
+     end;
+
+
+     qry_Update := TFDQuery.Create(self);
+     qry_Update.Connection := dmPrincipal.conexao;
+     try
+
+        try
+        qry_Update.Active := false;
+        qry_Update.SQL.Clear;
+        qry_Update.SQL.Add('update venda_pro set ME_Qtd_Conferida = :ME_Qtd_Conferida, ');
+        qry_Update.SQL.Add('ME_Cod_User_Conferente = :ME_Cod_User_Conferente, ME_DataHora_Conferencia = :ME_DataHora_Conferencia, ');
+        qry_Update.SQL.Add('ME_Nome_User_Conferente = :ME_Nome_User_Conferente where CodEmp = :CodEmp and Record_No = :Record_No ');
+        qry_Update.SQL.Add('and Cod_IDRegistro = :Cod_IDRegistro and Dt_Movto = :Dt_Movto and No_Docto = :No_Docto ');
+        qry_Update.ParamByName('ME_Qtd_Conferida').AsCurrency := StrToCurr(edt_QtdConferida.Text);
+        qry_Update.ParamByName('ME_Cod_User_Conferente').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+        qry_Update.ParamByName('ME_Nome_User_Conferente').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado;
+        qry_Update.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaDetalhe.FieldByName('Record_No').AsLargeInt;
+        qry_Update.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+        qry_Update.ParamByName('Cod_IDRegistro').AsInteger := qry_DetalhevendaCabecalho.FieldByName('Cod_IDRegistro').AsInteger;
+        qry_Update.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+        qry_Update.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+        qry_Update.ParamByName('ME_DataHora_Conferencia').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+        qry_Update.ExecSQL;
+
+
+          qry_DetalhevendaDetalhe.Refresh;
+          qry_DetalhevendaDetalhe.Next;
+          edt_QtdConferida.Text := '';
+          edt_QtdConferida.SetFocus;
+
+        except
+        ShowMessage('Falha ao atualizar os totais do item..');
+        end;
+
+     finally
+     qry_Update.DisposeOf;
+     end;
+
+
+  end;
+
+
+end;
+
+procedure TfrmDetalheEntrega.pAlterarExpConferencia;
+var
+  qry_atualiza : TFDQuery;
+begin
+
+      qry_atualiza := TFDQuery.Create(self);
+      qry_atualiza.Connection := dmPrincipal.conexao;
+      try
+
+        qry_atualiza.Active := false;
+        qry_atualiza.SQL.clear;
+        qry_atualiza.SQL.Add('update venda_cab set ME_Exp_Final = :ME_Exp_Final  ');
+        qry_atualiza.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and No_Docto = :No_Docto ');
+        qry_atualiza.SQL.Add('and Dt_Movto = :Dt_Movto ');
+
+
+        if qry_DetalhevendaCabecalho.FieldByName('ME_Exp_Final').AsInteger = 1 then
+        begin
+        qry_atualiza.ParamByName('ME_Exp_Final').AsInteger := 2;
+        end
+        else if qry_DetalhevendaCabecalho.FieldByName('ME_Exp_Final').AsInteger = 2 then
+        begin
+        qry_atualiza.ParamByName('ME_Exp_Final').AsInteger := 1;
+        end;
+
+
+        qry_atualiza.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+        qry_atualiza.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
+        qry_atualiza.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+        qry_atualiza.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+        qry_atualiza.ExecSQL;
+
+        if qry_atualiza.RowsAffected > 0 then
+        begin
+          frmDetalheEntrega.Close;
+          frmMonitoramentoEntrega.Img_ConsultaClick(Self);
+        end;
+
+
+      finally
+      qry_atualiza.DisposeOf;
+      end;
+
+
+end;
+
+procedure TfrmDetalheEntrega.pEnviarParaEntrega;
+  var
+  vControleConferencia : integer ; // 0 pendente 1 ok
+  qry_AtualizaStatus : TFDQuery;
+begin
+
+
+   if not (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 2) then
+   begin
+     ShowMessage('Operação invalida..');
+     exit;
+   end;
+
+
+
+   vControleConferencia := 0;
+   qry_DetalhevendaDetalhe.First;
+
+ while not qry_DetalhevendaDetalhe.Eof do
+ begin
+
+    if qry_DetalhevendaDetalhe.FieldByName('Qtd_vendida').AsCurrency = qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency  then
+    begin
+    vControleConferencia := 1;
+    qry_DetalhevendaDetalhe.Next;
+    end
+    else
+    begin
+    vControleConferencia := 0;
+    ShowMessage('Existem produtos pendentes de conferencia..');
+
+        if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 0 then
+        begin
+        edt_QtdConferida.SetFocus;
+        end;
+
+        if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 1 then
+        begin
+        Edt_CodEan.SetFocus;
+        end;
+
+      exit;
+
+    end;
+
+ end;
+
+ if vControleConferencia = 1 then
+ Begin
+
+    qry_AtualizaStatus := TFDQuery.Create(self);
+    qry_AtualizaStatus.Connection := dmPrincipal.conexao;
+    try
+    qry_AtualizaStatus.Active := false;
+    qry_AtualizaStatus.SQL.Clear;
+    qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Conferido = :ME_Status_Conferido, ME_Status_Entrega = :ME_Status_Entrega, ME_Pronto_Entrega = :ME_Pronto_Entrega');
+    qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
+    qry_AtualizaStatus.ParamByName('ME_Status_Conferido').AsInteger := 1;
+    qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
+    qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'CONFERIDO, PRONTO PARA ENTREGA';
+    qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+    qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
+    qry_AtualizaStatus.ExecSQL;
+
+      if qry_AtualizaStatus.RowsAffected > 0 then
+      begin
+      frmDetalheEntrega.Close;
+      frmMonitoramentoEntrega.pLimparCampos;
+      end;
+
+    finally
+    qry_AtualizaStatus.DisposeOf;
+    end;
+
+
+ End;
+
+
+
+
+
+end;
+
+procedure TfrmDetalheEntrega.pFinalizarEntrega;
+  var
+  vControleConferencia : integer ; // 0 pendente 1 ok
+  qry_AtualizaStatus : TFDQuery;
+  qry_AtualizaTransportador : TFDQuery;
+begin
+
+
+   if not (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 2) then
+   begin
+     ShowMessage('Operação invalida..');
+     exit;
+   end;
+
+
+
+   vControleConferencia := 0;
+   qry_DetalhevendaDetalhe.First;
+
+ while not qry_DetalhevendaDetalhe.Eof do
+ begin
+
+    if qry_DetalhevendaDetalhe.FieldByName('Qtd_vendida').AsCurrency = qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency  then
+    begin
+    vControleConferencia := 1;
+    qry_DetalhevendaDetalhe.Next;
+    end
+    else
+    begin
+    vControleConferencia := 0;
+    ShowMessage('Existem produtos pendentes de conferencia..');
+
+        if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 0 then
+        begin
+        edt_QtdConferida.SetFocus;
+        end;
+
+        if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 1 then
+        begin
+        Edt_CodEan.SetFocus;
+        end;
+
+      exit;
+
+    end;
+
+ end;
+
+ if vControleConferencia = 1 then
+ Begin
+
+    qry_AtualizaStatus := TFDQuery.Create(self);
+    qry_AtualizaStatus.Connection := dmPrincipal.conexao;
+    qry_AtualizaTransportador := TFDQuery.Create(self);
+    qry_AtualizaTransportador.Connection := dmPrincipal.conexao;
+    try
+    qry_AtualizaStatus.Active := false;
+    qry_AtualizaStatus.SQL.Clear;
+    qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Conferido = :ME_Status_Conferido, ME_Status_Entrega = :ME_Status_Entrega, ');
+    qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada');
+    qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
+    qry_AtualizaStatus.ParamByName('ME_Status_Conferido').AsInteger := 1;
+    qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 5;
+    qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := frmObsFinalizaEntrega.Memo_Obs.Text;
+    qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+    qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
+    qry_AtualizaStatus.ParamByName('Me_Hora_EntregaFinalizada').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+    qry_AtualizaStatus.ExecSQL;
+
+      if qry_AtualizaStatus.RowsAffected > 0 then
+      begin
+
+        qry_AtualizaTransportador.Active := false;
+        qry_AtualizaTransportador.SQL.clear;
+        qry_AtualizaTransportador.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp where CodEmp = :CodEmp ');
+        qry_AtualizaTransportador.SQL.Add('and No_Docto = :No_Docto and Record_No = :Record_No and Dt_Movto = :Dt_Movto;');
+        qry_AtualizaTransportador.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+        qry_AtualizaTransportador.ParamByName('Cod_Transp').AsInteger := StrToInt(frmObsFinalizaEntrega.LabeledEdit_CodTransportador.Text);
+        qry_AtualizaTransportador.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+        qry_AtualizaTransportador.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
+        qry_AtualizaTransportador.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+        qry_AtualizaTransportador.ExecSQL;
+
+        if qry_AtualizaTransportador.RowsAffected > 0 then
+        begin
+        frmObsFinalizaEntrega.Close;
+        frmDetalheEntrega.Close;
+        frmMonitoramentoEntrega.pLimparCampos;
+        end
+        else
+        begin
+        ShowMessage('Falha ao atualizar o transportador, solicite suporte..');
+        end;
+
+
+      end;
+
+    finally
+    qry_AtualizaStatus.DisposeOf;
+    qry_AtualizaTransportador.DisposeOf;
+    end;
+
+
+ End;
+
+
+
+
+
+end;
+
+procedure TfrmDetalheEntrega.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  {Limpar o formulario da memoria ao fecha-lo..}
+  Action := TCloseAction.caFree;
+  frmDetalheEntrega := nil;
+  {Fim}
+end;
+
+procedure TfrmDetalheEntrega.FormShow(Sender: TObject);
+begin
+
+  edt_QtdConferida.Enabled := false;
+  Edt_CodEan.Enabled := false;
+  edt_QtdConferida.Text := '';
+  Edt_CodEan.Text := '';
+
+  if StrToInt(frmMonitoramentoEntrega.vTipoConferencia) = 0  then
+  begin
+  edt_QtdConferida.Enabled := true;
+  edt_QtdConferida.SetFocus;
+  end;
+
+  if StrToInt(frmMonitoramentoEntrega.vTipoConferencia) = 1  then
+  begin
+  Edt_CodEan.Enabled := true;
+  Edt_CodEan.SetFocus;
+  end;
+
+  if StrToInt(frmMonitoramentoEntrega.vTipoConferencia) = 2  then
+  begin
+
+    Edt_CodEan.Enabled := true;
+    edt_QtdConferida.Enabled := true;
+
+    if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 0 then
+    begin
+    edt_QtdConferida.SetFocus;
+    end;
+
+    if StrToInt(frmMonitoramentoEntrega.vPreferenciaConferencia) = 1 then
+    begin
+    Edt_CodEan.SetFocus;
+    end;
+
+
+  end;
+
+
+  qry_DetalhevendaDetalhe.First;
+  btnGravarFinalizarEntrega.Enabled := true;
+
+  if qry_DetalhevendaCabecalho.FieldByName('ME_Exp_Final').AsInteger = 1 then
+  begin
+  BitBtn_AlterarExp.Caption := 'CONTINUAR CONFERENCIA NA EXPEDIÇÃO FRENTE';
+  end
+  else if qry_DetalhevendaCabecalho.FieldByName('ME_Exp_Final').AsInteger = 2 then
+  begin
+  BitBtn_AlterarExp.Caption := 'CONTINUAR CONFERENCIA NA EXPEDIÇÃO FUNDOS';
+  end;
+
+end;
+
+procedure TfrmDetalheEntrega.RetornarEntregaSeparacao;
+  var
+  vControleConferencia : integer ; // 0 pendente 1 ok
+  qry_AtualizaStatus : TFDQuery;
+  qry_AtualizaSeparacao : TFDQuery;
+begin
+
+  vControleConferencia := 999;
+  qry_DetalhevendaDetalhe.First;
+  qry_AtualizaSeparacao := TFDQuery.Create(self);
+  qry_AtualizaSeparacao.Connection := dmPrincipal.conexao;
+
+ while not qry_DetalhevendaDetalhe.Eof do
+ begin
+
+    if (qry_DetalhevendaDetalhe.FieldByName('Qtd_Conferida').AsCurrency = 0) then
+    begin
+    qry_AtualizaSeparacao.Active := false;
+    qry_AtualizaSeparacao.SQL.Clear;
+    qry_AtualizaSeparacao.SQL.Add('update venda_pro set ME_Qtd_Separada = :ME_Qtd_Separada ');
+    qry_AtualizaSeparacao.SQL.Add('where Record_No = :Record_No and No_Docto = :No_Docto and CodEmp = :CodEmp and Dt_Movto = :Dt_Movto');
+    qry_AtualizaSeparacao.ParamByName('ME_Qtd_Separada').AsCurrency := 0;
+    qry_AtualizaSeparacao.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaDetalhe.FieldByName('Record_No').AsLargeInt;
+    qry_AtualizaSeparacao.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+    qry_AtualizaSeparacao.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+    qry_AtualizaSeparacao.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+    qry_AtualizaSeparacao.ExecSQL;
+    vControleConferencia := 0;
+    qry_DetalhevendaDetalhe.Next;
+    end
+    else
+    begin
+    qry_DetalhevendaDetalhe.Next;
+    end;
+
+ end;
+
+ if vControleConferencia = 0 then
+ Begin
+
+    if not (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 2) then
+    begin
+    ShowMessage('Somente vendas que estão em conferencia podem voltar para a separação..');
+    exit;
+    end;
+
+
+    qry_AtualizaStatus := TFDQuery.Create(self);
+    qry_AtualizaStatus.Connection := dmPrincipal.conexao;
+    try
+
+      qry_AtualizaStatus.Active := false;
+      qry_AtualizaStatus.SQL.Clear;
+      qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :ME_Status_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, ME_MercSeparada = :ME_MercSeparada');
+      qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
+      qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 0;
+      qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
+      qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
+      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'DEVOLVIDO PARA A SEPARAÇÃO..';
+      qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
+      qry_AtualizaStatus.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
+      qry_AtualizaStatus.ParamByName('ME_MercSeparada').AsInteger := 2;
+      qry_AtualizaStatus.ExecSQL;
+
+      if qry_AtualizaStatus.RowsAffected > 0 then
+      begin
+      frmDetalheEntrega.Close;
+      frmMonitoramentoEntrega.pLimparCampos;
+      end;
+
+    finally
+    qry_AtualizaStatus.DisposeOf;
+    qry_AtualizaSeparacao.DisposeOf;
+    end;
+
+
+ End
+ else
+ begin
+ ShowMessage('Para retornar uma entrega para a separação, pelo menos 1 produto deve contem a quantidade separada = 0');
+ end;
+
+end;
+
+end.

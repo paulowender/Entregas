@@ -72,7 +72,7 @@ begin
         qry_Cancela.Active := false;
         qry_Cancela.SQL.clear;
         qry_Cancela.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Status_Conferido = :ME_Status_Conferido, ');
-        qry_Cancela.SQL.Add('Me_Pronto_Entrega = :Me_Pronto_Entrega, ME_Exp_Final = :ME_Exp_Final ');
+        qry_Cancela.SQL.Add('ME_Obs = :ME_Obs, ME_Exp_Final = :ME_Exp_Final ');
         qry_Cancela.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto');
         qry_Cancela.ParamByName('Status').AsInteger := 2;
 
@@ -86,7 +86,7 @@ begin
         end;
 
         qry_Cancela.ParamByName('ME_Status_Conferido').AsInteger := 0;
-        qry_Cancela.ParamByName('Me_Pronto_Entrega').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado+' '+Memo_Obs.Text;
+        qry_Cancela.ParamByName('ME_Obs').AsString := frmMonitoramentoEntrega.vNomeUsuarioLogado+' '+Memo_Obs.Text;
         qry_Cancela.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('CodEmp').AsInteger;
         qry_Cancela.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
         qry_Cancela.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;

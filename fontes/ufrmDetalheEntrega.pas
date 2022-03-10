@@ -26,7 +26,6 @@ type
     img_logo: TImage;
     qry_DetalhevendaCabecalhoRecord_No: TIntegerField;
     qry_DetalhevendaCabecalhoCod_IDRegistro: TIntegerField;
-    qry_DetalhevendaCabecalhoME_Hora_Separacao: TDateTimeField;
     qry_DetalhevendaCabecalhoME_Hora_ChegadaExp: TDateTimeField;
     qry_DetalhevendaCabecalhoCodEmp: TIntegerField;
     qry_DetalhevendaCabecalhoDt_Movto: TDateField;
@@ -38,7 +37,6 @@ type
     qry_DetalhevendaCabecalhoValor: TFMTBCDField;
     qry_DetalhevendaCabecalhoCod_Transp: TIntegerField;
     qry_DetalhevendaCabecalhoTransportador: TStringField;
-    qry_DetalhevendaCabecalhoME_Pronto_Entrega: TStringField;
     qry_DetalhevendaCabecalhoME_Cod_User_Separador: TIntegerField;
     qry_DetalhevendaCabecalhoME_Nome_User_Separador: TStringField;
     qry_DetalhevendaCabecalhoME_Hora_Saiu_Entrega: TDateTimeField;
@@ -71,6 +69,9 @@ type
     qry_DetalhevendaDetalheNome_Produto: TStringField;
     BitBtn_AlterarExp: TBitBtn;
     Edt_CodEan: TLabeledEdit;
+    qry_DetalhevendaCabecalhoME_Obs: TStringField;
+    qry_DetalhevendaCabecalhoME_Data_Separacao: TDateField;
+    qry_DetalhevendaCabecalhoME_Hora_Separacao: TTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -511,11 +512,11 @@ begin
     try
     qry_AtualizaStatus.Active := false;
     qry_AtualizaStatus.SQL.Clear;
-    qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Conferido = :ME_Status_Conferido, ME_Status_Entrega = :ME_Status_Entrega, ME_Pronto_Entrega = :ME_Pronto_Entrega');
+    qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Conferido = :ME_Status_Conferido, ME_Status_Entrega = :ME_Status_Entrega, ME_Obs = :ME_Obs');
     qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
     qry_AtualizaStatus.ParamByName('ME_Status_Conferido').AsInteger := 1;
     qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
-    qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'CONFERIDO, PRONTO PARA ENTREGA';
+    qry_AtualizaStatus.ParamByName('ME_Obs').AsString := 'CONFERIDO, PRONTO PARA ENTREGA';
     qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
     qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
     qry_AtualizaStatus.ExecSQL;
@@ -598,11 +599,11 @@ begin
     qry_AtualizaStatus.Active := false;
     qry_AtualizaStatus.SQL.Clear;
     qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Conferido = :ME_Status_Conferido, ME_Status_Entrega = :ME_Status_Entrega, ');
-    qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada');
+    qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs, Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada');
     qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No');
     qry_AtualizaStatus.ParamByName('ME_Status_Conferido').AsInteger := 1;
     qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 5;
-    qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := frmObsFinalizaEntrega.Memo_Obs.Text;
+    qry_AtualizaStatus.ParamByName('ME_Obs').AsString := frmObsFinalizaEntrega.Memo_Obs.Text;
     qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
     qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
     qry_AtualizaStatus.ParamByName('Me_Hora_EntregaFinalizada').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
@@ -767,12 +768,12 @@ begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
       qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :ME_Status_Entrega, ');
-      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega, ME_MercSeparada = :ME_MercSeparada');
+      qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs, ME_MercSeparada = :ME_MercSeparada');
       qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 0;
       qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := qry_DetalhevendaCabecalho.FieldByName('Record_No').AsLargeInt;
       qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := qry_DetalhevendaCabecalho.FieldByName('CodEmp').AsInteger;
-      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := 'DEVOLVIDO PARA A SEPARAÇÃO..';
+      qry_AtualizaStatus.ParamByName('ME_Obs').AsString := 'DEVOLVIDO PARA A SEPARAÇÃO..';
       qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := qry_DetalhevendaCabecalho.FieldByName('No_Docto').AsInteger;
       qry_AtualizaStatus.ParamByName('Dt_Movto').AsDate := qry_DetalhevendaCabecalho.FieldByName('Dt_Movto').AsDateTime;
       qry_AtualizaStatus.ParamByName('ME_MercSeparada').AsInteger := 2;

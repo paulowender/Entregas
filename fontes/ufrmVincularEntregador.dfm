@@ -24,8 +24,6 @@ object frmVincularEntregador: TfrmVincularEntregador
     Align = alClient
     Caption = 'Dados da entrega:'
     TabOrder = 0
-    ExplicitLeft = -136
-    ExplicitTop = -24
     object Label1: TLabel
       Left = 8
       Top = 147

@@ -109,7 +109,7 @@ begin
              frmVincularEntregador.LabeledEdit_NomeTransportador.text := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Transportador').AsString;
              frmVincularEntregador.LabeledEdit_CodTransportador.text := IntToStr(frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Cod_Transp').AsInteger);
              frmVincularEntregador.Memo_Obs.Clear;
-             frmVincularEntregador.Memo_Obs.Text := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Pronto_Entrega').AsString;
+             frmVincularEntregador.Memo_Obs.Text := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Obs').AsString;
              frmVincularEntregador.ShowModal;
 
 

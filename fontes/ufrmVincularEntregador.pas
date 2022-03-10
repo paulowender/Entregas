@@ -103,10 +103,10 @@ begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
       qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Saiu_Entrega=:ME_Hora_Saiu_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
-      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega where CodEmp = :CodEmp ');
+      qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 4;
-      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := Memo_Obs.Text;
+      qry_AtualizaStatus.ParamByName('ME_Obs').AsString := Memo_Obs.Text;
       qry_AtualizaStatus.ParamByName('ME_Hora_Saiu_Entrega').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
       qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
       end;
@@ -116,10 +116,10 @@ begin
       qry_AtualizaStatus.SQL.Clear;
       qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ');
       qry_AtualizaStatus.SQL.Add('Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada, ME_Status_Entrega = :ME_Status_Entrega, ');
-      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega where CodEmp = :CodEmp ');
+      qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 5;
-      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := Memo_Obs.Text;
+      qry_AtualizaStatus.ParamByName('ME_Obs').AsString := Memo_Obs.Text;
       qry_AtualizaStatus.ParamByName('ME_Hora_Chegou_Entrega').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
       qry_AtualizaStatus.ParamByName('Me_Hora_EntregaFinalizada').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
       qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
@@ -129,10 +129,10 @@ begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
       qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
-      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega where CodEmp = :CodEmp ');
+      qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
-      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := Memo_Obs.Text;
+      qry_AtualizaStatus.ParamByName('ME_Obs').AsString := Memo_Obs.Text;
       qry_AtualizaStatus.ParamByName('ME_Hora_Chegou_Entrega').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
       qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
       end;
@@ -141,10 +141,10 @@ begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
       qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
-      qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega where CodEmp = :CodEmp ');
+      qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
-      qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := Memo_Obs.Text;;
+      qry_AtualizaStatus.ParamByName('ME_Obs').AsString := Memo_Obs.Text;;
       qry_AtualizaStatus.ParamByName('ME_Hora_Chegou_Entrega').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
       qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
       end;
@@ -160,10 +160,10 @@ begin
         qry_AtualizaStatus.Active := false;
         qry_AtualizaStatus.SQL.Clear;
         qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
-        qry_AtualizaStatus.SQL.Add('ME_Pronto_Entrega = :ME_Pronto_Entrega where CodEmp = :CodEmp ');
+        qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
         qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
         qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 7;
-        qry_AtualizaStatus.ParamByName('ME_Pronto_Entrega').AsString := Memo_Obs.Text;;
+        qry_AtualizaStatus.ParamByName('ME_Obs').AsString := Memo_Obs.Text;;
         qry_AtualizaStatus.ParamByName('ME_Hora_Chegou_Entrega').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
         qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
 
