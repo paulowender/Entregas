@@ -14,7 +14,7 @@
   Font.Style = []
   Menu = MainMenu
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -361,7 +361,7 @@
     Top = 256
     Width = 1024
     Height = 513
-    ActivePage = tab_AguardandoSeparacao
+    ActivePage = tab_SeparacaoDeMercadoria
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
@@ -649,7 +649,7 @@
           end
           item
             Expanded = False
-            FieldName = 'ME_Hora_Separacao'
+            FieldName = 'Cod_Cfop'
             Title.Caption = 'Hora inicio separacao'
             Width = 150
             Visible = True
@@ -725,7 +725,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -738,6 +738,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid1: TDBGrid
           Left = 0
@@ -947,7 +948,7 @@
           end
           item
             Expanded = False
-            FieldName = 'ME_Hora_Separacao'
+            FieldName = 'ME_Data_Separacao'
             Title.Caption = 'Hora inicio separacao'
             Width = 150
             Visible = True
@@ -968,7 +969,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -981,6 +982,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
@@ -1195,7 +1197,7 @@
           end
           item
             Expanded = False
-            FieldName = 'ME_Hora_Separacao'
+            FieldName = 'ME_Data_Separacao'
             Title.Caption = 'Hora inicio separacao'
             Width = 120
             Visible = True
@@ -1237,7 +1239,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1250,6 +1252,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
@@ -1506,7 +1509,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1519,6 +1522,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
@@ -1775,7 +1779,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1788,6 +1792,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid3: TDBGrid
           Left = 0
@@ -2044,7 +2049,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2057,6 +2062,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
@@ -2509,7 +2515,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 54
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2522,6 +2528,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
@@ -2778,7 +2785,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2791,6 +2798,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
@@ -2975,6 +2983,7 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    ExplicitTop = 67
     object Panel3: TPanel
       AlignWithMargins = True
       Left = 420
@@ -3481,7 +3490,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 65'
+        Text = 'Vers'#227'o 80'
         Width = 50
       end>
   end
@@ -3496,15 +3505,15 @@
     FetchOptions.AssignedValues = [evRowsetSize]
     SQL.Strings = (
       
-        'select  clientes.Fone,clientes.Razao,clientes.Cpf_Cnpj, concat(c' +
-        'lientes.Endereco,'#39' '#39',clientes.End_Numero) as Endereco, clientes.' +
-        'Bairro,'
+        'select clientes.Fone,clientes.Razao,clientes.Cpf_Cnpj, concat(cl' +
+        'ientes.Endereco,'#39' '#39',clientes.End_Numero) as Endereco, clientes.B' +
+        'airro,'
       
         'clientes.Cep,clientes.Cidade,clientes.UF, clientes.Rg_Ie,venda_c' +
         'ab.Cod_Cfop,codfiscal.Descricao as DescricaoCfop, venda_cab.Reco' +
-        'rd_No,venda_cab.Cod_IDRegistro, venda_cab.ME_Hora_Separacao,vend' +
-        'a_cab.ME_Hora_ChegadaExp, venda_cab.CodEmp,venda_cab.Dt_Movto,ve' +
-        'nda_cab.Hr_Movto,'
+        'rd_No,venda_cab.Cod_IDRegistro,venda_cab.ME_Data_Separacao,venda' +
+        '_cab.ME_Hora_Separacao,venda_cab.ME_Hora_ChegadaExp, venda_cab.C' +
+        'odEmp,venda_cab.Dt_Movto,venda_cab.Hr_Movto,'
       
         'venda_cab.No_Docto, venda_cab.Cod_Proposta, venda_cab.Cod_Client' +
         'e,venda_cab.Razao_Cliente,'
@@ -3513,7 +3522,7 @@
         'uantidade))+venda_cab.Vlr_Frete+venda_cab.Vlr_IPI,2) as Valor,'
       
         'venda_cab.Cod_Transp, transportador.Razao as Transportador, vend' +
-        'a_cab.ME_Pronto_Entrega,'
+        'a_cab.ME_Obs,'
       
         'venda_cab.ME_Cod_User_Separador, venda_cab.ME_Nome_User_Separado' +
         'r,'
@@ -3526,8 +3535,8 @@
       'Fun.Nome as NomeVendedor, secao.Descricao as NomeSecao,'
       
         'concat(venda_nfecab.InfAdic_infCpl1,'#39' '#39',venda_nfecab.InfAdic_inf' +
-        'Cpl2,'#39' '#39',venda_nfecab.InfAdic_infCpl3, '#39' '#39', venda_cab.ME_Pronto_' +
-        'Entrega) as ObsNf,'
+        'Cpl2,'#39' '#39',venda_nfecab.InfAdic_infCpl3, '#39' '#39', venda_cab.ME_Obs) as' +
+        ' ObsNf,'
       'venda_cab.ME_Exp_Final,'
       'venda_cab.ME_Status_Entrega,'
       'case'
@@ -3652,11 +3661,6 @@
       ProviderFlags = []
       ReadOnly = True
       Size = 40
-    end
-    object FDQuery_VendasParaSepararME_Pronto_Entrega: TStringField
-      FieldName = 'ME_Pronto_Entrega'
-      Origin = 'ME_Pronto_Entrega'
-      Size = 60
     end
     object FDQuery_VendasParaSepararME_Cod_User_Separador: TIntegerField
       FieldName = 'ME_Cod_User_Separador'
@@ -3810,6 +3814,17 @@
       Origin = 'LocalSaida'
       Size = 16
     end
+    object FDQuery_VendasParaSepararME_Obs: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ME_Obs'
+      Origin = 'ME_Obs'
+      Size = 300
+    end
+    object FDQuery_VendasParaSepararME_Data_Separacao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ME_Data_Separacao'
+      Origin = 'ME_Data_Separacao'
+    end
   end
   object DataSource_VendasParaSeparar: TDataSource
     DataSet = FDQuery_VendasParaSeparar
@@ -3839,7 +3854,8 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_DataHoraSeparacao as Data_Separacao,'
+      'venda_pro.ME_Data_Separacao as Data_Separacao,'
+      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -3934,10 +3950,6 @@
       Origin = 'ME_Nome_User_Separador'
       Size = 60
     end
-    object FDQuery_ItensParaSeparacaoData_Separacao: TDateTimeField
-      FieldName = 'Data_Separacao'
-      Origin = 'ME_DataHoraSeparacao'
-    end
     object FDQuery_ItensParaSeparacaoQtd_Conferida: TFMTBCDField
       FieldName = 'Qtd_Conferida'
       Origin = 'ME_Qtd_Conferida'
@@ -4013,6 +4025,16 @@
       ReadOnly = True
       Size = 22
     end
+    object FDQuery_ItensParaSeparacaoData_Separacao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'Data_Separacao'
+      Origin = 'ME_Data_Separacao'
+    end
+    object FDQuery_ItensParaSeparacaoHora_Separacao: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Hora_Separacao'
+      Origin = 'ME_Hora_Separacao'
+    end
   end
   object DataSource_ItensParaSeparacao: TDataSource
     DataSet = FDQuery_ItensParaSeparacao
@@ -4034,7 +4056,6 @@
       'Record_No=Record_No'
       'Cod_Transp=Cod_Transp'
       'Transportador=Transportador'
-      'ME_Pronto_Entrega=ME_Pronto_Entrega'
       'ME_Cod_User_Separador=ME_Cod_User_Separador'
       'ME_Nome_User_Separador=ME_Nome_User_Separador'
       'ME_Hora_Saiu_Entrega=ME_Hora_Saiu_Entrega'
@@ -4066,7 +4087,8 @@
       'ME_Exp_Final=ME_Exp_Final'
       'ME_Status_Entrega=ME_Status_Entrega'
       'StatusOperacao=StatusOperacao'
-      'LocalSaida=LocalSaida')
+      'LocalSaida=LocalSaida'
+      'ME_Obs=ME_Obs')
     DataSet = FDQuery_VendasParaSeparar
     BCDToCurrency = False
     Left = 420
@@ -4081,7 +4103,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44467.838132858790000000
+    ReportOptions.LastChange = 44628.340469710650000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -5509,105 +5531,9 @@
         Height = 457.323112910000000000
         Top = 582.047620000000000000
         Width = 718.110700000000000000
-        object Memo218: TfrxMemoView
-          AllowVectorExport = True
-          Left = 7.897650000000000000
-          Top = 14.559060000000000000
-          Width = 211.653535980000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Assinatura Cliente')
-        end
-        object Memo60: TfrxMemoView
-          AllowVectorExport = True
-          Left = 241.889920000000000000
-          Top = 14.740157480000000000
-          Width = 211.653543310000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Assinatura Entregador')
-        end
-        object Memo81: TfrxMemoView
-          AllowVectorExport = True
-          Left = 483.559370000000000000
-          Top = 14.740157480000000000
-          Width = 211.653543310000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Foto Entrega')
-        end
-        object Shape12: TfrxShapeView
-          AllowVectorExport = True
-          Left = -0.440940000000000000
-          Top = 39.015770000000000000
-          Width = 226.771653540000000000
-          Height = 204.094620000000000000
-          Curve = 1
-          Frame.Typ = []
-          Shape = skRoundRectangle
-        end
-        object Shape4: TfrxShapeView
-          AllowVectorExport = True
-          Left = 238.008040000000000000
-          Top = 38.929136300000000000
-          Width = 226.771653540000000000
-          Height = 204.094620000000000000
-          Curve = 1
-          Frame.Typ = []
-          Shape = skRoundRectangle
-        end
-        object Shape5: TfrxShapeView
-          AllowVectorExport = True
-          Left = 477.338900000000000000
-          Top = 38.929136300000000000
-          Width = 226.771653540000000000
-          Height = 204.094620000000000000
-          Curve = 1
-          Frame.Typ = []
-          Shape = skRoundRectangle
-        end
-        object Picture_AssCli: TfrxPictureView
-          AllowVectorExport = True
-          Left = 6.338590000000000000
-          Top = 49.133890000000000000
-          Width = 211.653511570000000000
-          Height = 177.716450000000000000
-          Frame.Typ = []
-          HightQuality = False
-          Transparent = False
-          TransparentColor = clWhite
-        end
-        object Picture1: TfrxPictureView
-          AllowVectorExport = True
-          Left = 243.228510000000000000
-          Top = 49.133890000000000000
-          Width = 211.653511570000000000
-          Height = 177.716450000000000000
-          Frame.Typ = []
-          HightQuality = False
-          Transparent = False
-          TransparentColor = clWhite
-        end
-        object Picture2: TfrxPictureView
-          AllowVectorExport = True
-          Left = 484.338900000000000000
-          Top = 49.133890000000000000
-          Width = 211.653511570000000000
-          Height = 177.716450000000000000
-          Frame.Typ = []
-          HightQuality = False
-          Transparent = False
-          TransparentColor = clWhite
-        end
         object Memo82: TfrxMemoView
           AllowVectorExport = True
-          Top = 264.567100000000000000
+          Top = 7.559060000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5624,7 +5550,7 @@
         end
         object Memo83: TfrxMemoView
           AllowVectorExport = True
-          Top = 291.023810000000000000
+          Top = 34.015770000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5641,7 +5567,7 @@
         end
         object Memo84: TfrxMemoView
           AllowVectorExport = True
-          Top = 272.126160000000000000
+          Top = 15.118120000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'ME_Nome_RespEntRecebimento'
@@ -5663,7 +5589,7 @@
         end
         object Memo85: TfrxMemoView
           AllowVectorExport = True
-          Top = 298.582870000000000000
+          Top = 41.574830000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'ME_Hora_EntregaFinalizada'
@@ -5685,7 +5611,7 @@
         end
         object Memo86: TfrxMemoView
           AllowVectorExport = True
-          Top = 317.480520000000000000
+          Top = 60.472480000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5702,7 +5628,7 @@
         end
         object Memo87: TfrxMemoView
           AllowVectorExport = True
-          Top = 325.039580000000000000
+          Top = 68.031540000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'Transportador'
@@ -5724,7 +5650,7 @@
         end
         object Memo88: TfrxMemoView
           AllowVectorExport = True
-          Top = 343.937230000000000000
+          Top = 86.929190000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5741,7 +5667,7 @@
         end
         object Memo89: TfrxMemoView
           AllowVectorExport = True
-          Top = 351.496290000000000000
+          Top = 94.488250000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'DescricaoCfop'
@@ -5763,7 +5689,7 @@
         end
         object Memo91: TfrxMemoView
           AllowVectorExport = True
-          Top = 370.393940000000000000
+          Top = 113.385900000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5780,7 +5706,7 @@
         end
         object Memo92: TfrxMemoView
           AllowVectorExport = True
-          Top = 377.953000000000000000
+          Top = 120.944960000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'NomeVendedor'
@@ -5803,7 +5729,7 @@
         object Memo94: TfrxMemoView
           AllowVectorExport = True
           Left = 355.275820000000000000
-          Top = 264.567100000000000000
+          Top = 7.559060000000000000
           Width = 343.937230000000000000
           Height = 185.196952910000000000
           Font.Charset = ANSI_CHARSET
@@ -5821,7 +5747,7 @@
         object Memo95: TfrxMemoView
           AllowVectorExport = True
           Left = 355.275820000000000000
-          Top = 283.464750000000000000
+          Top = 26.456710000000000000
           Width = 340.157700000000000000
           Height = 160.630014020000000000
           DataField = 'ObsNf'
@@ -5841,7 +5767,7 @@
         end
         object Memo93: TfrxMemoView
           AllowVectorExport = True
-          Top = 396.850650000000000000
+          Top = 139.842610000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5858,7 +5784,7 @@
         end
         object Memo96: TfrxMemoView
           AllowVectorExport = True
-          Top = 404.409710000000000000
+          Top = 147.401670000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'StatusOperacao'
@@ -5880,7 +5806,7 @@
         end
         object Memo98: TfrxMemoView
           AllowVectorExport = True
-          Top = 423.307360000000000000
+          Top = 166.299320000000000000
           Width = 343.937230000000000000
           Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
@@ -5897,7 +5823,7 @@
         end
         object Memo99: TfrxMemoView
           AllowVectorExport = True
-          Top = 430.866420000000000000
+          Top = 173.858380000000000000
           Width = 340.157700000000000000
           Height = 17.007874020000000000
           DataField = 'LocalSaida'
@@ -6964,7 +6890,6 @@
       'Qtd_separada=Qtd_separada'
       'Cod_separador=Cod_separador'
       'Separador=Separador'
-      'Data_Separacao=Data_Separacao'
       'Qtd_Conferida=Qtd_Conferida'
       'Cod_Conferente=Cod_Conferente'
       'Nome_Conferente=Nome_Conferente'
@@ -6975,15 +6900,20 @@
       'Unidade=Unidade'
       'Qtd_vendidaImpressao=Qtd_vendidaImpressao'
       'Qtd_SeparadaImpressao=Qtd_SeparadaImpressao'
-      'Qtd_ConferidaImpressao=Qtd_ConferidaImpressao')
+      'Qtd_ConferidaImpressao=Qtd_ConferidaImpressao'
+      'Data_Separacao=Data_Separacao')
     DataSet = FDQuery_ItensParaSeparacao
     BCDToCurrency = False
     Left = 420
     Top = 344
   end
   object FDQuery_EndEntrega: TFDQuery
+    Connection = dmPrincipal.conexao
     SQL.Strings = (
-      'select clientes.razao, clientes.Cpf_Cnpj, clientes.Rg_Ie,'
+      
+        'select clientes.razao, clientes.Cpf_Cnpj, clientes.Rg_Ie,cli_end' +
+        'cobent.EndEntrega as EnderecoBD, cli_endcobent.EndEntrega_No as ' +
+        'NumeroEnd,'
       
         'concat(cli_endcobent.EndEntrega,'#39' '#39',EndEntrega_No ) as EndEntreg' +
         'a, cli_endcobent.BairroEntrega, cli_endcobent.CepEntrega,'
@@ -7020,6 +6950,8 @@
       'razao=razao'
       'Cpf_Cnpj=Cpf_Cnpj'
       'Rg_Ie=Rg_Ie'
+      'EnderecoBD=EnderecoBD'
+      'NumeroEnd=NumeroEnd'
       'EndEntrega=EndEntrega'
       'BairroEntrega=BairroEntrega'
       'CepEntrega=CepEntrega'
@@ -7065,7 +6997,8 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_DataHoraSeparacao as Data_Separacao,'
+      'venda_pro.ME_Data_Separacao as Data_Separacao,'
+      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -7210,10 +7143,6 @@
       Origin = 'ME_Nome_User_Separador'
       Size = 60
     end
-    object FDQuery_DetalhesItensData_Separacao: TDateTimeField
-      FieldName = 'Data_Separacao'
-      Origin = 'ME_DataHoraSeparacao'
-    end
     object FDQuery_DetalhesItensQtd_Conferida: TFMTBCDField
       FieldName = 'Qtd_Conferida'
       Origin = 'ME_Qtd_Conferida'
@@ -7252,6 +7181,16 @@
       Origin = 'Cod_IDRegistro'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
+    end
+    object FDQuery_DetalhesItensData_Separacao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'Data_Separacao'
+      Origin = 'ME_Data_Separacao'
+    end
+    object FDQuery_DetalhesItensHora_Separacao: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Hora_Separacao'
+      Origin = 'ME_Hora_Separacao'
     end
   end
   object MainMenu: TMainMenu

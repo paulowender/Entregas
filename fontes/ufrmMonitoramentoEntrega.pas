@@ -878,7 +878,7 @@ begin
         qry_Update.Active := false;
         qry_Update.SQL.Clear;
         qry_Update.SQL.Add('update venda_pro set ME_Qtd_Separada = :ME_Qtd_Separada, ');
-        qry_Update.SQL.Add('ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_DataHoraSeparacao = :ME_DataHoraSeparacao, ');
+        qry_Update.SQL.Add('ME_Cod_User_Separador = :ME_Cod_User_Separador, ME_Data_Separacao = :ME_Data_Separacao, ');
         qry_Update.SQL.Add('ME_Nome_User_Separador = :ME_Nome_User_Separador where CodEmp = :CodEmp and Record_No = :Record_No ');
         qry_Update.SQL.Add('and Cod_IDRegistro = :Cod_IDRegistro and Dt_Movto = :Dt_Movto and No_Docto = :No_Docto');
         qry_Update.ParamByName('ME_Qtd_Separada').AsCurrency := StrToCurr(edt_QtdSeparada.Text);
@@ -888,7 +888,7 @@ begin
         qry_Update.ParamByName('Cod_IDRegistro').AsLargeInt := FDQuery_VendasParaSeparar.FieldByName('Cod_IDRegistro').AsLargeInt;
         qry_Update.ParamByName('No_Docto').AsInteger := FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
         qry_Update.ParamByName('CodEmp').AsInteger := FDQuery_VendasParaSeparar.FieldByName('CodEmp').AsInteger;
-        qry_Update.ParamByName('ME_DataHoraSeparacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
+        qry_Update.ParamByName('ME_Data_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
         qry_Update.ParamByName('Dt_Movto').AsDate := FDQuery_VendasParaSeparar.FieldByName('Dt_Movto').AsDateTime;
         qry_Update.ExecSQL;
 
@@ -1469,7 +1469,7 @@ begin
         qry_VendaSeparada.SQL.Add('LEFT JOIN venda_pro ON venda_pro.Dt_Movto=venda_cab.Dt_Movto And venda_pro.No_Docto=venda_cab.No_Docto ');
         qry_VendaSeparada.SQL.Add('And venda_pro.Codemp=venda_cab.Codemp And venda_pro.Cod_IDRegistro=venda_cab.Cod_IDRegistro');
         qry_VendaSeparada.SQL.Add('LEFT JOIN funcionario Fun ON Fun.Codigo=venda_pro.Cod_Vendedor and Fun.Codemp in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30) ');
-        qry_VendaSeparada.SQL.Add('where venda_cab.CodEmp = :CodEmp and ( venda_cab.ME_MercSeparada = 1 or venda_cab.Cod_Cfop in ('+Edt_CodCfopDiretoConf.Text+') or venda_cab.Cod_Secao in ('+Edit_CodSecaoDiretoConf.Text+') )');
+        qry_VendaSeparada.SQL.Add('where venda_cab.CodEmp = :CodEmp and (venda_cab.Cod_Cfop in ('+Edt_CodCfopDiretoConf.Text+') or venda_cab.Cod_Secao in ('+Edit_CodSecaoDiretoConf.Text+') )');
         qry_VendaSeparada.SQL.Add('and venda_cab.ME_Status_Entrega = 0');
         qry_VendaSeparada.SQL.Add('and venda_cab.Dt_movto between :DataInicial and :DataFinal limit 50 ');
         qry_VendaSeparada.ParamByName('DataInicial').AsDate := DateEdit_InicioVenda.Date;

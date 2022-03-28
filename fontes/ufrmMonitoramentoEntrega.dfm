@@ -361,7 +361,7 @@
     Top = 256
     Width = 1024
     Height = 513
-    ActivePage = tab_AguardandoSeparacao
+    ActivePage = tab_EmSeparacao
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
@@ -649,8 +649,8 @@
           end
           item
             Expanded = False
-            FieldName = 'Cod_Cfop'
-            Title.Caption = 'Hora inicio separacao'
+            FieldName = 'ME_Data_Separacao'
+            Title.Caption = 'Data inicio separacao'
             Width = 150
             Visible = True
           end
@@ -2983,6 +2983,7 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    ExplicitTop = 67
     object Panel3: TPanel
       AlignWithMargins = True
       Left = 420
