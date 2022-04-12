@@ -113,7 +113,7 @@ begin
       begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
-      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp,ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ');
       qry_AtualizaStatus.SQL.Add('Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada, ME_Status_Entrega = :ME_Status_Entrega, ');
       qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');

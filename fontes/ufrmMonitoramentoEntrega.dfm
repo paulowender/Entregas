@@ -2983,7 +2983,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 67
     object Panel3: TPanel
       AlignWithMargins = True
       Left = 420
@@ -3490,9 +3489,10 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 80'
+        Text = 'Vers'#227'o 90'
         Width = 50
       end>
+    ExplicitTop = 768
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000

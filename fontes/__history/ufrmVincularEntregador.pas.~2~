@@ -66,6 +66,7 @@ procedure TfrmVincularEntregador.btnGravarClick(Sender: TObject);
 var
   qry_AtualizaStatus : TFDQuery;
   qry_AtualizaTransportador : TFDQuery;
+
 begin
 
   if frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('ME_Status_Conferido').AsInteger = 0 then
@@ -101,7 +102,7 @@ begin
       begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
-      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Saiu_Entrega=:ME_Hora_Saiu_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Saiu_Entrega=:ME_Hora_Saiu_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
       qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 4;
@@ -113,7 +114,7 @@ begin
       begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
-      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ');
       qry_AtualizaStatus.SQL.Add('Me_Hora_EntregaFinalizada = :Me_Hora_EntregaFinalizada, ME_Status_Entrega = :ME_Status_Entrega, ');
       qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
@@ -127,7 +128,7 @@ begin
       begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
-      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
       qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
@@ -139,7 +140,7 @@ begin
       begin
       qry_AtualizaStatus.Active := false;
       qry_AtualizaStatus.SQL.Clear;
-      qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
+      qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
       qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
       qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
       qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 3;
@@ -158,7 +159,7 @@ begin
 
         qry_AtualizaStatus.Active := false;
         qry_AtualizaStatus.SQL.Clear;
-        qry_AtualizaStatus.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp, ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
+        qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Hora_Chegou_Entrega=:ME_Hora_Chegou_Entrega, ME_Status_Entrega = :ME_Status_Entrega, ');
         qry_AtualizaStatus.SQL.Add('ME_Obs = :ME_Obs where CodEmp = :CodEmp ');
         qry_AtualizaStatus.SQL.Add('and Record_No = :Record_No and No_Docto = :No_Docto and Dt_Movto = :Dt_Movto ');
         qry_AtualizaStatus.ParamByName('ME_Status_Entrega').AsInteger := 7;
@@ -173,11 +174,23 @@ begin
     qry_AtualizaStatus.ParamByName('Dt_Movto').AsDate := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Dt_Movto').AsDateTime;
     qry_AtualizaStatus.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
     qry_AtualizaStatus.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
-    qry_AtualizaStatus.ParamByName('Cod_Transp').AsInteger := StrToInt(LabeledEdit_CodTransportador.Text);
     qry_AtualizaStatus.ExecSQL;
 
     if qry_AtualizaStatus.RowsAffected > 0 then
     begin
+
+      qry_AtualizaTransportador.Active := false;
+      qry_AtualizaTransportador.SQL.clear;
+      qry_AtualizaTransportador.SQL.Add('update venda_cab set Cod_Transp = :Cod_Transp where CodEmp = :CodEmp ');
+      qry_AtualizaTransportador.SQL.Add('and No_Docto = :No_Docto and Record_No = :Record_No and Dt_Movto = :Dt_Movto;');
+      qry_AtualizaTransportador.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
+      qry_AtualizaTransportador.ParamByName('Cod_Transp').AsInteger := StrToInt(LabeledEdit_CodTransportador.Text);
+      qry_AtualizaTransportador.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
+      qry_AtualizaTransportador.ParamByName('Record_No').AsLargeInt := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Record_No').AsLargeInt;
+      qry_AtualizaTransportador.ParamByName('Dt_Movto').AsDate := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Dt_Movto').AsDateTime;
+      qry_AtualizaTransportador.ExecSQL;
+
+
 
       frmVincularEntregador.Close;
       frmMonitoramentoEntrega.Img_ConsultaClick(sender);
@@ -190,7 +203,6 @@ begin
 
   finally
   qry_AtualizaStatus.DisposeOf;
-  qry_AtualizaTransportador.DisposeOf
   end;
 
 end;
