@@ -16,7 +16,6 @@ type
     FDGUIxWaitCursor: TFDGUIxWaitCursor;
     conexao: TFDConnection;
     procedure conexaoBeforeConnect(Sender: TObject);
-    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,11 +48,6 @@ begin
   TFDConnection(Sender).LoginPrompt := False;
   TFDConnection(Sender).UpdateOptions.CountUpdatedRecords := False;
 
-end;
-
-procedure TdmPrincipal.DataModuleCreate(Sender: TObject);
-begin
-  dmPrincipal.conexao.Connected := false;
 end;
 
 end.

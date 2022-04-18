@@ -1,5 +1,6 @@
 object dmPrincipal: TdmPrincipal
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 265
   Width = 197
   object FDPhysMySQLDriverLink: TFDPhysMySQLDriverLink

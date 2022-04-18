@@ -109,7 +109,7 @@ uses ufrmLiberaConferencia, udmPrincipal, ufrmMonitoramentoEntrega,
 procedure TfrmDetalheEntrega.BitBtn_AlterarExpClick(Sender: TObject);
 begin
 
-   if (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 5) then
+     if (qry_DetalhevendaCabecalho.FieldByName('ME_Status_Entrega').AsInteger = 5) then
    begin
      ShowMessage('Operação invalida, entrega finalizada..');
      exit;

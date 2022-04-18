@@ -482,7 +482,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -495,7 +495,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid_DetalhesItens: TDBGrid
           Left = 0
@@ -969,7 +968,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -982,7 +981,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
@@ -1239,7 +1237,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1252,7 +1250,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
@@ -1509,7 +1506,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1522,7 +1519,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
@@ -1779,7 +1775,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1792,7 +1788,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid3: TDBGrid
           Left = 0
@@ -2049,7 +2044,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2062,7 +2057,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
@@ -2515,7 +2509,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 54
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2528,7 +2522,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
@@ -2785,7 +2778,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2798,7 +2791,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
@@ -3489,10 +3481,9 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 90'
+        Text = 'Vers'#227'o 95'
         Width = 50
       end>
-    ExplicitTop = 768
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000
@@ -3534,9 +3525,10 @@
       'venda_cab.ME_Foto_AssFuncionario,venda_cab.ME_Foto_Entrega,'
       'Fun.Nome as NomeVendedor, secao.Descricao as NomeSecao,'
       
-        'concat(venda_nfecab.InfAdic_infCpl1,'#39' '#39',venda_nfecab.InfAdic_inf' +
-        'Cpl2,'#39' '#39',venda_nfecab.InfAdic_infCpl3, '#39' '#39', venda_cab.ME_Obs) as' +
-        ' ObsNf,'
+        'concat(venda_obs.ObsNF_01,'#39' '#39',venda_obs.ObsNF_02,'#39' '#39',venda_obs.O' +
+        'bsNF_03,'#39' '#39',venda_obs.ObsNF_04,'#39' '#39',venda_obs.ObsNF_05,'#39' '#39',venda_' +
+        'obs.ObsNF_06,'#39' '#39',if(venda_cab.ME_Obs is null,'#39#39',venda_cab.ME_Obs' +
+        ')) as ObsNf,'
       'venda_cab.ME_Exp_Final,'
       'venda_cab.ME_Status_Entrega,'
       'case'
@@ -3585,6 +3577,12 @@
       
         'and venda_nfecab.No_Docto = venda_cab.No_Docto and venda_nfecab.' +
         'Dt_Movto = venda_cab.Dt_Movto'
+      
+        'LEFT JOIN venda_obs on venda_obs.CodEmp = venda_cab.CodEmp and v' +
+        'enda_obs.No_Docto = venda_cab.No_Docto'
+      
+        'and venda_obs.Cod_IDRegistro = venda_cab.Cod_IDRegistro and vend' +
+        'a_obs.Dt_Movto = venda_cab.Dt_Movto'
       'where venda_cab.Dt_movto between current_date and current_date'
       'and venda_cab.CodEmp = 1 '
       'and venda_cab.Cod_Secao not in (31,7,35,8,34,32) '
@@ -4088,7 +4086,8 @@
       'ME_Status_Entrega=ME_Status_Entrega'
       'StatusOperacao=StatusOperacao'
       'LocalSaida=LocalSaida'
-      'ME_Obs=ME_Obs')
+      'ME_Obs=ME_Obs'
+      'ME_Data_Separacao=ME_Data_Separacao')
     DataSet = FDQuery_VendasParaSeparar
     BCDToCurrency = False
     Left = 420
@@ -4103,7 +4102,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44628.340469710650000000
+    ReportOptions.LastChange = 44669.443827905100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'

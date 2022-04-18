@@ -1593,7 +1593,7 @@ begin
       FDQuery_VendasParaSeparar.SQL.Add('venda_cab.ME_Hora_Chegou_Entrega, venda_cab.ME_Status_Conferido, venda_cab.Cod_Secao, ');
       FDQuery_VendasParaSeparar.SQL.Add('venda_cab.ME_Nome_RespEntRecebimento,venda_cab.ME_Foto_AssCli,venda_cab.ME_Foto_AssFuncionario, ');
       FDQuery_VendasParaSeparar.SQL.Add('venda_cab.ME_Foto_Entrega,Fun.Nome as NomeVendedor, secao.Descricao as NomeSecao, ');
-      FDQuery_VendasParaSeparar.SQL.Add('concat(venda_nfecab.InfAdic_infCpl1,'' '',venda_nfecab.InfAdic_infCpl2,'' '',venda_nfecab.InfAdic_infCpl3, '' '',venda_cab.ME_Obs) as ObsNf, ');
+      FDQuery_VendasParaSeparar.SQL.Add('concat(venda_obs.ObsNF_01,'' '',venda_obs.ObsNF_02,'' '',venda_obs.ObsNF_03,'' '',venda_obs.ObsNF_04,'' '',venda_obs.ObsNF_05,'' '',venda_obs.ObsNF_06,'' '',if(venda_cab.ME_Obs is null,'''',venda_cab.ME_Obs)) as ObsNf, ');
       FDQuery_VendasParaSeparar.SQL.Add('venda_cab.ME_Exp_Final,venda_cab.ME_Status_Entrega, ');
       FDQuery_VendasParaSeparar.SQL.Add('case when venda_cab.ME_Status_Entrega = 0 then "AGUARDANDO SEPARAÇÃO" ');
       FDQuery_VendasParaSeparar.SQL.Add('when venda_cab.ME_Status_Entrega = 1 then "EM SEPARAÇÃO" ');
@@ -1620,6 +1620,8 @@ begin
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN secao on secao.CodEmp = venda_cab.CodEmp and secao.Codigo = venda_cab.Cod_Secao');
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN venda_nfecab on venda_nfecab.CodEmp = venda_cab.CodEmp and venda_nfecab.Cod_IDRegistro = venda_cab.Cod_IDRegistro ');
       FDQuery_VendasParaSeparar.SQL.Add('and venda_nfecab.No_Docto = venda_cab.No_Docto and venda_nfecab.Dt_Movto = venda_cab.Dt_Movto');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN venda_obs on venda_obs.CodEmp = venda_cab.CodEmp and venda_obs.No_Docto = venda_cab.No_Docto  ');
+      FDQuery_VendasParaSeparar.SQL.Add('and venda_obs.Cod_IDRegistro = venda_cab.Cod_IDRegistro and venda_obs.Dt_Movto = venda_cab.Dt_Movto ');
       FDQuery_VendasParaSeparar.SQL.Add('where venda_cab.Dt_movto between :DataInicial and :DataFinal and venda_cab.CodEmp = :CodEmp');
 
       if StrToInt(vSincFiscal) = 1  then
