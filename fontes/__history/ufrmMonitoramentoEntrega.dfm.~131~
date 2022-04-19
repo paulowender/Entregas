@@ -3489,7 +3489,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 97'
+        Text = 'Vers'#227'o 95'
         Width = 50
       end>
   end
@@ -4107,7 +4107,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44670.401204467590000000
+    ReportOptions.LastChange = 44670.318745474530000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -5566,7 +5566,7 @@
           Frame.Width = 0.500000000000000000
           GapY = 2.000000000000000000
           Memo.UTF8W = (
-            'DATA BAIXA ENTREGA')
+            'DATA BAIXA ENTREGA:')
           ParentFont = False
         end
         object Memo84: TfrxMemoView
@@ -7186,14 +7186,6 @@
       Origin = 'Cod_IDRegistro'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
-    end
-    object FDQuery_DetalhesItensData_Separacao: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'Data_Separacao'
-      Origin = 'Data_Separacao'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 19
     end
   end
   object MainMenu: TMainMenu

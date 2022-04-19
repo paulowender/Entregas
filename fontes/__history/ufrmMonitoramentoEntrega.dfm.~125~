@@ -361,7 +361,7 @@
     Top = 256
     Width = 1024
     Height = 513
-    ActivePage = Tab_EntregaFinalizada
+    ActivePage = tab_AguardandoSeparacao
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
@@ -651,7 +651,7 @@
             Expanded = False
             FieldName = 'ME_Data_Separacao'
             Title.Caption = 'Data inicio separacao'
-            Width = 130
+            Width = 150
             Visible = True
           end
           item
@@ -1730,7 +1730,14 @@
           end
           item
             Expanded = False
-            FieldName = 'ME_Data_Separacao'
+            FieldName = 'ME_Pronto_Entrega'
+            Title.Caption = 'Status entrega'
+            Width = 350
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ME_Hora_Separacao'
             Title.Caption = 'Hora inicio separacao'
             Width = 120
             Visible = True
@@ -1754,13 +1761,6 @@
             FieldName = 'ME_Hora_Chegou_Entrega'
             Title.Caption = 'Hora chegada entrega'
             Width = 120
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ME_Hora_EntregaFinalizada'
-            Title.Caption = 'Hora Finaliza'#231#227'o Entrega'
-            Width = 130
             Visible = True
           end>
       end
@@ -3489,7 +3489,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 97'
+        Text = 'Vers'#227'o 95'
         Width = 50
       end>
   end
@@ -3858,9 +3858,8 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      
-        'concat(venda_pro.ME_Data_Separacao,'#39' '#39',venda_pro.ME_Hora_Separac' +
-        'ao) as Data_Separacao,'
+      'venda_pro.ME_Data_Separacao as Data_Separacao,'
+      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -4030,13 +4029,15 @@
       ReadOnly = True
       Size = 22
     end
-    object FDQuery_ItensParaSeparacaoData_Separacao: TStringField
+    object FDQuery_ItensParaSeparacaoData_Separacao: TDateField
       AutoGenerateValue = arDefault
       FieldName = 'Data_Separacao'
-      Origin = 'Data_Separacao'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 19
+      Origin = 'ME_Data_Separacao'
+    end
+    object FDQuery_ItensParaSeparacaoHora_Separacao: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Hora_Separacao'
+      Origin = 'ME_Hora_Separacao'
     end
   end
   object DataSource_ItensParaSeparacao: TDataSource
@@ -4107,7 +4108,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44670.401204467590000000
+    ReportOptions.LastChange = 44670.318745474530000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -5566,7 +5567,7 @@
           Frame.Width = 0.500000000000000000
           GapY = 2.000000000000000000
           Memo.UTF8W = (
-            'DATA BAIXA ENTREGA')
+            'DATA BAIXA ENTREGA:')
           ParentFont = False
         end
         object Memo84: TfrxMemoView
@@ -7001,9 +7002,8 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      
-        'concat(venda_pro.ME_Data_Separacao,'#39' '#39',venda_pro.ME_Hora_Separac' +
-        'ao) as Data_Separacao,'
+      'venda_pro.ME_Data_Separacao as Data_Separacao,'
+      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -7187,13 +7187,15 @@
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object FDQuery_DetalhesItensData_Separacao: TStringField
+    object FDQuery_DetalhesItensData_Separacao: TDateField
       AutoGenerateValue = arDefault
       FieldName = 'Data_Separacao'
-      Origin = 'Data_Separacao'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 19
+      Origin = 'ME_Data_Separacao'
+    end
+    object FDQuery_DetalhesItensHora_Separacao: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Hora_Separacao'
+      Origin = 'ME_Hora_Separacao'
     end
   end
   object MainMenu: TMainMenu

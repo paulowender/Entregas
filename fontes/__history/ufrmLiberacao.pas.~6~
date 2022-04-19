@@ -145,10 +145,10 @@ begin
 
               qry_AtualizaStatus.Active := false;
               qry_AtualizaStatus.SQL.Clear;
-              qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Data_Separacao = :ME_Data_Separacao, Me_Hora_Separacao = :Me_Hora_Separacao, ');
+              qry_AtualizaStatus.SQL.Add('update venda_cab set ME_Status_Entrega = :Status, ME_Data_Separacao = :ME_Data_Separacao, ');
               qry_AtualizaStatus.SQL.Add('ME_Cod_User_Separador = :ME_Cod_User_Separador, ');
               qry_AtualizaStatus.SQL.Add('ME_Nome_User_Separador = :ME_Nome_User_Separador, ME_Obs = :ME_Obs');
-              qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and Dt_Movto=:Dt_Movto and No_Docto=:No_Docto and ME_Data_Separacao is null');
+              qry_AtualizaStatus.SQL.Add('where CodEmp = :CodEmp and Record_No = :Record_No and Dt_Movto=:Dt_Movto and No_Docto=:No_Docto');
               qry_AtualizaStatus.ParamByName('Status').AsInteger := 1;
               qry_AtualizaStatus.ParamByName('ME_Data_Separacao').AsDateTime := frmMonitoramentoEntrega.GetDataServidor;
               qry_AtualizaStatus.ParamByName('ME_Cod_User_Separador').AsInteger := frmMonitoramentoEntrega.vCodigoUsuarioLogado;
@@ -158,14 +158,18 @@ begin
               qry_AtualizaStatus.ParamByName('ME_Obs').AsString := 'SEPARAÇÃO EM ANDAMENTO..';
               qry_AtualizaStatus.ParamByName('Dt_Movto').AsDate :=  frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('Dt_Movto').AsDateTime;
               qry_AtualizaStatus.ParamByName('No_Docto').AsInteger := frmMonitoramentoEntrega.FDQuery_VendasParaSeparar.FieldByName('No_Docto').AsInteger;
-              qry_AtualizaStatus.ParamByName('Me_Hora_Separacao').AsTime := frmMonitoramentoEntrega.GetDataServidor;
               qry_AtualizaStatus.ExecSQL;
 
-
+              if qry_AtualizaStatus.RowsAffected > 0 then
+              begin
               frmLiberacao.Close;
               frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.First;
               frmMonitoramentoEntrega.edt_QtdSeparada.SetFocus;
-
+              end
+              else
+              begin
+              ShowMessage('Falha na atualização do status da entrada..');
+              end;
 
 
             end

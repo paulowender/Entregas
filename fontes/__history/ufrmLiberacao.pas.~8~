@@ -161,11 +161,16 @@ begin
               qry_AtualizaStatus.ParamByName('Me_Hora_Separacao').AsTime := frmMonitoramentoEntrega.GetDataServidor;
               qry_AtualizaStatus.ExecSQL;
 
-
+              if qry_AtualizaStatus.RowsAffected > 0 then
+              begin
               frmLiberacao.Close;
               frmMonitoramentoEntrega.FDQuery_ItensParaSeparacao.First;
               frmMonitoramentoEntrega.edt_QtdSeparada.SetFocus;
-
+              end
+              else
+              begin
+              ShowMessage('Falha na atualização do status da entrada..');
+              end;
 
 
             end
