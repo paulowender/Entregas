@@ -482,7 +482,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -495,7 +495,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid_DetalhesItens: TDBGrid
           Left = 0
@@ -725,7 +724,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -738,7 +737,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid1: TDBGrid
           Left = 0
@@ -969,7 +967,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -982,7 +980,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
@@ -1239,7 +1236,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1252,7 +1249,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
@@ -1509,7 +1505,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1522,7 +1518,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
@@ -2049,7 +2044,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2062,7 +2057,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
@@ -2515,7 +2509,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 54
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2528,7 +2522,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
@@ -2785,7 +2778,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 139
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2798,7 +2791,6 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
