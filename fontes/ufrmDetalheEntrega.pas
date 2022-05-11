@@ -524,7 +524,7 @@ begin
       if qry_AtualizaStatus.RowsAffected > 0 then
       begin
       frmDetalheEntrega.Close;
-      frmMonitoramentoEntrega.pLimparCampos;
+      frmMonitoramentoEntrega.pLimparCampos(1);
       end;
 
     finally
@@ -627,7 +627,7 @@ begin
         begin
         frmObsFinalizaEntrega.Close;
         frmDetalheEntrega.Close;
-        frmMonitoramentoEntrega.pLimparCampos;
+        frmMonitoramentoEntrega.pLimparCampos(0);
         end
         else
         begin
@@ -782,7 +782,7 @@ begin
       if qry_AtualizaStatus.RowsAffected > 0 then
       begin
       frmDetalheEntrega.Close;
-      frmMonitoramentoEntrega.pLimparCampos;
+      frmMonitoramentoEntrega.pLimparCampos(0);
       end;
 
     finally

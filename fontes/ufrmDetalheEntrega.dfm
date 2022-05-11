@@ -444,6 +444,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 2
       OnClick = btnGravarEnviarEntregaClick
+      ExplicitTop = 7
     end
     object btnGravarFinalizarEntrega: TBitBtn
       Tag = 99

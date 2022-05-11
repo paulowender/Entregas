@@ -65,8 +65,8 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         end
         item
           Expanded = False
-          FieldName = 'ME_Hora_Separacao'
-          Title.Caption = 'Hora inicio separacao'
+          FieldName = 'ME_Data_Separacao'
+          Title.Caption = 'Data Separa'#231#227'o'
           Width = 120
           Visible = True
         end
@@ -444,6 +444,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 2
       OnClick = btnGravarEnviarEntregaClick
+      ExplicitTop = 0
     end
     object btnGravarFinalizarEntrega: TBitBtn
       Tag = 99
@@ -677,9 +678,9 @@ object frmDetalheEntrega: TfrmDetalheEntrega
     SQL.Strings = (
       
         'select venda_cab.ME_Status_Entrega,venda_cab.Record_No,venda_cab' +
-        '.Cod_IDRegistro, venda_cab.ME_Hora_Separacao,venda_cab.ME_Hora_C' +
-        'hegadaExp, venda_cab.CodEmp,venda_cab.Dt_Movto,venda_cab.Hr_Movt' +
-        'o,'
+        '.Cod_IDRegistro,venda_cab.ME_Data_Separacao,venda_cab.ME_Hora_Se' +
+        'paracao,venda_cab.ME_Hora_ChegadaExp, venda_cab.CodEmp,venda_cab' +
+        '.Dt_Movto,venda_cab.Hr_Movto,'
       
         'venda_cab.No_Docto, venda_cab.Cod_Proposta, venda_cab.Cod_Client' +
         'e,venda_cab.Razao_Cliente,'
@@ -688,7 +689,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         'uantidade))+venda_cab.Vlr_Frete+venda_cab.Vlr_IPI,2) as Valor,'
       
         'venda_cab.Cod_Transp, transportador.Razao as Transportador, vend' +
-        'a_cab.ME_Pronto_Entrega,'
+        'a_cab.ME_Obs,'
       
         'venda_cab.ME_Cod_User_Separador, venda_cab.ME_Nome_User_Separado' +
         'r,'
@@ -709,7 +710,9 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       
         'where venda_cab.Record_No  = :Record_No and venda_cab.CodEmp = :' +
         'CodEmp'
-      'and venda_cab.Dt_Movto = :Data')
+      'and venda_cab.Dt_Movto = :Data'
+      ''
+      '')
     Left = 524
     Top = 368
     ParamData = <
@@ -742,10 +745,6 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       Origin = 'Cod_IDRegistro'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
-    end
-    object qry_DetalhevendaCabecalhoME_Hora_Separacao: TDateTimeField
-      FieldName = 'ME_Hora_Separacao'
-      Origin = 'ME_Hora_Separacao'
     end
     object qry_DetalhevendaCabecalhoME_Hora_ChegadaExp: TDateTimeField
       FieldName = 'ME_Hora_ChegadaExp'
@@ -809,11 +808,6 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       ReadOnly = True
       Size = 40
     end
-    object qry_DetalhevendaCabecalhoME_Pronto_Entrega: TStringField
-      FieldName = 'ME_Pronto_Entrega'
-      Origin = 'ME_Pronto_Entrega'
-      Size = 60
-    end
     object qry_DetalhevendaCabecalhoME_Cod_User_Separador: TIntegerField
       FieldName = 'ME_Cod_User_Separador'
       Origin = 'ME_Cod_User_Separador'
@@ -843,6 +837,22 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       FieldName = 'ME_Exp_Final'
       Origin = 'ME_Exp_Final'
     end
+    object qry_DetalhevendaCabecalhoME_Obs: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ME_Obs'
+      Origin = 'ME_Obs'
+      Size = 300
+    end
+    object qry_DetalhevendaCabecalhoME_Data_Separacao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ME_Data_Separacao'
+      Origin = 'ME_Data_Separacao'
+    end
+    object qry_DetalhevendaCabecalhoME_Hora_Separacao: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ME_Hora_Separacao'
+      Origin = 'ME_Hora_Separacao'
+    end
   end
   object qry_DetalhevendaDetalhe: TFDQuery
     Connection = dmPrincipal.conexao
@@ -861,7 +871,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       'venda_pro.ME_Qtd_Separada as Qtd_separada,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_DataHoraSeparacao as Data_Separacao,'
+      'venda_pro.ME_Data_Separacao as Data_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       'venda_pro.ME_Cod_User_Conferente as Cod_Conferente,'
       'venda_pro.ME_Nome_User_Conferente as Nome_Conferente,'

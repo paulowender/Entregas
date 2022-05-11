@@ -313,7 +313,7 @@ type
     vPreferenciaConferencia : String;
     function ConverterData(Valor: string) : String;
     function GetDataServidor() : TDateTime;
-    procedure pLimparCampos;
+    procedure pLimparCampos(origem:integer);
     procedure pVoltarOriginal;
     procedure pConsultaNfeCancelada;
   end;
@@ -1821,7 +1821,7 @@ begin
     exit;
   end;
 
-  pLimparCampos;
+  pLimparCampos(0);
   pVoltarOriginal;
 
 
@@ -1959,14 +1959,21 @@ begin
 
 end;
 
-procedure TfrmMonitoramentoEntrega.pLimparCampos;
+procedure TfrmMonitoramentoEntrega.pLimparCampos(origem:integer);
 begin
+
  edt_CodigoCliente.Text := '';
  edt_NomeCliente.Text := '';
  LabeledEdit_CodigoTransportador.Text := '';
  LabeledEdit_NomeTransportador.Text := '';
+
+ if origem = 0 then
+ begin
  Edt_NumeroDoc.Text := '';
+ end;
+
  Img_ConsultaClick(self);
+
 end;
 
 procedure TfrmMonitoramentoEntrega.spb_fecharClick(Sender: TObject);
