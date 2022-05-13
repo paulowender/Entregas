@@ -361,7 +361,7 @@
     Top = 256
     Width = 1024
     Height = 513
-    ActivePage = tab_EmSeparacao
+    ActivePage = Tab_EntregaFinalizada
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
@@ -482,7 +482,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -495,6 +495,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid_DetalhesItens: TDBGrid
           Left = 0
@@ -650,7 +651,7 @@
             Expanded = False
             FieldName = 'ME_Data_Separacao'
             Title.Caption = 'Data inicio separacao'
-            Width = 150
+            Width = 130
             Visible = True
           end
           item
@@ -968,7 +969,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -981,6 +982,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
@@ -1237,7 +1239,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1250,6 +1252,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
@@ -1506,7 +1509,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1519,6 +1522,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
@@ -1726,14 +1730,7 @@
           end
           item
             Expanded = False
-            FieldName = 'ME_Pronto_Entrega'
-            Title.Caption = 'Status entrega'
-            Width = 350
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ME_Hora_Separacao'
+            FieldName = 'ME_Data_Separacao'
             Title.Caption = 'Hora inicio separacao'
             Width = 120
             Visible = True
@@ -1758,6 +1755,13 @@
             Title.Caption = 'Hora chegada entrega'
             Width = 120
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ME_Hora_EntregaFinalizada'
+            Title.Caption = 'Hora Finaliza'#231#227'o Entrega'
+            Width = 130
+            Visible = True
           end>
       end
       object Panel9: TPanel
@@ -1775,7 +1779,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1788,6 +1792,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid3: TDBGrid
           Left = 0
@@ -2044,7 +2049,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2057,6 +2062,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
@@ -2509,7 +2515,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 54
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2522,6 +2528,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
@@ -2778,7 +2785,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2791,6 +2798,7 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
@@ -3481,9 +3489,10 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 80'
+        Text = 'Vers'#227'o 105'
         Width = 50
       end>
+    ExplicitTop = 768
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000
@@ -3502,9 +3511,10 @@
       
         'clientes.Cep,clientes.Cidade,clientes.UF, clientes.Rg_Ie,venda_c' +
         'ab.Cod_Cfop,codfiscal.Descricao as DescricaoCfop, venda_cab.Reco' +
-        'rd_No,venda_cab.Cod_IDRegistro,venda_cab.ME_Data_Separacao,venda' +
-        '_cab.ME_Hora_Separacao,venda_cab.ME_Hora_ChegadaExp, venda_cab.C' +
-        'odEmp,venda_cab.Dt_Movto,venda_cab.Hr_Movto,'
+        'rd_No,venda_cab.Cod_IDRegistro,concat(venda_cab.ME_Data_Separaca' +
+        'o,'#39' '#39',venda_cab.ME_Hora_Separacao) as ME_Data_Separacao,venda_ca' +
+        'b.ME_Hora_ChegadaExp, venda_cab.CodEmp,venda_cab.Dt_Movto,venda_' +
+        'cab.Hr_Movto,'
       
         'venda_cab.No_Docto, venda_cab.Cod_Proposta, venda_cab.Cod_Client' +
         'e,venda_cab.Razao_Cliente,'
@@ -3525,9 +3535,10 @@
       'venda_cab.ME_Foto_AssFuncionario,venda_cab.ME_Foto_Entrega,'
       'Fun.Nome as NomeVendedor, secao.Descricao as NomeSecao,'
       
-        'concat(venda_nfecab.InfAdic_infCpl1,'#39' '#39',venda_nfecab.InfAdic_inf' +
-        'Cpl2,'#39' '#39',venda_nfecab.InfAdic_infCpl3, '#39' '#39', venda_cab.ME_Obs) as' +
-        ' ObsNf,'
+        'concat(venda_obs.ObsNF_01,'#39' '#39',venda_obs.ObsNF_02,'#39' '#39',venda_obs.O' +
+        'bsNF_03,'#39' '#39',venda_obs.ObsNF_04,'#39' '#39',venda_obs.ObsNF_05,'#39' '#39',venda_' +
+        'obs.ObsNF_06,'#39' '#39',if(venda_cab.ME_Obs is null,'#39#39',venda_cab.ME_Obs' +
+        ')) as ObsNf,'
       'venda_cab.ME_Exp_Final,'
       'venda_cab.ME_Status_Entrega,'
       'case'
@@ -3576,6 +3587,12 @@
       
         'and venda_nfecab.No_Docto = venda_cab.No_Docto and venda_nfecab.' +
         'Dt_Movto = venda_cab.Dt_Movto'
+      
+        'LEFT JOIN venda_obs on venda_obs.CodEmp = venda_cab.CodEmp and v' +
+        'enda_obs.No_Docto = venda_cab.No_Docto'
+      
+        'and venda_obs.Cod_IDRegistro = venda_cab.Cod_IDRegistro and vend' +
+        'a_obs.Dt_Movto = venda_cab.Dt_Movto'
       'where venda_cab.Dt_movto between current_date and current_date'
       'and venda_cab.CodEmp = 1 '
       'and venda_cab.Cod_Secao not in (31,7,35,8,34,32) '
@@ -3669,10 +3686,6 @@
     object FDQuery_VendasParaSepararME_Hora_Chegou_Entrega: TDateTimeField
       FieldName = 'ME_Hora_Chegou_Entrega'
       Origin = 'ME_Hora_Chegou_Entrega'
-    end
-    object FDQuery_VendasParaSepararME_Hora_Separacao: TDateTimeField
-      FieldName = 'ME_Hora_Separacao'
-      Origin = 'ME_Hora_Separacao'
     end
     object FDQuery_VendasParaSepararME_Hora_ChegadaExp: TDateTimeField
       FieldName = 'ME_Hora_ChegadaExp'
@@ -3811,10 +3824,11 @@
       Origin = 'ME_Obs'
       Size = 300
     end
-    object FDQuery_VendasParaSepararME_Data_Separacao: TDateField
+    object FDQuery_VendasParaSepararME_Data_Separacao: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ME_Data_Separacao'
       Origin = 'ME_Data_Separacao'
+      Size = 19
     end
   end
   object DataSource_VendasParaSeparar: TDataSource
@@ -3845,8 +3859,9 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_Data_Separacao as Data_Separacao,'
-      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
+      
+        'concat(venda_pro.ME_Data_Separacao,'#39' '#39',venda_pro.ME_Hora_Separac' +
+        'ao) as Data_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -4016,15 +4031,13 @@
       ReadOnly = True
       Size = 22
     end
-    object FDQuery_ItensParaSeparacaoData_Separacao: TDateField
+    object FDQuery_ItensParaSeparacaoData_Separacao: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'Data_Separacao'
-      Origin = 'ME_Data_Separacao'
-    end
-    object FDQuery_ItensParaSeparacaoHora_Separacao: TTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'Hora_Separacao'
-      Origin = 'ME_Hora_Separacao'
+      Origin = 'Data_Separacao'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 19
     end
   end
   object DataSource_ItensParaSeparacao: TDataSource
@@ -4079,7 +4092,8 @@
       'ME_Status_Entrega=ME_Status_Entrega'
       'StatusOperacao=StatusOperacao'
       'LocalSaida=LocalSaida'
-      'ME_Obs=ME_Obs')
+      'ME_Obs=ME_Obs'
+      'ME_Data_Separacao=ME_Data_Separacao')
     DataSet = FDQuery_VendasParaSeparar
     BCDToCurrency = False
     Left = 420
@@ -4094,7 +4108,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44628.340469710650000000
+    ReportOptions.LastChange = 44670.401204467590000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -5553,7 +5567,7 @@
           Frame.Width = 0.500000000000000000
           GapY = 2.000000000000000000
           Memo.UTF8W = (
-            'DATA E HORA ENTREGA')
+            'DATA BAIXA ENTREGA')
           ParentFont = False
         end
         object Memo84: TfrxMemoView
@@ -6988,8 +7002,9 @@
         'idade) as Qtd_SeparadaImpressao,'
       'venda_pro.ME_Cod_User_Separador as Cod_separador,'
       'venda_pro.ME_Nome_User_Separador as Separador,'
-      'venda_pro.ME_Data_Separacao as Data_Separacao,'
-      'venda_pro.ME_Hora_Separacao as Hora_Separacao,'
+      
+        'concat(venda_pro.ME_Data_Separacao,'#39' '#39',venda_pro.ME_Hora_Separac' +
+        'ao) as Data_Separacao,'
       'venda_pro.ME_Qtd_Conferida as Qtd_Conferida,'
       
         'concat(round(venda_pro.ME_Qtd_Conferida,2),'#39' '#39', prodserv_dados.U' +
@@ -7173,15 +7188,13 @@
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object FDQuery_DetalhesItensData_Separacao: TDateField
+    object FDQuery_DetalhesItensData_Separacao: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'Data_Separacao'
-      Origin = 'ME_Data_Separacao'
-    end
-    object FDQuery_DetalhesItensHora_Separacao: TTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'Hora_Separacao'
-      Origin = 'ME_Hora_Separacao'
+      Origin = 'Data_Separacao'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 19
     end
   end
   object MainMenu: TMainMenu

@@ -1450,6 +1450,12 @@ begin
 
       vTrabalhando := 'Sim';
 
+      if DateEdit_FimVendas.Date - DateEdit_InicioVenda.Date > 60 then
+      begin
+      ToggleSwitch_Consulta.State := tssOff;
+      end;
+
+
       qry_VendaSeparada := TFDQuery.Create(self);
       qry_VendaSeparada.Connection := dmPrincipal.conexao;
       qry_UpdateVendaSeparada := TFDQuery.Create(self);
