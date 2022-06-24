@@ -34,7 +34,6 @@
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1024
     object spb_fechar: TSpeedButton
       AlignWithMargins = True
       Left = 1138
@@ -263,7 +262,6 @@
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1024
     end
     object pnl_menu: TPanel
       Left = 230
@@ -365,7 +363,6 @@
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
-    ExplicitWidth = 1024
     object tab_AguardandoSeparacao: TTabSheet
       Caption = 'Aguardando separa'#231#227'o'
       object DBGrid_AguardandoSeparação: TDBGrid
@@ -1776,7 +1773,6 @@
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 1010
         object Label_Itens6: TLabel
           AlignWithMargins = True
           Left = 3
@@ -2259,7 +2255,6 @@
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 1016
         object Label1: TLabel
           Left = 248
           Top = 56
@@ -2991,7 +2986,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitWidth = 1024
     object Panel3: TPanel
       AlignWithMargins = True
       Left = 420
@@ -3003,7 +2997,6 @@
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 599
       object Panel1: TPanel
         AlignWithMargins = True
         Left = 10
@@ -3508,7 +3501,6 @@
         Text = 'Vers'#227'o 110'
         Width = 50
       end>
-    ExplicitWidth = 1024
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000
@@ -7019,6 +7011,8 @@
   object FDQuery_DetalhesItens: TFDQuery
     AfterOpen = FDQuery_DetalhesItensAfterOpen
     MasterSource = DataSource_VendasParaSeparar
+    MasterFields = 'No_Docto;CodEmp;Dt_Movto;Cod_IDRegistro'
+    DetailFields = 'No_Docto;CodEmp;Cod_IDRegistro'
     Connection = dmPrincipal.conexao
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]

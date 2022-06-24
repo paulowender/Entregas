@@ -1438,6 +1438,8 @@ begin
 
   try
 
+      {Teste}
+
       if (Length(Trim(DateEdit_InicioVenda.Text)) < 10) or (Length(Trim(DateEdit_FimVendas.Text)) < 10) then
       begin
         exit;
