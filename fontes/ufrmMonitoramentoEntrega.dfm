@@ -5,7 +5,7 @@
   BorderStyle = bsNone
   Caption = 'Menu Principal'
   ClientHeight = 788
-  ClientWidth = 1024
+  ClientWidth = 1182
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,17 +13,15 @@
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = MainMenu
-  OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object pnl_topo: TPanel
     Left = 0
     Top = 0
-    Width = 1024
+    Width = 1182
     Height = 65
     Align = alTop
     BevelOuter = bvNone
@@ -36,9 +34,10 @@
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1024
     object spb_fechar: TSpeedButton
       AlignWithMargins = True
-      Left = 980
+      Left = 1138
       Top = 3
       Width = 36
       Height = 58
@@ -216,7 +215,7 @@
       ExplicitHeight = 21
     end
     object spb_minimizar: TSpeedButton
-      Left = 944
+      Left = 1102
       Top = 0
       Width = 36
       Height = 64
@@ -258,12 +257,13 @@
     object pnl_barra_topo: TPanel
       Left = 0
       Top = 64
-      Width = 1024
+      Width = 1182
       Height = 1
       Align = alBottom
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 1024
     end
     object pnl_menu: TPanel
       Left = 230
@@ -359,18 +359,19 @@
   object PageControl_ControleEntrega: TPageControl
     Left = 0
     Top = 256
-    Width = 1024
+    Width = 1182
     Height = 513
     ActivePage = Tab_EntregaFinalizada
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
+    ExplicitWidth = 1024
     object tab_AguardandoSeparacao: TTabSheet
       Caption = 'Aguardando separa'#231#227'o'
       object DBGrid_AguardandoSeparação: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -471,7 +472,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -482,7 +483,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -495,11 +496,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid_DetalhesItens: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -604,7 +606,7 @@
       object DBGrid_Separacao: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -713,7 +715,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -724,7 +726,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -737,11 +739,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid1: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -846,7 +849,7 @@
       object DBGrid_Conferencia: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -956,7 +959,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -967,7 +970,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -980,11 +983,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid7: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -1089,7 +1093,7 @@
       object DBGrid_ProntoEntrega: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -1225,7 +1229,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -1236,7 +1240,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1249,11 +1253,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid2: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -1358,7 +1363,7 @@
       object DBGrid_SaiuEntrega: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -1494,7 +1499,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -1505,7 +1510,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1518,11 +1523,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid4: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -1627,7 +1633,7 @@
       object DBGrid_EntregaFinalizada: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -1763,18 +1769,19 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
+        ExplicitWidth = 1010
         object Label_Itens6: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -1792,7 +1799,7 @@
         object DBGrid3: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -1897,7 +1904,7 @@
       object DBGrid_OpEncerrada: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -2033,7 +2040,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -2044,7 +2051,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2057,11 +2064,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid5: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -2167,7 +2175,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 108
-        Width = 1010
+        Width = 1168
         Height = 374
         Align = alClient
         DataSource = DataSource_ItensParaSeparacao
@@ -2246,11 +2254,12 @@
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 105
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 1016
         object Label1: TLabel
           Left = 248
           Top = 56
@@ -2268,6 +2277,7 @@
           EditLabel.Caption = 'Proposta:'
           ReadOnly = True
           TabOrder = 0
+          Text = ''
         end
         object edt_DocEmConferencia: TLabeledEdit
           Left = 10
@@ -2279,6 +2289,7 @@
           EditLabel.Caption = 'Documento:'
           ReadOnly = True
           TabOrder = 1
+          Text = ''
         end
         object edt_CodCliEmConferencia: TLabeledEdit
           Left = 154
@@ -2290,6 +2301,7 @@
           EditLabel.Caption = 'C'#243'digo cliente:'
           ReadOnly = True
           TabOrder = 2
+          Text = ''
         end
         object edt_RazaoClienteEmConferencia: TLabeledEdit
           Left = 248
@@ -2301,6 +2313,7 @@
           EditLabel.Caption = 'Raz'#227'o cliente:'
           ReadOnly = True
           TabOrder = 3
+          Text = ''
         end
         object edt_QtdSeparada: TLabeledEdit
           Left = 154
@@ -2373,6 +2386,7 @@
           EditLabel.Caption = 'Sa'#237'da:'
           ReadOnly = True
           TabOrder = 7
+          Text = ''
         end
       end
     end
@@ -2382,7 +2396,7 @@
       object DBGrid_Todas: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -2498,7 +2512,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -2509,7 +2523,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 54
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Produtos:'
@@ -2522,11 +2536,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 54
         end
         object DBGrid6: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -2631,7 +2646,7 @@
       object DBGrid_EntregaFutura: TDBGrid
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 329
         Align = alClient
         DataSource = DataSource_VendasParaSeparar
@@ -2767,7 +2782,7 @@
         AlignWithMargins = True
         Left = 3
         Top = 332
-        Width = 1010
+        Width = 1168
         Height = 150
         Align = alBottom
         BevelOuter = bvNone
@@ -2778,7 +2793,7 @@
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 139
+          Width = 1162
           Height = 13
           Align = alTop
           Caption = 'Quantidade de produtos:'
@@ -2791,11 +2806,12 @@
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 139
         end
         object DBGrid9: TDBGrid
           Left = 0
           Top = 19
-          Width = 1010
+          Width = 1168
           Height = 131
           Align = alClient
           DataSource = DataSource_DetalhesItens
@@ -2900,7 +2916,7 @@
       object Panel15: TPanel
         Left = 0
         Top = 0
-        Width = 1016
+        Width = 1174
         Height = 129
         Align = alTop
         TabOrder = 0
@@ -2964,7 +2980,7 @@
   object GroupBox1: TGroupBox
     Left = 0
     Top = 65
-    Width = 1024
+    Width = 1182
     Height = 191
     Align = alTop
     Caption = 'Defina um perido:'
@@ -2975,17 +2991,19 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    ExplicitWidth = 1024
     object Panel3: TPanel
       AlignWithMargins = True
       Left = 420
       Top = 35
-      Width = 599
+      Width = 757
       Height = 134
       Margins.Top = 20
       Margins.Bottom = 20
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 599
       object Panel1: TPanel
         AlignWithMargins = True
         Left = 10
@@ -3367,6 +3385,7 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Documento:'
         TabOrder = 2
+        Text = ''
         OnKeyPress = Edt_NumeroDocKeyPress
       end
       object edt_NomeCliente: TLabeledEdit
@@ -3379,6 +3398,7 @@
         EditLabel.Caption = 'Raz'#227'o:'
         ReadOnly = True
         TabOrder = 3
+        Text = ''
       end
       object LabeledEdit2: TLabeledEdit
         Left = 40
@@ -3390,6 +3410,7 @@
         EditLabel.Caption = 'Raz'#227'o cliente:'
         ReadOnly = True
         TabOrder = 4
+        Text = ''
       end
       object edt_CodigoCliente: TLabeledEdit
         Left = 6
@@ -3406,6 +3427,7 @@
         Font.Style = []
         ParentFont = False
         TabOrder = 5
+        Text = ''
         OnChange = edt_CodigoClienteChange
         OnKeyDown = edt_CodigoClienteKeyDown
         OnKeyPress = edt_CodigoClienteKeyPress
@@ -3453,6 +3475,7 @@
     EditLabel.Height = 13
     EditLabel.Caption = 'C'#243'digo transportador:'
     TabOrder = 3
+    Text = ''
     OnChange = LabeledEdit_CodigoTransportadorChange
     OnKeyDown = LabeledEdit_CodigoTransportadorKeyDown
     OnKeyPress = LabeledEdit_CodigoTransportadorKeyPress
@@ -3467,11 +3490,12 @@
     EditLabel.Caption = 'Raz'#227'o:'
     ReadOnly = True
     TabOrder = 4
+    Text = ''
   end
   object StatusBar_Registros: TStatusBar
     Left = 0
     Top = 769
-    Width = 1024
+    Width = 1182
     Height = 19
     Margins.Top = 0
     Margins.Bottom = 10
@@ -3481,9 +3505,10 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 105'
+        Text = 'Vers'#227'o 110'
         Width = 50
       end>
+    ExplicitWidth = 1024
   end
   object Timer_ConsultaVendas: TTimer
     Interval = 6000
@@ -4087,11 +4112,12 @@
       'ME_Data_Separacao=ME_Data_Separacao')
     DataSet = FDQuery_VendasParaSeparar
     BCDToCurrency = False
+    DataSetOptions = []
     Left = 420
     Top = 429
   end
   object frxReport_Entregas: TfrxReport
-    Version = '6.9.6'
+    Version = '2022.1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
@@ -4138,6 +4164,10 @@
       MirrorMode = []
       object Destinatario: TfrxMasterData
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 96.267762910000000000
         Top = 222.992270000000000000
@@ -4653,6 +4683,10 @@
       end
       object DadosProdutos: TfrxMasterData
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 30.236232680000000000
         Top = 529.134200000000000000
@@ -4913,6 +4947,10 @@
       end
       object DadosProdutosHeader: TfrxGroupHeader
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 41.196850390000000000
         Top = 464.882190000000000000
@@ -5132,6 +5170,10 @@
       end
       object Entrega: TfrxMasterData
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 96.267762910000000000
         Top = 343.937230000000000000
@@ -5523,6 +5565,10 @@
       end
       object RodapeFotos: TfrxFooter
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 457.323112910000000000
         Top = 582.047620000000000000
@@ -5842,6 +5888,10 @@
       end
       object Logo: TfrxPageHeader
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 144.181200000000000000
         Top = 18.897650000000000000
@@ -6900,6 +6950,7 @@
       'Data_Separacao=Data_Separacao')
     DataSet = FDQuery_ItensParaSeparacao
     BCDToCurrency = False
+    DataSetOptions = []
     Left = 420
     Top = 344
   end
@@ -6956,6 +7007,7 @@
       'FoneEntrega=FoneEntrega')
     DataSet = FDQuery_EndEntrega
     BCDToCurrency = False
+    DataSetOptions = []
     Left = 204
     Top = 517
   end
@@ -6967,8 +7019,6 @@
   object FDQuery_DetalhesItens: TFDQuery
     AfterOpen = FDQuery_DetalhesItensAfterOpen
     MasterSource = DataSource_VendasParaSeparar
-    MasterFields = 'No_Docto;CodEmp;Cod_IDRegistro;Dt_Movto'
-    DetailFields = 'No_Docto;CodEmp;Cod_IDRegistro'
     Connection = dmPrincipal.conexao
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
@@ -7016,14 +7066,14 @@
       'and venda_pro.CodEmp = :CodEmp'
       'and venda_pro.Dt_movto = :Dt_movto'
       'and venda_pro.Icms_ST_Aliquota <> '#39'ISS'#39' '
-      'and venda_pro.Cod_IDRegistro = :Cod_IDRegistro'
+      'and venda_pro.Cod_IDRegistro = :Cod_IDRegistro '
       'order by Fabricante')
     Left = 812
     Top = 328
     ParamData = <
       item
         Name = 'NO_DOCTO'
-        DataType = ftInteger
+        DataType = ftLargeint
         ParamType = ptInput
         Value = Null
       end
@@ -7041,7 +7091,7 @@
       end
       item
         Name = 'COD_IDREGISTRO'
-        DataType = ftSmallint
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end>

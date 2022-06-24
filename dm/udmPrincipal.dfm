@@ -1,16 +1,16 @@
 object dmPrincipal: TdmPrincipal
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 265
-  Width = 197
+  Height = 331
+  Width = 246
+  PixelsPerInch = 120
   object FDPhysMySQLDriverLink: TFDPhysMySQLDriverLink
-    Left = 67
-    Top = 39
+    Left = 84
+    Top = 49
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 64
-    Top = 104
+    Left = 80
+    Top = 130
   end
   object conexao: TFDConnection
     Params.Strings = (
@@ -20,7 +20,7 @@ object dmPrincipal: TdmPrincipal
       'DriverID=mySQL')
     LoginPrompt = False
     BeforeConnect = conexaoBeforeConnect
-    Left = 64
-    Top = 176
+    Left = 80
+    Top = 220
   end
 end
