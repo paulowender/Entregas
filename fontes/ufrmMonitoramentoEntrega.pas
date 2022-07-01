@@ -1619,12 +1619,12 @@ begin
       FDQuery_VendasParaSeparar.SQL.Add('from venda_cab ');
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN venda_pro ON venda_pro.Dt_Movto=venda_cab.Dt_Movto And venda_pro.No_Docto=venda_cab.No_Docto ');
       FDQuery_VendasParaSeparar.SQL.Add('And venda_pro.Codemp=venda_cab.Codemp And venda_pro.Cod_IDRegistro=venda_cab.Cod_IDRegistro ');
-      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN transportador on transportador.Codigo = venda_cab.Cod_Transp and transportador.CodEmp = venda_cab.CodEmp ');
-      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN clientes on clientes.CodEmp = venda_cab.CodEmp and clientes.codigo = venda_cab.Cod_Cliente');
-      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN codfiscal on codfiscal.CodEmp = venda_cab.CodEmp and codfiscal.Codigo = Cod_Cfop');
-      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN usuario on usuario.CodEmp = venda_cab.CodEmp and usuario.codigo = venda_cab.Cod_Usuario');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN transportador on transportador.Codigo = venda_cab.Cod_Transp and transportador.CodEmp in (1,3) ');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN clientes on clientes.CodEmp in (1,3) and clientes.codigo = venda_cab.Cod_Cliente');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN codfiscal on codfiscal.CodEmp in (1,3) and codfiscal.Codigo = Cod_Cfop');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN usuario on usuario.CodEmp in (1,3) and usuario.codigo = venda_cab.Cod_Usuario');
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN funcionario Fun ON Fun.Codigo=venda_pro.Cod_Vendedor and Fun.Codemp in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30) ');
-      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN secao on secao.CodEmp = venda_cab.CodEmp and secao.Codigo = venda_cab.Cod_Secao');
+      FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN secao on secao.CodEmp in (1,3) and secao.Codigo = venda_cab.Cod_Secao');
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN venda_nfecab on venda_nfecab.CodEmp = venda_cab.CodEmp and venda_nfecab.Cod_IDRegistro = venda_cab.Cod_IDRegistro ');
       FDQuery_VendasParaSeparar.SQL.Add('and venda_nfecab.No_Docto = venda_cab.No_Docto and venda_nfecab.Dt_Movto = venda_cab.Dt_Movto');
       FDQuery_VendasParaSeparar.SQL.Add('LEFT JOIN venda_obs on venda_obs.CodEmp = venda_cab.CodEmp and venda_obs.No_Docto = venda_cab.No_Docto  ');

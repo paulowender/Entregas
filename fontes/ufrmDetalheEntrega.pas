@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
-  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Mask;
 
 type
   TfrmDetalheEntrega = class(TForm)

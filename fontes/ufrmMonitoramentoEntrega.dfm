@@ -359,7 +359,7 @@
     Top = 256
     Width = 1182
     Height = 513
-    ActivePage = Tab_EntregaFinalizada
+    ActivePage = tab_AguardandoSeparacao
     Align = alClient
     TabOrder = 1
     OnChange = PageControl_ControleEntregaChange
@@ -3498,7 +3498,7 @@
         Width = 200
       end
       item
-        Text = 'Vers'#227'o 110'
+        Text = 'Vers'#227'o 115'
         Width = 50
       end>
   end
@@ -3878,9 +3878,7 @@
       'venda_pro.ME_Nome_User_Conferente as Nome_Conferente,'
       'venda_pro.ME_DataHora_Conferencia as Data_Confernecia'
       'from venda_pro'
-      
-        'inner join prodserv_dados on prodserv_dados.CodEmp = venda_pro.C' +
-        'odEmp'
+      'inner join prodserv_dados on prodserv_dados.CodEmp in (1,3)'
       'and prodserv_dados.Codigo = venda_pro.Cod_Produto'
       'where'
       'venda_pro.no_docto = :NoDocto '
@@ -4117,7 +4115,7 @@
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44345.078932222200000000
-    ReportOptions.LastChange = 44670.401204467590000000
+    ReportOptions.LastChange = 44743.438624490740000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -4645,7 +4643,7 @@
           Frame.Width = 0.500000000000000000
           GapY = 2.000000000000000000
           Memo.UTF8W = (
-            'ID REGISTRO')
+            'EMPRESA')
           ParentFont = False
         end
         object Memo56: TfrxMemoView
@@ -4654,7 +4652,7 @@
           Top = 79.370130000000000000
           Width = 75.590551180000000000
           Height = 17.007874020000000000
-          DataField = 'Cod_IDRegistro'
+          DataField = 'CodEmp'
           DataSet = frxDBDataset_VendasParaSeparar
           DataSetName = 'frxDBDataset_VendasParaSeparar'
           Font.Charset = DEFAULT_CHARSET
@@ -4667,7 +4665,7 @@
           GapX = 5.000000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDataset_VendasParaSeparar."Cod_IDRegistro"]')
+            '[frxDBDataset_VendasParaSeparar."CodEmp"]')
           ParentFont = False
           WordWrap = False
           VAlign = vaBottom
@@ -7051,9 +7049,7 @@
         '.CodEmp,'
       'venda_pro.Cod_IDRegistro'
       'from venda_pro'
-      
-        'inner join prodserv_dados on prodserv_dados.CodEmp = venda_pro.C' +
-        'odEmp'
+      'inner join prodserv_dados on prodserv_dados.CodEmp in (1,3)'
       'and prodserv_dados.Codigo = venda_pro.Cod_Produto'
       'where'
       'venda_pro.No_Docto = :No_Docto '

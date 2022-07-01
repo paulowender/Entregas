@@ -11,11 +11,9 @@ object frmDetalheEntrega: TfrmDetalheEntrega
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   OnClose = FormClose
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
     AlignWithMargins = True
@@ -444,7 +442,6 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 2
       OnClick = btnGravarEnviarEntregaClick
-      ExplicitTop = 7
     end
     object btnGravarFinalizarEntrega: TBitBtn
       Tag = 99
@@ -877,9 +874,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
       'venda_pro.ME_Nome_User_Conferente as Nome_Conferente,'
       'venda_pro.ME_DataHora_Conferencia as Data_Confernecia'
       'from venda_pro'
-      
-        'inner join prodserv_dados on prodserv_dados.CodEmp = venda_pro.C' +
-        'odEmp'
+      'inner join prodserv_dados on prodserv_dados.CodEmp in (1,3)'
       'and prodserv_dados.Codigo = venda_pro.Cod_Produto'
       'where'
       'venda_pro.no_docto = :NoDocto '
