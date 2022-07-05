@@ -11,9 +11,11 @@
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     AlignWithMargins = True
@@ -39,11 +41,9 @@
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 76
+        EditLabel.Width = 3
         EditLabel.Height = 13
-        EditLabel.Caption = 'edt_NumeroNfe'
         TabOrder = 0
-        Text = ''
         OnEnter = edt_NumeroNfeEnter
         OnKeyPress = edt_NumeroNfeKeyPress
       end
@@ -85,11 +85,9 @@
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 114
+        EditLabel.Width = 3
         EditLabel.Height = 13
-        EditLabel.Caption = 'LabeledEdit_Or'#231'amento'
         TabOrder = 0
-        Text = ''
         OnEnter = LabeledEdit_OrçamentoEnter
         OnKeyPress = LabeledEdit_OrçamentoKeyPress
       end
@@ -130,7 +128,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Transportador:'
         TabOrder = 0
-        Text = ''
       end
       object LabeledEdit_Volumes: TLabeledEdit
         Left = 10
@@ -142,7 +139,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Volumes:'
         TabOrder = 6
-        Text = ''
         OnKeyPress = LabeledEdit_VolumesKeyPress
       end
       object LabeledEdit_Embalagem: TLabeledEdit
@@ -155,7 +151,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Embalagem:'
         TabOrder = 7
-        Text = ''
       end
       object LabeledEdit_End: TLabeledEdit
         Left = 337
@@ -167,7 +162,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Endere'#231'o:'
         TabOrder = 1
-        Text = ''
       end
       object LabeledEdit_Numero: TLabeledEdit
         Left = 611
@@ -179,7 +173,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Numero:'
         TabOrder = 2
-        Text = ''
       end
       object LabeledEdit_Cidade: TLabeledEdit
         Left = 337
@@ -191,7 +184,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade:'
         TabOrder = 4
-        Text = ''
       end
       object LabeledEdit_UF: TLabeledEdit
         Left = 611
@@ -203,7 +195,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'UF:'
         TabOrder = 5
-        Text = ''
       end
       object LabeledEdit_Cep: TLabeledEdit
         Left = 337
@@ -215,7 +206,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'CEP:'
         TabOrder = 8
-        Text = ''
       end
       object LabeledEdit_Cliente: TLabeledEdit
         Left = 10
@@ -227,7 +217,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Cliente:'
         TabOrder = 3
-        Text = ''
       end
       object LabeledEdit_Bairro: TLabeledEdit
         Left = 503
@@ -239,7 +228,6 @@
         EditLabel.Height = 13
         EditLabel.Caption = 'Bairro:'
         TabOrder = 9
-        Text = ''
       end
       object Memo_Obs: TMemo
         AlignWithMargins = True
@@ -338,7 +326,7 @@
     end
   end
   object frxReport_Etiqueta: TfrxReport
-    Version = '2022.1'
+    Version = '6.9.6'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
