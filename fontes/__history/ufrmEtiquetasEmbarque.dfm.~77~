@@ -32,6 +32,7 @@
       Width = 374
       Height = 56
       Align = alLeft
+      Caption = 'Numero Nota Fiscal:'
       TabOrder = 0
       object edt_NumeroNfe: TLabeledEdit
         Left = 7
@@ -39,9 +40,9 @@
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 63
+        EditLabel.Width = 76
         EditLabel.Height = 13
-        EditLabel.Caption = 'Numero NFE:'
+        EditLabel.Caption = 'edt_NumeroNfe'
         TabOrder = 0
         Text = ''
         OnEnter = edt_NumeroNfeEnter
@@ -77,6 +78,7 @@
       Width = 282
       Height = 56
       Align = alRight
+      Caption = 'Numero Or'#231'amento:'
       TabOrder = 1
       ExplicitLeft = 337
       object LabeledEdit_Orçamento: TLabeledEdit
@@ -85,9 +87,9 @@
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 97
+        EditLabel.Width = 114
         EditLabel.Height = 13
-        EditLabel.Caption = 'Numero Or'#231'amento:'
+        EditLabel.Caption = 'LabeledEdit_Or'#231'amento'
         TabOrder = 0
         Text = ''
         OnEnter = LabeledEdit_OrçamentoEnter
@@ -272,7 +274,7 @@
     ExplicitWidth = 622
     object btnGravar: TBitBtn
       Tag = 99
-      Left = 310
+      Left = 293
       Top = 6
       Width = 112
       Height = 25
@@ -309,7 +311,7 @@
     end
     object btnCancelar: TBitBtn
       Tag = 99
-      Left = 214
+      Left = 197
       Top = 6
       Width = 81
       Height = 25

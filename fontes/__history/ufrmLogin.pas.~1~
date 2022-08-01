@@ -114,7 +114,6 @@ begin
         frmMonitoramentoEntrega.vCodigoUsuarioLogado := sql_Login.FieldByName('CodigoUsuario').AsInteger;
         frmMonitoramentoEntrega.vCodEmpLogado := frmMonitoramentoEntrega.vCodEmp.ToInteger();
         frmMonitoramentoEntrega.FDQuery_DetalhesItens.Active := true;
-        frmMonitoramentoEntrega.StatusBar_Registros.Panels[2].Text := 'Empresa: '+frmMonitoramentoEntrega.vApresentacao;
         frmLogin.Close;
         end;
 

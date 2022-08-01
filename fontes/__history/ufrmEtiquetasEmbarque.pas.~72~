@@ -107,7 +107,7 @@ begin
 
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Data')).Memo.Text := DateToStr(Now);
        TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_VolumeQtd')).Memo.Text := LabeledEdit_Embalagem.Text+' '+IntToStr(I)+'/'+LabeledEdit_Volumes.Text;
-       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Empresa')).Memo.Text := frmMonitoramentoEntrega.vApresentacao;
+       TfrxMemoView(frxReport_Etiqueta.FindObject('Memo_Empresa')).Memo.Text := UpperCase(frmMonitoramentoEntrega.vApresentacao);
 
        frxReport_Etiqueta.PrintOptions.Printer := 'Embarque';
        frxReport_Etiqueta.PrintOptions.ShowDialog:= False;

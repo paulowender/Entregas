@@ -3,8 +3,8 @@
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Emiss'#227'o de etiquetas para embarque'
-  ClientHeight = 413
-  ClientWidth = 714
+  ClientHeight = 392
+  ClientWidth = 874
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,12 +19,12 @@
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 708
+    Width = 868
     Height = 62
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 622
+    ExplicitWidth = 698
     object GroupBox1: TGroupBox
       AlignWithMargins = True
       Left = 3
@@ -32,6 +32,7 @@
       Width = 374
       Height = 56
       Align = alLeft
+      Caption = 'Numero Nota Fiscal:'
       TabOrder = 0
       object edt_NumeroNfe: TLabeledEdit
         Left = 7
@@ -39,9 +40,8 @@
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 63
+        EditLabel.Width = 3
         EditLabel.Height = 13
-        EditLabel.Caption = 'Numero NFE:'
         TabOrder = 0
         Text = ''
         OnEnter = edt_NumeroNfeEnter
@@ -72,22 +72,22 @@
     end
     object GroupBox2: TGroupBox
       AlignWithMargins = True
-      Left = 423
+      Left = 583
       Top = 3
       Width = 282
       Height = 56
       Align = alRight
+      Caption = 'Numero Or'#231'amento:'
       TabOrder = 1
-      ExplicitLeft = 337
+      ExplicitLeft = 413
       object LabeledEdit_Orçamento: TLabeledEdit
         Left = 9
         Top = 22
         Width = 119
         Height = 21
         TabStop = False
-        EditLabel.Width = 97
+        EditLabel.Width = 3
         EditLabel.Height = 13
-        EditLabel.Caption = 'Numero Or'#231'amento:'
         TabOrder = 0
         Text = ''
         OnEnter = LabeledEdit_OrçamentoEnter
@@ -99,24 +99,22 @@
     AlignWithMargins = True
     Left = 3
     Top = 71
-    Width = 708
-    Height = 292
+    Width = 868
+    Height = 271
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 622
-    ExplicitHeight = 253
+    ExplicitWidth = 698
     object GroupBox_DadosNfe: TGroupBox
       Left = 0
       Top = 0
-      Width = 708
-      Height = 292
+      Width = 868
+      Height = 271
       Align = alClient
       Caption = 'Dados para impress'#227'o:'
       Enabled = False
       TabOrder = 0
-      ExplicitWidth = 622
-      ExplicitHeight = 253
+      ExplicitWidth = 698
       object Label1: TLabel
         Left = 10
         Top = 165
@@ -248,32 +246,30 @@
       object Memo_Obs: TMemo
         AlignWithMargins = True
         Left = 5
-        Top = 186
-        Width = 698
+        Top = 165
+        Width = 858
         Height = 101
         Align = alBottom
         ReadOnly = True
         TabOrder = 10
-        ExplicitTop = 147
-        ExplicitWidth = 612
+        ExplicitWidth = 688
       end
     end
   end
   object Panel3: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 369
-    Width = 708
+    Top = 348
+    Width = 868
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 330
-    ExplicitWidth = 622
+    ExplicitWidth = 698
     object btnGravar: TBitBtn
       Tag = 99
-      Left = 310
-      Top = 6
+      Left = 317
+      Top = 8
       Width = 112
       Height = 25
       Caption = 'Imprimir'
@@ -309,8 +305,8 @@
     end
     object btnCancelar: TBitBtn
       Tag = 99
-      Left = 214
-      Top = 6
+      Left = 211
+      Top = 8
       Width = 81
       Height = 25
       Caption = 'CANCELAR'
@@ -360,8 +356,8 @@
       'begin'
       ''
       'end.')
-    Left = 423
-    Top = 283
+    Left = 488
+    Top = 219
     Datasets = <>
     Variables = <>
     Style = <>

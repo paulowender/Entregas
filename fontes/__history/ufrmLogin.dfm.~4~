@@ -3,8 +3,8 @@ object frmLogin: TfrmLogin
   Top = 0
   BorderStyle = bsNone
   Caption = 'frmLogin'
-  ClientHeight = 381
-  ClientWidth = 462
+  ClientHeight = 390
+  ClientWidth = 468
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,15 +12,14 @@ object frmLogin: TfrmLogin
   Font.Name = 'Tahoma'
   Font.Style = []
   Position = poScreenCenter
-  Scaled = False
   OnClose = FormClose
   OnShow = FormShow
   TextHeight = 13
   object pnl_principal: TPanel
     Left = 0
     Top = 0
-    Width = 462
-    Height = 381
+    Width = 468
+    Height = 390
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -95,8 +94,8 @@ object frmLogin: TfrmLogin
       end
     end
     object pnl_entrar: TPanel
-      Left = 49
-      Top = 299
+      Left = 44
+      Top = 312
       Width = 179
       Height = 53
       BevelOuter = bvNone
@@ -123,8 +122,8 @@ object frmLogin: TfrmLogin
       end
     end
     object pnl_cancelar: TPanel
-      Left = 228
-      Top = 299
+      Left = 223
+      Top = 312
       Width = 179
       Height = 53
       BevelOuter = bvNone
@@ -153,7 +152,7 @@ object frmLogin: TfrmLogin
     object Panel_Login: TPanel
       Left = 0
       Top = 0
-      Width = 462
+      Width = 468
       Height = 53
       Align = alTop
       BevelOuter = bvNone
