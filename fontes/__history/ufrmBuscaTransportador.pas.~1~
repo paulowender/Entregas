@@ -82,6 +82,7 @@ begin
   begin
 
     FDQuery_Fornecedor.Active := false;
+    FDQuery_Fornecedor.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
     FDQuery_Fornecedor.ParamByName('Razao').AsString := '^'+Edit_NomeFornecedor.Text;
     FDQuery_Fornecedor.Active := true;
 

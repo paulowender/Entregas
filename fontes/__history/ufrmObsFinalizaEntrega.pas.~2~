@@ -96,6 +96,7 @@ begin
   try
 
     FDQuery_Fornecedor.Active := false;
+    FDQuery_Fornecedor.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
     FDQuery_Fornecedor.ParamByName('Codigo').AsInteger := StrToInt(LabeledEdit_CodTransportador.Text);
     FDQuery_Fornecedor.Active := true;
 

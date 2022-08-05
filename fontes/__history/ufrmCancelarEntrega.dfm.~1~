@@ -1,8 +1,8 @@
-object frmLiberaConferencia: TfrmLiberaConferencia
+object frmCancelaEntrega: TfrmCancelaEntrega
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'frmLiberaConferencia'
+  Caption = 'frmCancelaEntrega'
   ClientHeight = 120
   ClientWidth = 600
   Color = clBtnFace
@@ -11,8 +11,11 @@ object frmLiberaConferencia: TfrmLiberaConferencia
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Position = poMainFormCenter
+  OldCreateOrder = False
+  Position = poDesktopCenter
   OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 13
   object Img_SairLiberacao: TImage
     Left = 0
@@ -129,15 +132,16 @@ object frmLiberaConferencia: TfrmLiberaConferencia
       DBAE1AAA98DB9BAB5AF9E9EDF2FFDD0C8001300006403B0703600014ED171CFB
       3F9F72E226C10000000049454E44AE426082}
     OnClick = Img_SairLiberacaoClick
-    ExplicitTop = -17
-    ExplicitHeight = 100
+    ExplicitLeft = 88
+    ExplicitTop = 56
+    ExplicitHeight = 105
   end
-  object Label_DocumentoConferencia: TLabel
+  object Label_Cliente: TLabel
     Left = 123
-    Top = 8
-    Width = 291
+    Top = 37
+    Width = 58
     Height = 21
-    Caption = 'Confirmar conferencia do documento:'
+    Caption = 'Cliente:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 13972250
     Font.Height = -16
@@ -146,12 +150,12 @@ object frmLiberaConferencia: TfrmLiberaConferencia
     ParentFont = False
     Layout = tlCenter
   end
-  object Label_Cliente: TLabel
+  object Label_DocumentoSeparadacao: TLabel
     Left = 123
-    Top = 39
-    Width = 58
+    Top = 8
+    Width = 323
     Height = 21
-    Caption = 'Cliente:'
+    Caption = 'Confirmar o cancelamento do documento:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 13972250
     Font.Height = -16
@@ -170,7 +174,6 @@ object frmLiberaConferencia: TfrmLiberaConferencia
     EditLabel.Caption = 'Senha:'
     PasswordChar = '*'
     TabOrder = 0
-    Text = ''
     OnKeyPress = edt_senhaKeyPress
   end
 end

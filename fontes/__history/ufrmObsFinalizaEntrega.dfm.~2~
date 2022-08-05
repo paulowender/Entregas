@@ -128,12 +128,18 @@ object frmObsFinalizaEntrega: TfrmObsFinalizaEntrega
     Connection = dmPrincipal.conexao
     SQL.Strings = (
       
-        'select Codigo,Razao, Cnpj, Ie from transportador where CodEmp in' +
-        ' (1,3)'
+        'select Codigo,Razao, Cnpj, Ie from transportador where CodEmp = ' +
+        ':CodEmp'
       'and Codigo = :Codigo limit 1 ')
-    Left = 321
-    Top = 69
+    Left = 378
+    Top = 68
     ParamData = <
+      item
+        Name = 'CODEMP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
       item
         Name = 'CODIGO'
         DataType = ftInteger

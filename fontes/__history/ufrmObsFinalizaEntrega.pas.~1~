@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.Mask;
+  FireDAC.Comp.Client;
 
 type
   TfrmObsFinalizaEntrega = class(TForm)
@@ -96,6 +96,7 @@ begin
   try
 
     FDQuery_Fornecedor.Active := false;
+    FDQuery_Fornecedor.ParamByName('CodEmp').AsInteger := frmMonitoramentoEntrega.vCodEmpLogado;
     FDQuery_Fornecedor.ParamByName('Codigo').AsInteger := StrToInt(LabeledEdit_CodTransportador.Text);
     FDQuery_Fornecedor.Active := true;
 

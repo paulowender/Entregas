@@ -703,7 +703,7 @@ object frmDetalheEntrega: TfrmDetalheEntrega
         'ro=venda_cab.Cod_IDRegistro '
       
         'LEFT JOIN transportador on transportador.Codigo = venda_cab.Cod_' +
-        'Transp and transportador.CodEmp = venda_cab.CodEmp '
+        'Transp and transportador.CodEmp in (1,3)'
       
         'where venda_cab.Record_No  = :Record_No and venda_cab.CodEmp = :' +
         'CodEmp'
